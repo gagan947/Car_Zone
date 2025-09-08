@@ -1,0 +1,102 @@
+<section class="ct_login_main_bg">
+      <div class="container">
+            <div class="row">
+                  <div class="col-xxl-6 col-xl-7 col-lg-8 mx-auto">
+                        <div class="ct_login_white_bg ct_custom_scroll">
+                              <img src="img/logo_white.svg" alt="">
+                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">Welcome To <span
+                                          class="ct_text_red">CarZone</span> </h4>
+                              <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                                    <div class="form-group mb-4">
+                                          <label for="" class="mb-2 ct_fw_600 text-white">Full Name</label>
+                                          <input type="text" class="form-control ct_input" placeholder="Enter Full Name"
+                                                formControlName="fullName">
+                                          <small
+                                                class="text-danger">{{validationErrorService.getErrorMessage("Full name", Form.get("fullName"))}}</small>
+                                    </div>
+                                    <div class="row">
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Email
+                                                            Address</label>
+                                                      <input type="email" class="form-control ct_input"
+                                                            placeholder="Enter Email Address" formControlName="email">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Phone
+                                                            Number</label>
+                                                      <ngx-intl-tel-input name="phone"
+                                                            [cssClass]="'form-control ct_input w-full ps-5 ct_pe_90'"
+                                                            [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
+                                                            [searchCountryFlag]="true"
+                                                            [customPlaceholder]="'Enter phone number'"
+                                                            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
+                                                            [selectFirstCountry]="false"
+                                                            [selectedCountryISO]="selectedCountry" [maxLength]="15"
+                                                            [phoneValidation]="true" formControlName="phoneNumber">
+                                                      </ngx-intl-tel-input>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Phone number", Form.get("phoneNumber"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-2">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
+                                                      <div class="position-relative">
+                                                            <input type="password" class="form-control ct_input"
+                                                                  placeholder="Enter Password"
+                                                                  formControlName="password">
+                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                      </div>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-2">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Confirm
+                                                            Password</label>
+                                                      <div class="position-relative">
+                                                            <input type="password" class="form-control ct_input"
+                                                                  placeholder="Enter Confirm Password">
+                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                      </div>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Confirm password", Form.get("confirmPassword"))}}</small>
+                                                </div>
+                                          </div>
+                                    </div>
+
+                                    <div class="text-center mt-4">
+                                          <app-submit-button [class]="'ct_red_btn px-5'" [isLoading]="loading"
+                                                [text]="'Sign Up'"></app-submit-button>
+                                    </div>
+                              </form>
+                              <div class="ct_sign_in_text mt-4">
+                                    <p class="mb-0">Or Sign Up With</p>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <button class="ct_google_btn">
+                                          <img src="img/devicon_google.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Google</h6>
+                                    </button>
+                                    <button class="ct_google_btn">
+                                          <img src="img/logos_facebook.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Facebook</h6>
+                                    </button>
+                              </div>
+                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Already you
+                                          have an
+                                          account? </span> <a routerLink="/login" class="ct_text_red ct_fw_600">
+                                          Log
+                                          In</a></p>
+
+                        </div>
+                  </div>
+            </div>
+      </div>
+</section>

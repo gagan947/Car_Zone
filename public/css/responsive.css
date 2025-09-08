@@ -1,0 +1,198 @@
+@media screen and (max-width:1326px){
+ .ct_login_white_bg {
+    
+    overflow-y: auto;
+    height: auto;
+    max-height: 471px;
+}
+}
+
+@media screen and (max-width:1199px){
+      .chatlist {
+    width: 300px;
+  }
+  .chat-list a.d-flex {
+    padding-inline: 8px;
+  }
+}
+@media screen and (max-width:991px){
+    .ct_menu_bar{
+        display: block;
+    }
+    .ct_navlist ul {
+    flex-direction: column;
+    position: fixed;
+    right: -100%;
+    height: 100%;
+    background-color: #fff;
+    top: 0px;
+    max-width: 300px;
+    width: 100%;
+    z-index: 999999;
+    padding: 60px 20px;
+    gap: 30px;
+    display: flex;
+        align-items: self-start;
+        transition: 0.4s ease all;
+
+
+    }
+       .ct_navlist ul.active{
+        right: 0px;
+       }
+    .ct_close_bar{
+        display: block;
+    }
+    .ct_menu_bar{
+        display: block;
+    }
+    .ct_fs_74 {
+    font-size: 40px;
+}
+#ct_filter_modal .modal-content {
+    /* position: fixed;
+    max-width: 350px;
+    right: -100%;
+    top: 0px; */
+    height: 100vh;
+    /* overflow-y: auto;
+    width: 100%; */
+}
+/* div#ct_filter_modal {
+    display: block;
+    opacity: 1;
+} */
+#ct_filter_modal .modal-dialog {
+    transform: unset !important;
+    position: fixed;
+    right: -100%;
+    width: 300px;
+    height: 100vh;
+    top: 0px;
+    margin: 0px;
+    transition: 0.4s ease all;
+}
+div#ct_filter_modal.show .modal-dialog{
+     right: 0%;
+}
+.ct_grid_4 {
+
+    grid-template-columns: repeat(3, 1fr);
+}
+}
+
+@media screen and (max-width:767px){
+    .ct_card_item_animated img {
+    height: 214px;
+}
+    .ct_fs_74 ,.ct_fs_44  {
+        font-size: 28px;
+    }
+    .ct_card_item_animated h1 {
+    font-size: 24px;
+}
+    .ct_gallery {
+        grid-template-columns: 0 1fr;
+    }
+
+    .chat-icon {
+  display: block;
+  margin-right: 5px;
+}
+.chatlist {
+  width: 100%;
+}
+.chatbox {
+  width: 100%;
+  position: absolute;
+  left: 1000px;
+  right: 0;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  transition: all 0.5s ease;
+  border-left: none;
+}
+.showbox {
+  left: 0 !important;
+  transition: all 0.5s ease;
+  padding-inline: 15px;
+}
+.msg-head h3 {
+  font-size: 14px;
+}
+.msg-head p {
+  font-size: 12px;
+}
+.msg-head .flex-shrink-0 img {
+  height: 30px;
+}
+.send-box button {
+  width: 28%;
+}
+
+.chat-list h3 {
+  font-size: 14px;
+}
+.chat-list p {
+  font-size: 12px;
+}
+.msg-body ul li.sender {
+  font-size: 13px;
+  padding: 8px;
+  border-bottom-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.msg-body ul li.repaly p {
+  font-size: 13px;
+  padding: 8px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.msg-body ul li img {
+  width: 30px;
+  height: 30px;
+}
+.ct_grid_4 {
+
+    grid-template-columns: repeat(2, 1fr);
+}
+.ct_edit_profile_bg {
+    padding: 40px 15px;
+}
+}
+
+@media screen and (max-width:575px) {
+    .ct_logo img {
+
+    max-width: 101px;
+}
+        .ct_fs_74 {
+        font-size: 25px;
+    }
+    .ct_card_item_animated h1{
+        font-size: 20px;
+    }
+  
+.ct_right_dropdown p {
+    white-space: nowrap;
+    width: auto;
+    max-width: 39px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ct_custom_tabs{
+  flex-direction: column;
+  width: 100%;
+}
+.ct_custom_tabs li ,.ct_custom_tabs.nav-pills .nav-link{
+  width: 100%;
+}
+.ct_right_nav,.ct_right_dropdown  {
+
+    gap: 6px;
+}
+
+}
