@@ -18,9 +18,9 @@
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">Email
-                                                            Address</label>
+                                                      </label>
                                                       <input type="email" class="form-control ct_input"
-                                                            placeholder="Enter Email Address" formControlName="email">
+                                                            placeholder="Enter Email" formControlName="email">
                                                       <small
                                                             class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
                                                 </div>
@@ -47,10 +47,13 @@
                                                 <div class="form-group mb-2">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
                                                       <div class="position-relative">
-                                                            <input type="password" class="form-control ct_input"
+                                                            <input [type]="isShowPassword ? 'text' : 'password'"
+                                                                  class="form-control ct_input"
                                                                   placeholder="Enter Password"
                                                                   formControlName="password">
-                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                            <i class="fa-solid ct_show_eye"
+                                                                  [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                                                  (click)="isShowPassword = !isShowPassword"></i>
                                                       </div>
                                                       <small
                                                             class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
@@ -61,14 +64,29 @@
                                                       <label for="" class="mb-2 ct_fw_600 text-white">Confirm
                                                             Password</label>
                                                       <div class="position-relative">
-                                                            <input type="password" class="form-control ct_input"
-                                                                  placeholder="Enter Confirm Password">
-                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                            <input [type]="isShowConfirmPassword ? 'text' : 'password'"
+                                                                  class="form-control ct_input"
+                                                                  placeholder="Enter Confirm Password"
+                                                                  formControlName="confirmPassword">
+                                                            <i class="fa-solid ct_show_eye"
+                                                                  [ngClass]="isShowConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                                                  (click)="isShowConfirmPassword = !isShowConfirmPassword"></i>
                                                       </div>
                                                       <small
                                                             class="text-danger">{{validationErrorService.getErrorMessage("Confirm password", Form.get("confirmPassword"))}}</small>
+                                                      <small *ngIf="Form.errors?.['passwordMismatch'] && !Form.controls['confirmPassword'].errors?.['required']"
+                                                            class="text-danger">Password does not match</small>
                                                 </div>
                                           </div>
+                                          @if(!lat && !lng){
+                                          <div class="form-group mb-4">
+                                                <label for="" class="mb-2 ct_fw_600 text-white">Address</label>
+                                                <textarea type="text" class="form-control ct_input h-auto"
+                                                      placeholder="Enter Address" formControlName="address"></textarea>
+                                                <small
+                                                      class="text-danger">{{validationErrorService.getErrorMessage("Address", Form.get("address"))}}</small>
+                                          </div>
+                                          }
                                     </div>
 
                                     <div class="text-center mt-4">

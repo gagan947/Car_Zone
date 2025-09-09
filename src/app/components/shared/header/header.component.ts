@@ -1,7 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { RoleService, UserRole } from '../../../services/role.service';
 import { RoleDirective } from '../../../directives/role.directive';
+import { AuthService } from '../../../services/auth.service';
+import { CommonService } from '../../../services/common.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +15,23 @@ import { RoleDirective } from '../../../directives/role.directive';
 export class HeaderComponent {
   private roleService = inject(RoleService);
   role = this.roleService.currentRole;
-
-  constructor(private router: Router) { }
-  switchRole() {
-    const newRole: UserRole = this.role() === 'buyer' ? 'seller' : 'buyer';
+  @ViewChild('close') close: ElementRef | undefined;
+  userData: any
+  destroy$ = new Subject<void>();
+  constructor(private router: Router, public authService: AuthService, private commonService: CommonService) {
+    if (this.authService.isLogedIn()) {
+      this.commonService.get('user/getUserProfile').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+        this.userData = res.data
+      })
+    }
+  }
+  switchRole(role: string) {
+    const newRole: UserRole = role as UserRole;
     this.roleService.setRole(newRole);
+    if (!this.authService.isLogedIn()) {
+      this.router.navigate(['/login']);
+      return
+    }
     const existingScript = document.querySelector('script[src="js/main.js"]');
     if (existingScript) {
       existingScript.remove();
@@ -25,6 +40,15 @@ export class HeaderComponent {
     scriptElement.src = 'js/main.js';
     scriptElement.async = true;
     document.body.appendChild(scriptElement);
-    this.router.navigate(['/']);
+  }
+
+  logout() {
+    this.close?.nativeElement.click();
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

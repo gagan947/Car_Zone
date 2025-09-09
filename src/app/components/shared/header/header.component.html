@@ -43,25 +43,31 @@
                                     </ul>
                               </div>
                               <div class="ct_right_nav">
-                                    <a  routerLink="/notifications" class="text-dark ct_fs_20 ct_notification_icon">
-                                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12 6.43994V9.76994" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
-                                    <path d="M12.0199 2C8.3399 2 5.3599 4.98 5.3599 8.66V10.76C5.3599 11.44 5.0799 12.46 4.7299 13.04L3.4599 15.16C2.6799 16.47 3.2199 17.93 4.6599 18.41C9.4399 20 14.6099 20 19.3899 18.41C20.7399 17.96 21.3199 16.38 20.5899 15.16L19.3199 13.04C18.9699 12.46 18.6899 11.43 18.6899 10.76V8.66C18.6799 5 15.6799 2 12.0199 2Z" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
-                                    <path d="M15.3299 18.8201C15.3299 20.6501 13.8299 22.1501 11.9999 22.1501C11.0899 22.1501 10.2499 21.7701 9.64992 21.1701C9.04992 20.5701 8.66992 19.7301 8.66992 18.8201" stroke="#fff" stroke-width="1.5" stroke-miterlimit="10"></path>
-                                </svg>
+                                    <a routerLink="/notifications" class="text-dark ct_fs_20 ct_notification_icon">
+                                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 6.43994V9.76994" stroke="#fff" stroke-width="1.5"
+                                                      stroke-miterlimit="10" stroke-linecap="round"></path>
+                                                <path d="M12.0199 2C8.3399 2 5.3599 4.98 5.3599 8.66V10.76C5.3599 11.44 5.0799 12.46 4.7299 13.04L3.4599 15.16C2.6799 16.47 3.2199 17.93 4.6599 18.41C9.4399 20 14.6099 20 19.3899 18.41C20.7399 17.96 21.3199 16.38 20.5899 15.16L19.3199 13.04C18.9699 12.46 18.6899 11.43 18.6899 10.76V8.66C18.6799 5 15.6799 2 12.0199 2Z"
+                                                      stroke="#fff" stroke-width="1.5" stroke-miterlimit="10"
+                                                      stroke-linecap="round"></path>
+                                                <path d="M15.3299 18.8201C15.3299 20.6501 13.8299 22.1501 11.9999 22.1501C11.0899 22.1501 10.2499 21.7701 9.64992 21.1701C9.04992 20.5701 8.66992 19.7301 8.66992 18.8201"
+                                                      stroke="#fff" stroke-width="1.5" stroke-miterlimit="10"></path>
+                                          </svg>
                                     </a>
                                     <select class="form-control ct_language_option ct_flex_1">
                                           <option value="">English</option>
                                     </select>
 
-                                    <!-- <a class="ct_red_btn" data-bs-toggle="modal" data-bs-target="#ct_login_modal">Login</a> -->
+                                    @if(authService.isLogedIn()) {
                                     <div class="ct_right_dropdown dropdown">
                                           <button id="dropdownMenuButton" id="dropdownMenuButton1"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 <div class="d-flex align-items-center gap-2" style="line-height: 1;">
-                                                      <img src="img/user_2.jpg" alt="" class="ct_img_30">
+                                                      <img [src]="userData.profileImage || 'img/np_pro.png'" alt=""
+                                                            class="ct_img_30">
                                                       <div class="text-start">
-                                                            <p class="mb-0 ct_fw_500">Alice Johnson</p>
+                                                            <p class="mb-0 ct_fw_500">{{userData?.fullName}}</p>
                                                             <small
                                                                   class="ct_text_939393">{{ role() === 'buyer' ? 'Buyer' : 'Seller' }}</small>
                                                       </div>
@@ -70,16 +76,11 @@
                                           </button>
                                           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li>
-                                                      <a (click)="switchRole()" class="dropdown-item"
-                                                            href="javascript:void(0)">
+                                                      <a (click)="switchRole(role() === 'buyer' ? 'seller' : 'buyer')"
+                                                            class="dropdown-item" href="javascript:void(0)">
                                                             Switch To {{ role() === 'buyer' ? 'Seller' : 'Buyer' }}
                                                       </a>
                                                 </li>
-                                                <!-- <li>
-                                                      <a class="dropdown-item" routerLink="/notifications">
-                                                            Notifications
-                                                      </a>
-                                                </li> -->
                                                 <ng-container *appRole="'buyer'">
                                                       <li>
                                                             <a class="dropdown-item" routerLink="/wishlist">
@@ -118,6 +119,10 @@
                                                 </li>
                                           </ul>
                                     </div>
+                                    }@else {
+                                    <a class="ct_red_btn" data-bs-toggle="modal"
+                                          data-bs-target="#ct_login_modal">Login</a>
+                                    }
                                     <div class="ct_menu_bar">
                                           <i class="fa-solid fa-bars-staggered"></i>
                                     </div>
@@ -175,8 +180,8 @@
                               </figure>
                               <div class="d-flex justify-content-center border-0 gap-3 ct_modal_footer">
                                     <button type="button" class="ct_red_btn ct_outline_btn ct_h_40 w-100 ct_fw_600"
-                                          data-bs-dismiss="modal">Cancel</button>
-                                    <a href="javascript:void(0)" data-bs-target="#ct_login_modal" data-bs-toggle="modal"
+                                          data-bs-dismiss="modal" #close>Cancel</button>
+                                    <a (click)="logout()"
                                           class="ct_border_radius_10 ct_h_40 ct_red_btn  w-100 ct_fw_600 text-center">
                                           Log
                                           Out
@@ -202,13 +207,15 @@
                         <h5 class="ct_fs_20 ct_fw_600 text-white text-center">Choose your role to continue</h5>
                         <div class="row mt-5">
                               <div class="col-sm-6 mb-4 mb-sm-0">
-                                    <a routerLink="/signup" class="ct_login_author_card" data-bs-dismiss="modal">
+                                    <a (click)="switchRole('buyer')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
                                           <img src="img/buyer_icon.svg" alt="">
                                           <h6 class="mb-0 ct_fs_20 ct_fw_600">Buyer</h6>
                                     </a>
                               </div>
                               <div class="col-sm-6 mb-4 mb-sm-0">
-                                    <a routerLink="/seller-signup" class="ct_login_author_card" data-bs-dismiss="modal">
+                                    <a (click)="switchRole('seller')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
                                           <img src="img/seller_login_icon.svg" alt="">
                                           <h6 class="mb-0 ct_fs_20 ct_fw_600">Seller</h6>
 
@@ -216,10 +223,6 @@
                               </div>
                         </div>
                   </div>
-                  <!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div> -->
             </div>
       </div>
 </div>

@@ -120,4 +120,8 @@ export const routes: Routes = [
             path: 'forgot-password',
             loadComponent: () => import('./components/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
       },
+      {
+            path: 'otp-verification',
+            loadComponent: () => import('./components/otp-verification/otp-verification.component').then(m => m.OtpVerificationComponent),
+      },
 ];

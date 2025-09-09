@@ -11,7 +11,7 @@ export class HttpInterceptorService implements HttpInterceptor {
       constructor(private router: Router) { }
 
       intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-            const authToken = localStorage.getItem(`token`);
+            const authToken = localStorage.getItem(`CarZoneToken`);
 
             let modifiedRequest: HttpRequest<any>;
             if (req.body instanceof FormData) {

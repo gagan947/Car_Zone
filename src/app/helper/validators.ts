@@ -35,7 +35,7 @@ export function strongPasswordValidator(
 
 export function passwordMismatchValidator(): ValidatorFn {
       return (control: AbstractControl): { [key: string]: boolean } | null => {
-            const password = control.get('newPassword');
+            const password = control.get('newPassword') || control.get('password');
             const confirmPassword = control.get('confirmPassword');
 
             if (!password || !confirmPassword) {

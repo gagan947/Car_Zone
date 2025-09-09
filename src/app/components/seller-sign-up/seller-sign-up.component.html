@@ -6,19 +6,23 @@
                               <img src="img/logo_white.svg" alt="">
                               <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">Welcome To <span
                                           class="ct_text_red">CarZone</span> </h4>
-                              <form action="">
+                              <form [formGroup]="Form" (ngSubmit)="onSubmit()">
+                                    @if(formStep === 1){
                                     <div class="form-group mb-4">
                                           <label for="" class="mb-2 ct_fw_600 text-white">Full Name</label>
-                                          <input type="text" class="form-control ct_input"
-                                                placeholder="Enter Full Name">
+                                          <input type="text" class="form-control ct_input" placeholder="Enter Full Name"
+                                                formControlName="fullName">
+                                          <small
+                                                class="text-danger">{{validationErrorService.getErrorMessage("Full name", Form.get("fullName"))}}</small>
                                     </div>
                                     <div class="row">
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Email
-                                                            Address</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Email</label>
                                                       <input type="email" class="form-control ct_input"
-                                                            placeholder="Enter Email Address">
+                                                            placeholder="Enter Email" formControlName="email">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
@@ -33,68 +37,235 @@
                                                             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
                                                             [selectFirstCountry]="false"
                                                             [selectedCountryISO]="selectedCountry" [maxLength]="15"
-                                                            [phoneValidation]="true">
+                                                            [phoneValidation]="true" formControlName="phoneNumber">
                                                       </ngx-intl-tel-input>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Phone number", Form.get("phoneNumber"))}}</small>
                                                 </div>
 
                                           </div>
                                           <div class="col-md-6">
-                                                <div class="form-group mb-2">
+                                                <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
                                                       <div class="position-relative">
-                                                            <input type="password" class="form-control ct_input"
-                                                                  placeholder="Enter Password">
-                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                            <input [type]="isShowPassword ? 'text' : 'password'"
+                                                                  class="form-control ct_input"
+                                                                  placeholder="Enter Password"
+                                                                  formControlName="password">
+                                                            <i class="fa-solid ct_show_eye"
+                                                                  [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                                                  (click)="isShowPassword = !isShowPassword"></i>
                                                       </div>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
                                                 </div>
-
                                           </div>
                                           <div class="col-md-6">
-                                                <div class="form-group mb-2">
+                                                <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">Confirm
                                                             Password</label>
                                                       <div class="position-relative">
-                                                            <input type="password" class="form-control ct_input"
-                                                                  placeholder="Enter Confirm Password">
-                                                            <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                            <input [type]="isShowConfirmPassword ? 'text' : 'password'"
+                                                                  class="form-control ct_input"
+                                                                  placeholder="Enter Confirm Password"
+                                                                  formControlName="confirmPassword">
+                                                            <i class="fa-solid ct_show_eye"
+                                                                  [ngClass]="isShowConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                                                  (click)="isShowConfirmPassword = !isShowConfirmPassword"></i>
                                                       </div>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Confirm password", Form.get("confirmPassword"))}}</small>
+                                                      <small *ngIf="Form.errors?.['passwordMismatch'] && !Form.controls['confirmPassword'].errors?.['required']"
+                                                            class="text-danger">Password does not match</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-12">
-                                                <div class="form-group mb-2">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Select Legal
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Type of
+                                                            Seller
+                                                      </label>
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center gap-3">
+                                                            <label for="flexRadioDefault1"
+                                                                  class="d-flex align-items-center gap-3 custom_border"
+                                                                  [ngClass]="Form.get('typeOfSeller')?.value == 'personal' ? 'active' : ''">
+                                                                  <input type="radio" class="cutom_radio_input"
+                                                                        formControlName="typeOfSeller" value="personal"
+                                                                        id="flexRadioDefault1" />
+                                                                  <div class="d-grid">
+                                                                        <span class="text-white ct_fw_500">
+                                                                              Private Seller
+                                                                        </span>
+                                                                        <span class="text-white fs_10">
+                                                                              For individual sellers
+                                                                        </span>
+                                                                  </div>
+                                                            </label>
+                                                            <label for="flexRadioDefault2"
+                                                                  class="d-flex align-items-center gap-3 custom_border gap-3"
+                                                                  [ngClass]="Form.get('typeOfSeller')?.value == 'business' ? 'active' : ''">
+                                                                  <input type="radio" class="cutom_radio_input"
+                                                                        formControlName="typeOfSeller" value="business"
+                                                                        id="flexRadioDefault2" />
+                                                                  <div class="d-grid">
+                                                                        <span class="text-white ct_fw_500">
+                                                                              Official Seller
+                                                                        </span>
+                                                                        <span class="text-white fs_10">
+                                                                              For business
+                                                                        </span>
+                                                                  </div>
+                                                            </label>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          @if(!lat && !lng){
+                                          <div class="form-group mb-4">
+                                                <label for="" class="mb-2 ct_fw_600 text-white">Address</label>
+                                                <textarea type="text" class="form-control ct_input h-auto"
+                                                      placeholder="Enter Address" formControlName="address"></textarea>
+                                                <small
+                                                      class="text-danger">{{validationErrorService.getErrorMessage("Address", Form.get("address"))}}</small>
+                                          </div>
+                                          }
+                                    </div>
+                                    }@else {
+                                    <div class="row">
+                                          <div class="col-md-12">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Legal
                                                             Entity</label>
-                                                      <select class="form-control ct_input">
-                                                            <option value="">Legal Entity</option>
-                                                            <option value="">Legal Entity</option>
-                                                      </select>
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+                                                            <label for="flexRadioDefault1"
+                                                                  class="d-flex align-items-center gap-2 custom_border"
+                                                                  [ngClass]="Form.get('legalForm')?.value == 'Sole Proprietorship' ? 'active' : ''">
+                                                                  <input type="radio" class="cutom_radio_input"
+                                                                        formControlName="legalForm"
+                                                                        value="Sole Proprietorship"
+                                                                        id="flexRadioDefault1" />
+                                                                  <div class="d-grid">
+                                                                        <span class="text-white ct_fw_500">
+                                                                              Sole proprietorship
+                                                                        </span>
+                                                                  </div>
+                                                            </label>
+                                                            <label for="flexRadioDefault2"
+                                                                  class="d-flex align-items-center gap-3 custom_border gap-3"
+                                                                  [ngClass]="Form.get('legalForm')?.value == 'Limited Liability Company (GmbH)' ? 'active' : ''">
+                                                                  <input type="radio" class="cutom_radio_input"
+                                                                        formControlName="legalForm"
+                                                                        value="Limited Liability Company (GmbH)"
+                                                                        id="flexRadioDefault2" />
+                                                                  <div class="d-grid">
+                                                                        <span class="text-white ct_fw_500">
+                                                                              Limited Liability Company (GmbH)
+                                                                        </span>
+                                                                  </div>
+                                                            </label>
+                                                            <label for="flexRadioDefault3"
+                                                                  class="d-flex align-items-center gap-3 custom_border gap-3"
+                                                                  [ngClass]="Form.get('legalForm')?.value == 'Corporation (AG)' ? 'active' : ''">
+                                                                  <input type="radio" class="cutom_radio_input"
+                                                                        formControlName="legalForm"
+                                                                        value="Corporation (AG)"
+                                                                        id="flexRadioDefault3" />
+                                                                  <div class="d-grid">
+                                                                        <span class="text-white ct_fw_500">
+                                                                              Corporation (AG)
+                                                                        </span>
+                                                                  </div>
+                                                            </label>
+                                                      </div>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Company
+                                                            Name</label>
+                                                      <input type="text" class="form-control ct_input"
+                                                            placeholder="Enter Company Name"
+                                                            formControlName="companyName">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Company Name", Form.get("companyName"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">
+                                                            VAT/business Registration Number</label>
+                                                      <input type="text" class="form-control ct_input"
+                                                            placeholder="Enter VAT/business Registration Number"
+                                                            formControlName="vat">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("VAT/business Registration Number", Form.get("vat"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-12">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">Company
+                                                            Address</label>
+                                                      <textarea type="text" class="form-control ct_input h-auto"
+                                                            placeholder="Enter Company Address"
+                                                            formControlName="companyAddress"></textarea>
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Company address", Form.get("companyAddress"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">
+                                                            City</label>
+                                                      <input type="text" class="form-control ct_input"
+                                                            placeholder="Enter City" formControlName="city">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("City", Form.get("city"))}}</small>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-6">
+                                                <div class="form-group mb-4">
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">
+                                                            Pincode</label>
+                                                      <input type="text" class="form-control ct_input"
+                                                            placeholder="Enter Pincode" formControlName="pincode">
+                                                      <small
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Pincode", Form.get("pincode"))}}</small>
                                                 </div>
                                           </div>
                                     </div>
+                                    }
 
                                     <div class="text-center mt-4">
-                                          <button class="ct_red_btn  px-5">Sign Up</button>
-                                    </div>
-                                    <div class="ct_sign_in_text mt-4">
-                                          <p class="mb-0">Or Sign Up With</p>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-center gap-3">
-                                          <button class="ct_google_btn">
-                                                <img src="img/devicon_google.png" alt="">
-                                                <h6 class="mb-0 ct_fs_16">Google</h6>
-                                          </button>
-                                          <button class="ct_google_btn">
-                                                <img src="img/logos_facebook.png" alt="">
-                                                <h6 class="mb-0 ct_fs_16">Facebook</h6>
-                                          </button>
+                                          @if(formStep === 1 && Form.get('typeOfSeller')?.value == 'business'){
+                                          <button class="ct_red_btn px-5"
+                                                (click)="formStep = formStep + 1">Coninue</button>
+                                          }@else {
+                                          <app-submit-button [text]="'Sign Up'" [class]="'ct_red_btn px-5'"
+                                                [isLoading]="loading"></app-submit-button>
+                                          }
 
                                     </div>
-                                    <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Already you
-                                                have an
-                                                account? </span> <a routerLink="/login"
-                                                class="ct_text_red ct_fw_600">Log
-                                                In</a></p>
                               </form>
+
+                              <div class="ct_sign_in_text mt-4">
+                                    <p class="mb-0">Or Sign Up With</p>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <button class="ct_google_btn">
+                                          <img src="img/devicon_google.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Google</h6>
+                                    </button>
+                                    <button class="ct_google_btn">
+                                          <img src="img/logos_facebook.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Facebook</h6>
+                                    </button>
+
+                              </div>
+                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Already you
+                                          have an
+                                          account? </span> <a routerLink="/login" class="ct_text_red ct_fw_600">Log
+                                          In</a></p>
+
                         </div>
                   </div>
             </div>

@@ -340,15 +340,15 @@ textarea {
   z-index: 1;
 
 }
+
 a.ct_notification_icon {
-    width: 30px;
-    height: 30px;
-    background: var(--red);
-    display: flex
-;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
 }
 
 .ct_red_btn:before {
@@ -1589,9 +1589,11 @@ a.add img {
   border-radius: 10px;
   border-bottom-left-radius: 0px;
 }
+
 .ct_search input {
-    padding-right: 40px;
+  padding-right: 40px;
 }
+
 .msg-body ul .sender h5 {
   line-height: 22px;
   font-weight: 400;

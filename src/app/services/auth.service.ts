@@ -5,14 +5,13 @@ import { Router } from '@angular/router';
 export class AuthService {
       constructor(private router: Router) { }
 
-      setValues(token: string, roleUUID: string,userInfo: any) {
-            localStorage.setItem('token', token)
-            localStorage.setItem('role_uuid', roleUUID);
+      setValues(token: string, userInfo: any) {
+            localStorage.setItem('CarZoneToken', token)
             localStorage.setItem('userInfo', JSON.stringify(userInfo));
       }
 
       getToken() {
-            return localStorage.getItem('ZynqToken')
+            return localStorage.getItem('CarZoneToken');
       };
 
       getUserInfo() {
@@ -24,12 +23,8 @@ export class AuthService {
       }
 
       logout(): void {
-            localStorage.removeItem('role_uuid');
-            localStorage.removeItem('token');
+            localStorage.removeItem('app_role');
+            localStorage.removeItem('CarZoneToken');
             localStorage.removeItem('userInfo');
       };
-
-      getRoleUUID(): string | null {
-            return localStorage.getItem('role_uuid');
-      }
 }

@@ -17,6 +17,10 @@ export class ValidationErrorService {
                   return `${label} is required.`;
             }
 
+            if (errors['validatePhoneNumber']) {
+                  return `Please enter valid mobile number.`;
+            }
+
             if (errors['minlength']) {
                   return `${label} must be at least ${errors['minlength'].requiredLength} characters long.`;
             }
