@@ -14,6 +14,13 @@
   .chat-list a.d-flex {
     padding-inline: 8px;
   }
+  .ct_ads_slider button.owl-prev  {
+    left: -15px;
+    position: relative;
+}
+ .ct_ads_slider button.owl-next{
+  right:-15px
+ }
 }
 @media screen and (max-width:991px){
     .ct_menu_bar{
@@ -194,5 +201,16 @@ div#ct_filter_modal.show .modal-dialog{
 
     gap: 6px;
 }
+.ct_ads_slider button{
+  transform:translateY(-100%)
+}
+    .ct_ads_slider button.owl-prev {
+      left:15px
+
+    }
+    
+    .ct_ads_slider button.owl-next {
+      right:15px
+    }
 
 }

@@ -2565,3 +2565,20 @@ header {
 .ct_under_review_text {
   color: #838317;
 }
+
+.ct_ads_slider .owl-nav button {
+    background: red !important;
+    border-radius: 29px !important;
+    height: 30px;
+    z-index: 9999;
+    width: 30px;
+    color: #fff !important;
+}
+.ct_ads_slider button.owl-prev {
+    left: -40px;
+    position: relative;
+}
+.ct_ads_slider button.owl-next {
+    right: -40px;
+    position: relative;
+}

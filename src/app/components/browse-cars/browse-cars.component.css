@@ -1,0 +1,10 @@
+ .ct_collapse_main i {
+      transition: transform 0.3s ease;
+    }
+    .ct_collapse_main.collapsed i {
+      transform: rotate(0deg);
+    }
+    .ct_collapse_main i {
+      transform: rotate(180deg);
+    }
+    
