@@ -106,8 +106,7 @@ export class EditProfileComponent {
     let formData = new FormData();
     formData.append('fullName', this.Form.value.fullName);
     formData.append('email', this.Form.value.email);
-    debugger
-    formData.append('phoneNumber', this.Form.value.phoneNumber.number);
+    formData.append('phoneNumber', this.Form.value.phoneNumber.number.slice(this.Form.value.phoneNumber.dialCode.length));
     formData.append('legalForm', this.Form.value.legalForm);
     formData.append('companyName', this.Form.value.companyName);
     formData.append('companyAddress', this.Form.value.companyAddress);
@@ -117,7 +116,6 @@ export class EditProfileComponent {
     formData.append('typeOfSeller', this.Form.value.typeOfSeller);
     formData.append('profileImage', this.profileImage);
     formData.append('countryCode', this.Form.value.phoneNumber.dialCode);
-
 
     this.commonService.post('user/editProfile', formData).pipe(takeUntil(this.destroy$)).subscribe({
       next: (res: any) => {
