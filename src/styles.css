@@ -108,3 +108,16 @@ ul.iti__country-list {
 .iti input#country-search-box {
       height: 30px;
 }
+
+
+.ct_ads_slider .owl-nav {
+    display: flex
+;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 999;
+}

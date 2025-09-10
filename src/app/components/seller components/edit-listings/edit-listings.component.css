@@ -1,0 +1,9 @@
+.ct_border_btm_1{
+    border-bottom: 1px solid #e6e6e6;
+}
+.ct_live_price_change_card {
+    background-color: #e9021e;
+    padding: 30px;
+    color: #fff;
+    border-radius: 10px;
+}
