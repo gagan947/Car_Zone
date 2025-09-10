@@ -109,6 +109,18 @@ ul.iti__country-list {
       height: 30px;
 }
 
+
+.ct_ads_slider .owl-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+}
+
 .ant-otp-input {
       width: 48px !important;
       height: 48px !important;

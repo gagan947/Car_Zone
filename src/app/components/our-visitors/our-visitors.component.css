@@ -1,0 +1,39 @@
+ .ct_custom_table {
+        border: 1px solid #d2d5db;
+        border-radius: 10px;
+    }
+
+    .ct_custom_table table {
+        margin-bottom: 0px;
+    }
+
+    .ct_custom_table tr th,
+    .ct_custom_table tr td {
+        padding: 15px 15px;
+        /* text-align: center; */
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .ct_custom_table tr th {
+        background-color: #F2F2F2;
+        /* border-top: 1px solid #d2d5db; */
+        border-bottom: 1px solid #d2d5db;
+        color: #66748c;
+        font-weight: 600;
+    }
+
+    .ct_custom_table tr td {
+        border-color: #d2d5db;
+        color: #384152;
+    }
+
+    .ct_custom_table tr th:first-child {
+        border-top-left-radius: 10px;
+        /* border-left: 1px solid #d2d5db; */
+    }
+
+    .ct_custom_table tr th:last-child {
+        border-top-right-radius: 10px;
+        /* border-right: 1px solid #d2d5db; */
+    }

@@ -27,7 +27,9 @@ body {
   --red: #E9021E;
   --yellow: #F2B827
 }
-
+.ct_start_yellow{
+  color: #f6a30e;
+}
 .ct_text_red {
   color: var(--red);
 }
@@ -87,7 +89,7 @@ input[type="number"] {
 }
 
 .ct_fw_600 {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 .ct_fw_700 {
@@ -1013,13 +1015,13 @@ footer:before {
   padding: 0px 15px 15px;
 }
 
-.ct_browse_car_card figcaption a.ct_fs_24 {
+.ct_browse_car_card figcaption > a {
   color: #000;
   transition: 0.4s ease all;
-  white-space: nowrap;
+  /* white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  width: 100%;
+  width: 100%; */
 }
 
 .ct_browse_car_card figcaption a.ct_fs_24:hover {
@@ -1699,7 +1701,6 @@ a.add img {
   bottom: 0px;
   width: 100%;
   background-color: #fff;
-  box-shadow: 0px -4px 4px 0px #0000000a;
 }
 
 .send-box form {
@@ -2015,9 +2016,9 @@ button:focus {
 }
 
 
-.ct_custom_check2 {
-  width: 24px;
-  height: 24px;
+.ct_custom_check2 .form-check-input {
+  width: 18px;
+  height: 18px;
   margin-top: 4px;
 }
 

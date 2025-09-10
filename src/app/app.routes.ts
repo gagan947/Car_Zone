@@ -101,6 +101,10 @@ export const routes: Routes = [
                   {
                         path: 'request-additional-slots',
                         loadComponent: () => import('./components/seller components/request-additional-slots/request-additional-slots.component').then(m => m.RequestAdditionalSlotsComponent)
+                  },
+                  {
+                        path:'our-visitors',
+                        loadComponent : () => import('./components/our-visitors/our-visitors.component').then(m => m.OurVisitorsComponent)
                   }
             ]
       },
