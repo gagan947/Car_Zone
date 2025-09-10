@@ -64,10 +64,10 @@
                                           <button id="dropdownMenuButton" id="dropdownMenuButton1"
                                                 data-bs-toggle="dropdown" aria-expanded="false">
                                                 <div class="d-flex align-items-center gap-2" style="line-height: 1;">
-                                                      <img [src]="userData.profileImage || 'img/np_pro.png'" alt=""
+                                                      <img [src]="userData()?.profileImage || 'img/np_pro.png'" alt=""
                                                             class="ct_img_30">
                                                       <div class="text-start">
-                                                            <p class="mb-0 ct_fw_500">{{userData?.fullName}}</p>
+                                                            <p class="mb-0 ct_fw_500">{{userData()?.fullName}}</p>
                                                             <small
                                                                   class="ct_text_939393">{{ role() === 'buyer' ? 'Buyer' : 'Seller' }}</small>
                                                       </div>

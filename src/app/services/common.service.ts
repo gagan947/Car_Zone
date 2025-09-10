@@ -9,6 +9,7 @@ import { environment } from '../../environments/environment';
 
 export class CommonService {
   baseUrl = environment.apiUrl
+  userData = signal<any>(null);
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -27,4 +28,10 @@ export class CommonService {
   delete<T>(url: string): Observable<T> {
     return this.http.delete<T>(this.baseUrl + url);
   };
+
+  getProfile() {
+    this.get('user/getUserProfile').subscribe((res: any) => {
+      this.userData.set(res.data)
+    })
+  }
 }
