@@ -9,6 +9,7 @@ import { CountryISO, NgxIntlTelInputModule, SearchCountryField } from 'ngx-intl-
 import { ValidationErrorService } from '../../services/validation-error.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CommonModule } from '@angular/common';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -26,13 +27,13 @@ export class EditProfileComponent {
   loading: boolean = false
   profileImage: any
   imagePreview: any
-  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router) {
+  role: any
+  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router, private roleService: RoleService) {
     this.Form = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), NoWhitespaceDirective.validate]],
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: ['', [Validators.required]],
       typeOfSeller: ['personal', [Validators.required]],
-      address: [''],
       legalForm: ['Sole Proprietorship'],
       companyName: [''],
       companyAddress: [''],
@@ -43,19 +44,19 @@ export class EditProfileComponent {
 
     effect(() => {
       this.userData = this.commonService.userData
+      this.role = this.roleService.currentRole()
       if (this.userData()) {
         this.Form.patchValue({
           fullName: this.userData().fullName,
           email: this.userData().email,
           phoneNumber: this.userData().countryCode + this.userData().phoneNumber,
-          address: this.userData().address,
           legalForm: this.userData().legalForm,
           companyName: this.userData().companyName,
           companyAddress: this.userData().companyAddress,
           city: this.userData().city,
           pincode: this.userData().pincode,
-          vat: this.userData().vat,
-          typeOfSeller: this.userData().roleData.filter((role: any) => role.role === 'seller')[0].seller_type,
+          vat: this.userData().vat !== 'null' ? this.userData().vat : '',
+          typeOfSeller: this.userData().roleData.filter((role: any) => role.role === 'seller')[0]?.seller_type || 'personal',
         })
       }
     })
@@ -106,7 +107,7 @@ export class EditProfileComponent {
     let formData = new FormData();
     formData.append('fullName', this.Form.value.fullName);
     formData.append('email', this.Form.value.email);
-    formData.append('phoneNumber', this.Form.value.phoneNumber.number.slice(this.Form.value.phoneNumber.dialCode.length));
+    formData.append('phoneNumber', this.Form.value.phoneNumber.e164Number.slice(this.Form.value.phoneNumber.dialCode.length));
     formData.append('legalForm', this.Form.value.legalForm);
     formData.append('companyName', this.Form.value.companyName);
     formData.append('companyAddress', this.Form.value.companyAddress);
@@ -116,6 +117,7 @@ export class EditProfileComponent {
     formData.append('typeOfSeller', this.Form.value.typeOfSeller);
     formData.append('profileImage', this.profileImage);
     formData.append('countryCode', this.Form.value.phoneNumber.dialCode);
+    formData.append('isSeller', this.role === 'seller' ? '1' : '0');
 
     this.commonService.post('user/editProfile', formData).pipe(takeUntil(this.destroy$)).subscribe({
       next: (res: any) => {

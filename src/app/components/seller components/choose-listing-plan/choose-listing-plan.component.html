@@ -4,90 +4,58 @@
                   <div class="col-md-12">
                         <div class="ct_edit_profile_bg">
                               <div class="row">
-                                    <div class="col-md-6 mb-4 mb-md-0">
-                                          <div class="ct_pricing_plan_card">
-                                                <div
-                                                      class="d-flex align-items-center justify-content-between gap-2 mb-2">
-                                                      <h4 class="ct_fs_20 ct_fw_600 mb-0">Basic Plan</h4>
-                                                      <span class="ct_custom_badge">Starter</span>
+                                    <div class="row">
+                                          @for (item of planList.slice(0, 2); track $index) {
+                                          <div class="col-md-6 mb-4 mb-md-0">
+                                                <div class="ct_pricing_plan_card"
+                                                      [ngClass]="{'selected': selectedPlan === item}"
+                                                      (click)="selectPlan(item)">
+                                                      <div
+                                                            class="d-flex align-items-center justify-content-between gap-2 mb-2">
+                                                            <h4 class="ct_fs_20 ct_fw_600 mb-0">{{item.name}}</h4>
+                                                            @if (item.name == 'Basic Plan') {
+                                                            <span class="ct_custom_badge">Starter</span>
+                                                            }
+                                                      </div>
+                                                      <h3 class="ct_fs_24 ct_fw_700 mb-0 ct_text_red mb-1">
+                                                            {{item.price }}
+                                                      </h3>
+                                                      @if (item.name == 'Basic Plan') {
+                                                      <p class="mb-0">First car</p>
+                                                      }@else {
+                                                      <p class="mb-0">Price per additional car</p>
+                                                      }
                                                 </div>
-                                                <h3 class="ct_fs_24 ct_fw_700 mb-0 ct_text_red mb-1">
-                                                      CHF 1.00
-                                                </h3>
-                                                <p class="mb-0">First car</p>
                                           </div>
+                                          }
                                     </div>
-                                    <div class="col-md-6 mb-4 mb-md-0">
-                                          <div class="ct_pricing_plan_card">
-                                                <div
-                                                      class="d-flex align-items-center justify-content-between gap-2 mb-2">
-                                                      <h4 class="ct_fs_20 ct_fw_600 mb-0">Additional Cars</h4>
-                                                </div>
-                                                <h3 class="ct_fs_24 ct_fw_700 mb-0 ct_text_red mb-1">
-                                                      CHF 29.95
-                                                </h3>
-                                                <p class="mb-0">Price per additional car</p>
-                                          </div>
-                                    </div>
+
                               </div>
 
                               <div class="mt-4">
                                     <h4 class="ct_fs_20 ct_fw_600 mb-4">Bulk Slot Options</h4>
                                     <div class="row">
+                                          @for (item of planList.slice(2); track $index) {
                                           <div class="col-md-6 mb-4">
                                                 <ul class="ct_slot_list">
                                                       <li>
                                                             <div class="form-check ct_custom_radio">
                                                                   <input class="form-check-input" type="radio"
                                                                         name="flexRadioDefault"
-                                                                        id="flexRadioDefault1" />
-                                                                  <label class="form-check-label ct_fw_500"
-                                                                        for="flexRadioDefault1">
-                                                                        10 Slots
+                                                                        [id]="item.slot_count + '_' + item.name"
+                                                                        (change)="selectPlan(item)" />
+                                                                  <label class="form-check-label ct_fw_500 ms-1"
+                                                                        [for]="item.slot_count + '_' + item.name">
+                                                                        {{item.slot_count}} Slots
                                                                   </label>
                                                             </div>
                                                             <h6 class="mb-0">
-                                                                  <span class="ct_fw_700">CHF 299.50</span>/month
+                                                                  <span class="ct_fw_700">{{item.price}}</span>/month
                                                             </h6>
                                                       </li>
                                                 </ul>
                                           </div>
-                                          <div class="col-md-6 mb-4">
-                                                <ul class="ct_slot_list">
-                                                      <li>
-                                                            <div class="form-check ct_custom_radio">
-                                                                  <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault"
-                                                                        id="flexRadioDefault1" />
-                                                                  <label class="form-check-label ct_fw_500"
-                                                                        for="flexRadioDefault1">
-                                                                        15 Slots
-                                                                  </label>
-                                                            </div>
-                                                            <h6 class="mb-0">
-                                                                  <span class="ct_fw_700">CHF 449.25</span>/month
-                                                            </h6>
-                                                      </li>
-                                                </ul>
-                                          </div>
-                                          <div class="col-md-6 mb-4">
-                                                <ul class="ct_slot_list">
-                                                      <li>
-                                                            <div class="form-check ct_custom_radio">
-                                                                  <input class="form-check-input" type="radio"
-                                                                        name="flexRadioDefault"
-                                                                        id="flexRadioDefault1" />
-                                                                  <label class="form-check-label ct_fw_500"
-                                                                        for="flexRadioDefault1">
-                                                                        20 Slots
-                                                                  </label>
-                                                            </div>
-                                                            <h6 class="mb-0">
-                                                                  <span class="ct_fw_700">CHF 599.00</span>/month
-                                                            </h6>
-                                                      </li>
-                                                </ul>
-                                          </div>
+                                          }
                                     </div>
 
                                     <a routerLink="/request-additional-slots" class="ct_text_red ct_fw_600">Request Slot
@@ -100,8 +68,9 @@
                                     </div>
 
                                     <div class="mt-5 text-center">
-                                          <a routerLink="/list-your-car" class="ct_red_btn">Continue to Add car</a>
-
+                                          <button [disabled]="!selectedPlan" class="ct_red_btn"
+                                                (click)="purchasePlan()">Continue to Add
+                                                car</button>
                                     </div>
                               </div>
                         </div>

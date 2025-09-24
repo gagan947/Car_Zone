@@ -6,193 +6,421 @@
                               <form id="msform">
                                     <!-- progressbar -->
                                     <ul id="ct_form_progressbar" class="ct_host_process_multi_form">
-                                          <li class="active ct_flex_1">
+                                          <li class="ct_flex_1" [ngClass]="{ 'active': formStep >= 1}">
                                                 <h5>Car Details</h5>
                                           </li>
-                                          <li class="ct_flex_1">
+                                          <li class="ct_flex_1" [ngClass]="{ 'active': formStep >= 2}">
                                                 <h5>Pricing & Location</h5>
                                           </li>
-                                          <li id="ct_pricing">
+                                          <li id="ct_pricing" [ngClass]="{ 'active': formStep === 3}">
                                                 <h5>Upload Photos & Video</h5>
                                           </li>
                                     </ul>
-                                    <fieldset class="ct_mt_60 ct_white_bg">
-                                          <div class="ct_edit_profile_bg">
-                                                <div class="row">
-                                                      <div class="col-md-12">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Vehicle
-                                                                        Registration Number
-                                                                  </label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter VRN" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Car Model &
-                                                                        Variant</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Model" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Brand
-                                                                        Name</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Brand Name" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Sitting
-                                                                        Capacity</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter eg. 7" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Select
-                                                                        Year</label>
-                                                                  <select class="form-control ct_input">
-                                                                        <option value="">Select year</option>
-                                                                        <option value="">1980</option>
-                                                                  </select>
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Mileage
-                                                                        (km)</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Mileage" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Fuel Type</label>
-                                                                  <select class="form-control ct_input">
-                                                                        <option value="">Select fuel type</option>
-                                                                        <option value="">Petrol</option>
-                                                                  </select>
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for=""
-                                                                        class="mb-2 ct_fw_600">Transmission</label>
-                                                                  <select class="form-control ct_input">
-                                                                        <option value="">Select transmisson</option>
-                                                                        <option value="">Petrol</option>
-                                                                  </select>
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Engine
-                                                                        Type</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Engine Type" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">CO₂
-                                                                        Emissions</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Mileage" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Exterior
-                                                                        Colour</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Enter Car Colour" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Condition</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="eg. Good Condition" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Power
-                                                                        Output</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="110 kW (150 PS)" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Features &
-                                                                        Specifications</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="e.g. Leather Seats" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-6">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">MFK Inspection
-                                                                        Date (optional)</label>
-                                                                  <input type="text" class="form-control ct_input"
-                                                                        placeholder="Select inspection date" />
-                                                            </div>
-                                                      </div>
-                                                      <div class="col-md-12">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for=""
-                                                                        class="mb-2 ct_fw_600">Description</label>
-                                                                  <!-- <textarea type="text"
-                                                                        class="form-control ct_input h-auto" rows="4"
-                                                                        placeholder="Enter Description"></textarea> -->
-                                                                  <quill-editor [(ngModel)]="htmlText" class="w-100"
-                                                                        placeholder="Enter Description"
-                                                                        [modules]="quillConfig"></quill-editor>
-                                                            </div>
-                                                      </div>
-                                                </div>
-                                          </div>
-
-                                          <!-- <input type="button" name="next" class="ct_form_next action-button" value="Next" /> -->
-                                          <button type="button" class="ct_red_btn ct_form_next float-end mt-4">
-                                                Next
-                                          </button>
-                                    </fieldset>
-                                    <fieldset class="ct_white_bg">
-                                          <div class="ct_edit_profile_bg mb-4">
-                                                <div class="row">
-                                                      <div class="col-md-12">
-                                                            <div class="form-group mb-4 text-start">
-                                                                  <label for="" class="mb-2 ct_fw_600">Total Price
-                                                                  </label>
-                                                                  <div class="position-relative">
-                                                                        <input type="number" placeholder="Enter Amount"
-                                                                              class="form-control ct_input pe-5" />
-                                                                        <span class="ct_show_eye">CHF</span>
+                                    <fieldset *ngIf="formStep == 1" class="ct_mt_60 ct_white_bg">
+                                          <form [formGroup]="carFormOne">
+                                                <div class="ct_edit_profile_bg">
+                                                      <div class="row">
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Vehicle
+                                                                              Identification Number
+                                                                        </label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="Enter VIN"
+                                                                              formControlName="vrn" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("VIN", carFormOne.get("vrn"))}}</small>
                                                                   </div>
                                                             </div>
-                                                            
+                                                            @if(entryType == 1){
+                                                            <div class="col-md-12">
+                                                                  <div class="d-flex align-items-center gap-2 mb-4">
+                                                                        <!-- <button type="button" class="ct_red_btn w-100">
+                                                                              Continue
+                                                                        </button> -->
+                                                                        <app-submit-button class="w-100"
+                                                                              [isLoading]="loading" [text]="'Continue'"
+                                                                              [class]="'ct_red_btn w-100'"
+                                                                              (click)="fetchCarDetailByVIN()"></app-submit-button>
+                                                                        <h6 class="mb-0 text-nowrap">OR</h6>
+                                                                        <button type="button" (click)="entryType = 2"
+                                                                              class="ct_red_btn ct_outline_btn w-100">
+                                                                              Enter Manually
+                                                                        </button>
+                                                                  </div>
+                                                            </div>
+                                                            }
+                                                            @if(entryType === 2){
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Brand
+                                                                              Name</label>
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="Select"
+                                                                              [nzShowSearch]="true"
+                                                                              formControlName="brandName">
+                                                                              @for (item of brandList; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.MakeName"
+                                                                                    [nzValue]="item.MakeName"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{item.MakeName}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.MakeName == carFormOne.get('brandName')?.value" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Brand name", carFormOne.get("brandName"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Car Model &
+                                                                              Variant</label>
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="Select"
+                                                                              [nzShowSearch]="true"
+                                                                              formControlName="carModel">
+                                                                              @for (item of modalList; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.modelName"
+                                                                                    [nzValue]="item.modelName"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{item.modelName}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.modelName === carFormOne.get('carModel')?.value" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Car model", carFormOne.get("carModel"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Sitting
+                                                                              Capacity</label>
+                                                                        <input type="number"
+                                                                              class="form-control ct_input"
+                                                                              placeholder="Enter eg. 7"
+                                                                              formControlName="sittingCapacity" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Sitting capacity", carFormOne.get("sittingCapacity"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Select
+                                                                              Year</label>
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="Select"
+                                                                              formControlName="selectYear">
+                                                                              @for (year of years; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="year" [nzValue]="year"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{year}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="year === carFormOne.get('selectYear')?.value" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Year", carFormOne.get("selectYear"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Mileage
+                                                                              (km)</label>
+                                                                        <input type="number"
+                                                                              class="form-control ct_input"
+                                                                              placeholder="Enter Mileage"
+                                                                              formControlName="carMileage" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Mileage", carFormOne.get("carMileage"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Fuel
+                                                                              Type</label>
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="Select"
+                                                                              formControlName="fuelType">
+                                                                              @for (type of fuelTypes; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="type.title"
+                                                                                    [nzValue]="type.key"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{type.title}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="type.key === carFormOne.get('fuelType')?.value" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Fuel type", carFormOne.get("fuelType"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">Transmission</label>
+                                                                        <nz-select
+                                                                              class="form-control ct_input ct_custom_select"
+                                                                              nzPlaceHolder="Select"
+                                                                              formControlName="transmission">
+                                                                              @for (item of transmissions; track $index)
+                                                                              {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.title"
+                                                                                    [nzValue]="item.key"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{item.title}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Transmission", carFormOne.get("transmission"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Engine
+                                                                              Type</label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="Enter Engine Type"
+                                                                              formControlName="engineType" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Engine Type", carFormOne.get("engineType"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">CO₂
+                                                                              Emissions</label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="Enter Mileage"
+                                                                              formControlName="co2Emission" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("CO2 emissions", carFormOne.get("co2Emission"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Exterior
+                                                                              Colour</label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="Enter Car Colour"
+                                                                              formControlName="carColor" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Exterior color", carFormOne.get("carColor"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">Condition</label>
+                                                                        <nz-select
+                                                                              class="form-control ct_input ct_custom_select"
+                                                                              nzPlaceHolder="Select"
+                                                                              formControlName="carCondition">
+                                                                              @for (item of conditions; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.title"
+                                                                                    [nzValue]="item.key"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p
+                                                                                                      class="m-0 ct_fw_600">
+                                                                                                      {{item.title}}
+                                                                                                </p>
+                                                                                                <p class="m-0 ">
+                                                                                                      {{item.subTitle}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Condition", carFormOne.get("carCondition"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Power
+                                                                              Output</label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="110 kW (150 PS)"
+                                                                              formControlName="powerOutput" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Power output", carFormOne.get("powerOutput"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">First
+                                                                              Registration Date</label>
+                                                                        <input type="date" class="form-control ct_input"
+                                                                              placeholder="Select inspection date"
+                                                                              formControlName="first_registration_date" />
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Registration date", carFormOne.get("first_registration_date"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Features &
+                                                                              Specifications</label>
+                                                                        <ul class="d-flex align-items-center gap-3 flex-wrap  ct_para_scroll ct_custom_scroll ct_pe_30 mb-0"
+                                                                              [ngClass]="{'mb-2' : selectedFeatures.length > 0}">
+                                                                              @for (item of selectedFeatures; track
+                                                                              $index) {
+                                                                              <li>
+                                                                                    <button type="button"
+                                                                                          class="ct_select_badge">{{item}}
+                                                                                          <span
+                                                                                                (click)="removeFeature($index)"><i
+                                                                                                      class="fa-solid fa-xmark"></i></span></button>
+                                                                              </li>
+                                                                              }
+                                                                        </ul>
+                                                                        <div class="position-relative">
+                                                                              <input type="text"
+                                                                                    class="form-control ct_input"
+                                                                                    #featureInput rows="4"
+                                                                                    placeholder="Enter Features & Specifications"
+                                                                                    formControlName="carFeatures"
+                                                                                    (keydown.enter)="addFeature(featureInput.value); $event.preventDefault()" />
+                                                                              <button type="button"
+                                                                                    (click)="addFeature(featureInput.value)"
+                                                                                    class="position-absolute plus_button"><i
+                                                                                          class="fa fa-plus"></i></button>
+                                                                        </div>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Feature", carFormOne.get("carFeatures"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">Description</label>
+                                                                        <textarea type="text"
+                                                                              class="form-control ct_input h-auto"
+                                                                              rows="4" placeholder="Enter Description"
+                                                                              formControlName="description"></textarea>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Description", carFormOne.get("description"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            }
                                                       </div>
                                                 </div>
-                                          </div>
 
-                                          <button type="button" class="ct_red_btn ct_form_next float-end">
-                                                Next
-                                          </button>
-                                          <button type="button"
-                                                class="ct_red_btn ct_outline_btn previous float-end me-3">
-                                                Back
-                                          </button>
+                                                <!-- <input type="button" name="next" class="ct_form_next action-button" value="Next" /> -->
+                                                @if(entryType === 2){
+                                                <button type="button" class="ct_red_btn float-end mt-4"
+                                                      (click)="nextStep(carFormOne)">
+                                                      Next
+                                                </button>
+                                                }
+                                          </form>
+                                    </fieldset>
+                                    <fieldset *ngIf="formStep == 2" class="ct_white_bg">
+                                          <form [formGroup]="carFormTwo">
+                                                <div class="ct_edit_profile_bg mb-4">
+                                                      <div class="row">
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for="" class="mb-2 ct_fw_600">Total Price
+                                                                        </label>
+                                                                        <div class="position-relative">
+                                                                              <input type="number"
+                                                                                    placeholder="Enter Amount"
+                                                                                    class="form-control ct_input pe-5"
+                                                                                    formControlName="totalPrice" />
+                                                                              <span class="ct_show_eye">CHF</span>
+                                                                        </div>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Total price", carFormTwo.get("totalPrice"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">Location</label>
+                                                                        <textarea type="text"
+                                                                              class="form-control ct_input h-auto"
+                                                                              rows="2" placeholder="Enter Location"
+                                                                              formControlName="location"></textarea>
+                                                                        <small
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Location", carFormTwo.get("location"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                      </div>
+                                                </div>
+
+                                                <button type="button" class="ct_red_btn float-end"
+                                                      (click)="nextStep(carFormTwo)">
+                                                      Next
+                                                </button>
+                                                <button type="button" (click)="previousStep()"
+                                                      class="ct_red_btn ct_outline_btn float-end me-3">
+                                                      Back
+                                                </button>
+                                          </form>
                                     </fieldset>
                                     <fieldset class="ct_white_bg">
                                           <div class="text-start mb-4">
-                                                <label for="" class="ct_fw_600 mb-2">Upload Photos & Video
+                                                <label for="" class="ct_fw_600 mb-2">Upload Photos
                                                 </label>
                                                 <div class="ct_upload_product_main ct_upload_product_main_180">
                                                       <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -205,56 +433,33 @@
                                                       <p class="text-center ct_fs_18 ct_text_op_07 mb-0">
                                                             Upload your image here
                                                       </p>
-                                                      <small class="text-center d-block ct_text_op_6">Maximum 10 images,
-                                                            MP4 video up to 30 seconds
+                                                      <small class="text-center d-block ct_text_op_6">Maximum 10 images
                                                       </small>
                                                       <label for="ct_upload_product">
                                                             <input type="file" name="" id="ct_upload_product"
-                                                                  class="d-none" />
+                                                                  class="d-none" accept="image/*"
+                                                                  (change)="onCarImage($event)" multiple />
                                                             <div class="ct_browse_btn mt-3">
                                                                   <span>Browse Files</span>
                                                             </div>
                                                       </label>
                                                 </div>
 
-                                                <div class="ct_multiple_img_div ct_custom_scroll mb-4 d-none">
+                                                <div class="ct_multiple_img_div ct_custom_scroll mb-4">
+                                                      @for (item of previewCarImages; track $index) {
                                                       <div class="ct_uploaded_img123 position-relative">
                                                             <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
+                                                                  <img [src]="item" alt="" />
+                                                                  <i class="fa-solid fa-xmark"
+                                                                        (click)="removeCarImage($index)"></i>
                                                             </div>
                                                       </div>
-                                                      <div class="ct_uploaded_img123 position-relative">
-                                                            <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
-                                                            </div>
-                                                      </div>
-                                                      <div class="ct_uploaded_img123 position-relative">
-                                                            <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
-                                                            </div>
-                                                      </div>
-                                                      <div class="ct_uploaded_img123 position-relative">
-                                                            <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
-                                                            </div>
-                                                      </div>
-                                                      <div class="ct_uploaded_img123 position-relative">
-                                                            <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
-                                                            </div>
-                                                      </div>
-                                                      <div class="ct_uploaded_img123 position-relative">
-                                                            <div class="ct_uploaded_img_w">
-                                                                  <img src="img/car-1.png" alt="" />
-                                                                  <i class="fa-solid fa-xmark"></i>
-                                                            </div>
-                                                      </div>
+                                                      }
                                                 </div>
+                                                <small *ngIf="previewCarImages.length == 0 && submitted"
+                                                      class="text-danger">
+                                                      Please upload car images.
+                                                </small>
                                           </div>
                                           <div class="text-start mb-4">
                                                 <label for="" class="ct_fw_600 mb-2">Upload Car Reel
@@ -273,26 +478,37 @@
                                                       <small class="text-center d-block ct_text_op_6">MP4 video up to 60
                                                             seconds
                                                       </small>
-                                                      <label for="ct_upload_product">
-                                                            <input type="file" name="" id="ct_upload_product"
-                                                                  class="d-none" />
+                                                      <label for="ct_upload_video">
+                                                            <input type="file" name="" id="ct_upload_video"
+                                                                  class="d-none" accept="video/mp4"
+                                                                  (change)="onFileSelected($event)" />
                                                             <div class="ct_browse_btn mt-3">
                                                                   <span>Browse Files</span>
                                                             </div>
                                                       </label>
                                                 </div>
 
-                                                <div class="ct_single_uploaded_img mt-3">
-                                                      <img src="img/car-2.png" alt="">
-                                                      <i class="fa-solid fa-xmark"></i>
+                                                <div class="ct_single_uploaded_img mt-3 py-2" *ngIf="videoPreview">
+                                                      <div class="mobile-frame">
+                                                            <video [src]="videoPreview" autoplay controls playsinline
+                                                                  class="videoPreview"></video>
+                                                            <i class="fa-solid fa-xmark close-btn"
+                                                                  (click)="removeFile()"></i>
+                                                      </div>
                                                 </div>
                                           </div>
-                                          <button routerLink="/my-listings" type="button"
+                                          <!-- <button routerLink="/my-listings" type="button"
                                                 class="ct_red_btn ct_form_next float-end">
                                                 Submit
-                                          </button>
+                                          </button> -->
+
+                                          <app-submit-button [class]="'ct_red_btn float-end'" [isLoading]="loading"
+                                                [text]="'Submit'" (click)="onSubmit()">
+                                          </app-submit-button>
+
                                           <button type="button"
-                                                class="ct_red_btn ct_outline_btn previous float-end me-3">
+                                                class="ct_red_btn ct_outline_btn previous float-end me-3"
+                                                (click)="previousStep()">
                                                 Back
                                           </button>
                                     </fieldset>
@@ -302,3 +518,9 @@
             </div>
       </div>
 </section>
+
+
+<!-- <ngx-scanner-qrcode #action="scanner" (event)="onEvent($event)">
+</ngx-scanner-qrcode>
+<button (click)="action.start()">Start</button>
+<button (click)="action.stop()">Stop</button> -->

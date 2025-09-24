@@ -76,7 +76,11 @@ export class OtpVerificationComponent {
       next: (res: any) => {
         this.loading = false
         this.toster.success(res.message)
-        this.router.navigate(['/login'])
+        if (this.isForgotPassword === '1') {
+          this.router.navigate(['/reset-password'])
+        } else {
+          this.router.navigate(['/login'])
+        }
       },
       error: (error) => {
         this.loading = false

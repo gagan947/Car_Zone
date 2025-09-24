@@ -21,7 +21,6 @@ export class NotificationService {
                   const token = await getToken(this.messaging, {
                         vapidKey: environment.firebaseConfig.vapidKey
                   });
-
                   if (token) {
                         this.currentToken.next(token);
                         localStorage.setItem('fcm_token', token);
@@ -43,7 +42,7 @@ export class NotificationService {
                   const body = payload.notification?.body || '';
                   new Notification(title, {
                         body: body,
-                        icon: 'img/logo.svg',
+                        icon: 'img/carzone_logo.png',
                   });
             });
       }
@@ -51,5 +50,4 @@ export class NotificationService {
       setMessage(value: any) {
             this.messageSource.next(value);
       }
-
 }

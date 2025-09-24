@@ -1,5 +1,5 @@
 .ct_seller_company_add li {
-  
+
     margin-bottom: 12px;
 }
 
@@ -7,6 +7,7 @@
     width: 120px;
     margin-bottom: 20px;
 }
+
 .ct_seller_company_add {
     padding: 20px;
     border: 1px solid #e6e6e6;
@@ -15,8 +16,7 @@
 
 
 .ct_working_hours_list12 li {
-    display: flex
-;
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px;
@@ -24,7 +24,8 @@
     border-radius: 10px;
     gap: 10px;
 }
-.ct_working_hours_list12 li + li {
+
+.ct_working_hours_list12 li+li {
     margin-top: 10px;
 }
 
@@ -33,6 +34,14 @@
     box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.09);
     padding: 20px;
     border-radius: 10px;
-    height:100%;
+    height: 100%;
 }
 
+.ct_gallery_right_2_img {
+    grid-template-columns: repeat(1, 1fr) !important;
+}
+
+.ct_gallery_right_1_img {
+    grid-template-rows: repeat(1, 1fr) !important;
+    display: block !important;
+}

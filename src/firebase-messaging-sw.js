@@ -16,6 +16,6 @@ const messaging = firebase.messaging();
 messaging.onBackgroundMessage((payload) => {
       self.registration.showNotification(payload.notification.title, {
             body: payload.notification.body,
-            icon: 'img/logo.svg'
+            icon: 'img/carzone_logo.png'
       });
 });

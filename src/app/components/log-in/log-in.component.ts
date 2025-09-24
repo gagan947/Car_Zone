@@ -1,20 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { integerValidator, NoWhitespaceDirective, passwordMatchValidator, passwordMismatchValidator, strongPasswordValidator } from '../../helper/validators';
 import { ValidationErrorService } from '../../services/validation-error.service';
 import { CommonModule } from '@angular/common';
-import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { QuillModule } from 'ngx-quill';
 import { Router, RouterLink } from '@angular/router';
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RoleService, UserRole } from '../../services/role.service';
 import { AuthService } from '../../services/auth.service';
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-log-in',
-  imports: [ReactiveFormsModule, CommonModule, NzSelectModule, QuillModule, FormsModule, RouterLink, SubmitButtonComponent],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink, SubmitButtonComponent],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.css'
 })
@@ -33,8 +32,18 @@ export class LogInComponent {
   }
 
   ngOnInit(): void {
-
+    if (!this.role()) {
+      const modalElement = document.getElementById('ct_login_modal_1');
+      if (modalElement) {
+        const modal = new bootstrap.Modal(modalElement, {
+          backdrop: 'static',
+          keyboard: false
+        });
+        modal.show();
+      }
+    }
   }
+
   onSubmit() {
     if (this.Form.invalid) {
       this.Form.markAllAsTouched();
@@ -75,8 +84,14 @@ export class LogInComponent {
     }
   }
 
+  switchRole1(role: string) {
+    const newRole: UserRole = role as UserRole;
+    this.roleService.setRole(newRole);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
 }
+

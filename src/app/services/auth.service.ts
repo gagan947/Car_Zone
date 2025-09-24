@@ -23,8 +23,8 @@ export class AuthService {
       }
 
       logout(): void {
-            localStorage.removeItem('app_role');
             localStorage.removeItem('CarZoneToken');
             localStorage.removeItem('userInfo');
+            localStorage.removeItem('app_role');
       };
 }
