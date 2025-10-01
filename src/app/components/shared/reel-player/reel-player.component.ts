@@ -59,7 +59,7 @@ export class ReelPlayerComponent {
         },
         touchReleaseOnEdges: true,
         slidesPerView: 1,
-        spaceBetween: 0,
+        spaceBetween: 30,
         initialSlide: this.currentIndex,
         resistance: true,
         resistanceRatio: 0.85,
