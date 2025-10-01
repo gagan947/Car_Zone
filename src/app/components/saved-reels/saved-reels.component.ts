@@ -1,12 +1,43 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
+import { Subject, takeUntil } from 'rxjs';
+import { CommonService } from '../../services/common.service';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-saved-reels',
-  imports: [],
+  imports: [CommonModule, RouterLink],
   templateUrl: './saved-reels.component.html',
   styleUrl: './saved-reels.component.css'
 })
 export class SavedReelsComponent {
+  private destroy$ = new Subject<void>();
+  savedReels: any = []
+  constructor(private service: CommonService, private message: NzMessageService, private router: Router) { }
 
+  ngOnInit(): void {
+    this.getSavedReels()
+  }
+
+  getSavedReels() {
+    this.service.get('user/fetchCarReels').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      // this.savedReels = res.data
+    })
+  }
+
+  removeFromSaved(item: any) {
+    item.isWishlist = !item.isWishlist
+    this.service.delete('user/removeSavedCarsReel', { carId: item.carId }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.savedReels.splice(this.savedReels.indexOf(item), 1)
+    })
+  }
+
+  openReel(item: any) {
+    this.router.navigate(['reel-player'], { queryParams: { id: item.id } });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

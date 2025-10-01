@@ -3,12 +3,12 @@ import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 declare var Swiper: any
 
 @Component({
   selector: 'app-reel-player',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './reel-player.component.html',
   styleUrl: './reel-player.component.css',
 })
@@ -234,6 +234,17 @@ export class ReelPlayerComponent {
   //   video.parentElement?.appendChild(playButton);
   // }
 
+  saveReel(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.service.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  removeFromSaved(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.service.delete('user/removeSavedCarsReel', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();

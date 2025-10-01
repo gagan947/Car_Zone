@@ -1,32 +1,34 @@
 <section class="">
       <div class="mySwiper swiper">
-      <div class="swiper-wrapper">
-            @for (item of carReels; track $index) {
-            @if(item.carReel){
-            <div class="swiper-slide">
-                  <div class="mobile-frame">
-                        <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="none"
-                              class="videoPreview">
-                        </video>
-                        <div class="d-flex align-items-start justify-content-between gap-3 ct_reel_title_top w-100">
-                                   <div>
-                                     <p class="mb-0 ct_fw_600 ct_fs_18">{{item.fullModel}}
-                                    </p>
+            <div class="swiper-wrapper">
+                  @for (item of carReels; track $index) {
+                  @if(item.carReel){
+                  <div class="swiper-slide">
+                        <div class="mobile-frame">
+                              <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="none"
+                                    class="videoPreview">
+                              </video>
+                              <div
+                                    class="d-flex align-items-start justify-content-between gap-3 ct_reel_title_top w-100">
+                                    <div>
+                                          <p class="mb-0 ct_fw_600 ct_fs_18">{{item.fullModel}}
+                                          </p>
 
-                                     <p class="mb-0 ct_fw_500">254'554.00- CHF | 2024 | 2580 km
-                                    </p>
-                                   </div>
-                                  <div class="d-flex align-items-center gap-2">
-                                    <i class="fa-regular fa-eye"></i>
-                                    <i class="fa-bookmark" [ngClass]="item.isSavedReel ? 'fa-solid' : 'fa-regular'"></i>
-                                  </div>
+                                          <p class="mb-0 ct_fw_500">{{item.carReelInfo}}
+                                          </p>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-2">
+                                          <i class="fa-regular fa-eye" routerLink="/car-detail"
+                                                [queryParams]="{id: item.id}" style="cursor: pointer;"></i>
+                                          <i class="fa-bookmark"
+                                                [ngClass]="item.isSavedReel ? 'fa-solid' : 'fa-regular'"
+                                                (click)="item.isSavedReel ? removeFromSaved(item) : saveReel(item)"></i>
+                                    </div>
                               </div>
+                        </div>
                   </div>
-                   
-                  
+                  }
+                  }
             </div>
-            }
-            }
       </div>
-</div>
 </section>
