@@ -32,9 +32,10 @@ export class HomeComponent {
       slidesPerView: 1,
       loop: true,
       autoplay: {
-        delay: 2500,
+        delay: 2000,
         disableOnInteraction: false
       },
+       speed: 2500,    
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
