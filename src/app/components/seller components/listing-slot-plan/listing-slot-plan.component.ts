@@ -13,7 +13,7 @@ import { CommonService } from '../../../services/common.service';
 })
 export class ListingSlotPlanComponent {
   private destroy$ = new Subject<void>();
-  planList: any[] = []
+  planList: any
   selectedPlan: any = null;
 
   constructor(private service: CommonService, private message: NzMessageService) { }
@@ -28,6 +28,11 @@ export class ListingSlotPlanComponent {
     })
   }
 
+  convert(val: string, type: 'used' | 'total'): number {
+    if (!val) return 0;
+    const [used, total] = val.replace(/\s/g, '').split('/').map(Number);
+    return type === 'used' ? used : total;
+  }
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();

@@ -47,6 +47,7 @@ export class HeaderComponent {
           scriptElement.async = true;
           document.body.appendChild(scriptElement);
           this.toster.success(res.message);
+          this.router.navigate(['/']);
         }
       })
     }

@@ -13,8 +13,8 @@ export class CommonService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  get<T>(url: string): Observable<T> {
-    return this.http.get<T>(this.baseUrl + url);
+  get<T>(url: string, params?: any): Observable<T> {
+    return this.http.get<T>(this.baseUrl + url, { params });
   };
 
   post<T, U>(url: string, data: U): Observable<T> {
@@ -25,8 +25,8 @@ export class CommonService {
     return this.http.post<T>(this.baseUrl + url, data)
   };
 
-  delete<T>(url: string): Observable<T> {
-    return this.http.delete<T>(this.baseUrl + url);
+  delete<T>(url: string, data?: any): Observable<T> {
+    return this.http.delete<T>(this.baseUrl + url, { body: data });
   };
 
   getProfile() {

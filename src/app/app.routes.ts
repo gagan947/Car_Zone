@@ -107,7 +107,11 @@ export const routes: Routes = [
                   {
                         path: 'our-visitors',
                         loadComponent: () => import('./components/our-visitors/our-visitors.component').then(m => m.OurVisitorsComponent)
-                  }
+                  },
+                  {
+                        path: 'reel-player',
+                        loadComponent: () => import('./components/shared/reel-player/reel-player.component').then(m => m.ReelPlayerComponent)
+                  },
             ]
       },
       {

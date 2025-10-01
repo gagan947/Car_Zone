@@ -629,6 +629,7 @@ a.ct_notification_icon {
 .ct_listing_img img {
   height: 400px;
   object-fit: cover;
+  width: 100%;
 }
 
 .ct_listing_slider .owl-dots {

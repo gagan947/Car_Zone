@@ -141,3 +141,59 @@ ul.iti__country-list {
 small {
       font-size: 13px !important;
 }
+
+
+
+
+
+
+.owl-carousel,
+.owl-stage-outer {
+      height: 100vh !important;
+      width: 100%;
+      overflow: hidden;
+}
+
+/* stack slides vertically */
+.owl-stage {
+      display: flex !important;
+      flex-direction: column !important;
+      height: 100% !important;
+      transition: transform 600ms ease !important;
+      /* we will control transform */
+      will-change: transform;
+}
+
+/* each item takes full viewport height */
+.owl-item {
+      flex: 0 0 100% !important;
+      height: 100vh !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+}
+
+/* video cover */
+.item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+}
+
+.fa-heart {
+      cursor: pointer;
+}
+
+.ant-slider-handle {
+      background-color: #f0151e !important;
+      border: solid 2px #f0151e !important;
+}
+
+.ant-slider-track {
+      background-color: #f0151e !important;
+}
+
+.ant-slider-rail {
+      background-color: #f0151e42 !important;
+}

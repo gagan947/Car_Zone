@@ -218,7 +218,8 @@
                                                                                                 </p>
                                                                                           </div>
                                                                                           <input type="radio"
-                                                                                                class="cutom_radio_input" />
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.key === carFormOne.get('transmission')?.value" />
                                                                                     </div>
                                                                               </nz-option>
                                                                               }
@@ -243,7 +244,7 @@
                                                                         <label for="" class="mb-2 ct_fw_600">CO₂
                                                                               Emissions</label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="Enter Mileage"
+                                                                              placeholder="Enter CO2 emissions"
                                                                               formControlName="co2Emission" />
                                                                         <small
                                                                               class="text-danger">{{validationErrorService.getErrorMessage("CO2 emissions", carFormOne.get("co2Emission"))}}</small>
@@ -285,7 +286,8 @@
                                                                                                 </p>
                                                                                           </div>
                                                                                           <input type="radio"
-                                                                                                class="cutom_radio_input" />
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.key === carFormOne.get('carCondition')?.value" />
                                                                                     </div>
                                                                               </nz-option>
                                                                               }

@@ -4,7 +4,8 @@ import { RoleDirective } from '../../directives/role.directive';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
-declare var $: any;
+import { carData } from '../../helper/carData';
+declare var Swiper: any;
 @Component({
   selector: 'app-car-detail',
   imports: [RouterLink, RoleDirective, CommonModule],
@@ -15,6 +16,7 @@ export class CarDetailComponent {
   private destroy$ = new Subject<void>();
   carData: any
   carId: any
+  conditions = carData.conditions
   constructor(private service: CommonService, private route: ActivatedRoute) {
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
@@ -45,21 +47,14 @@ export class CarDetailComponent {
   }
 
   ngAfterViewInit(): void {
-    $(".ct_product_gallary_slider").owlCarousel({
-      loop: true,
-      margin: 10,
-      nav: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        600: {
-          items: 1,
-        },
-        1000: {
-          items: 1,
-        },
-      },
+    const swiper = new Swiper('.mySwiper', {
+      direction: 'horizontal',
+      loop: false,
+      mousewheel: false,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }
     });
   }
 
@@ -87,5 +82,21 @@ export class CarDetailComponent {
 
   getFeaturesArray(features: any) {
     return features?.split(',')
+  }
+
+  getCarCondition(condition: any) {
+    return this.conditions.find((c: any) => c.key === condition)?.title
+  }
+
+  addToWishlist(item: any) {
+    item.isWishlist = !item.isWishlist
+    this.service.post('user/addToWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  removeFromWishlist(item: any) {
+    item.isWishlist = !item.isWishlist
+    this.service.delete('user/removeCarFromWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
   }
 }
