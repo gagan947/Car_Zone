@@ -1,0 +1,12 @@
+.ct_pricing_plan_card.selected {
+      border: 2px solid #f0151e;
+}
+
+.ct_pricing_plan_card {
+      border: 2px solid transparent;
+}
+
+.ct_red_btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+}

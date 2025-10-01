@@ -7,6 +7,11 @@ $(document).ready(function () {
   })
 })
 
+$(document).on("click", function (e) {
+  if (!$(e.target).closest(".ct_menu_bar").length) {
+    $(".ct_navlist ul").removeClass("active");
+  }
+});
 // Wrap every letter in a span
 // var textWrapper = document.querySelector('.ml10 .letters');
 // textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -26,26 +31,23 @@ $(document).ready(function () {
 //   });
 
 $('.ct_ads_slider').owlCarousel({
-    loop:true,
-    margin:10,
-    nav:true,
-    responsive:{
-        0:{
-            items:1
-        },
-        600:{
-            items:2
-        },
-        1000:{
-            items:3
-        }
+  loop: true,
+  margin: 10,
+  nav: true,
+  responsive: {
+    0: {
+      items: 1
+    },
+    600: {
+      items: 2
+    },
+    1000: {
+      items: 3
     }
+  }
 })
 
-
-
 new WOW().init();
-
 
 var a = 0;
 $(window).scroll(function () {
@@ -81,22 +83,22 @@ $(window).scroll(function () {
 });
 
 
-$('.ct_listing_slider').owlCarousel({
-  loop: true,
-  margin: 20,
-  nav: false,
-  responsive: {
-    0: {
-      items: 1
-    },
-    600: {
-      items: 2
-    },
-    1000: {
-      items: 3
-    }
-  }
-})
+// $('.ct_listing_slider').owlCarousel({
+//   loop: true,
+//   margin: 20,
+//   nav: false,
+//   responsive: {
+//     0: {
+//       items: 1
+//     },
+//     600: {
+//       items: 2
+//     },
+//     1000: {
+//       items: 2
+//     }
+//   }
+// })
 
 
 $('.ct_login_slider').owlCarousel({
@@ -122,22 +124,6 @@ $('.ct_login_slider').owlCarousel({
   }
 })
 
-$(".ct_product_gallary_slider").owlCarousel({
-  loop: true,
-  margin: 10,
-  nav: true,
-  responsive: {
-    0: {
-      items: 1,
-    },
-    600: {
-      items: 1,
-    },
-    1000: {
-      items: 1,
-    },
-  },
-});
 
 $(".chat-list a").click(function () {
   $(".chatbox").addClass("showbox");

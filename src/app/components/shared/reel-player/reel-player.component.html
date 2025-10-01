@@ -1,0 +1,14 @@
+<div class="mySwiper swiper">
+      <div class="swiper-wrapper">
+            @for (item of carReels; track $index) {
+            @if(item.carReel){
+            <div class="swiper-slide">
+                  <div class="mobile-frame">
+                        <video [src]="item.carReel" [poster]="item.reelThumbnails" controls playsinline autoplay
+                              class="videoPreview"></video>
+                  </div>
+            </div>
+            }
+            }
+      </div>
+</div>

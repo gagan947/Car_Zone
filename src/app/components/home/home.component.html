@@ -1,6 +1,43 @@
 <section>
       <div class="container-fluid">
             <div class="row">
+                  <!-- <div class="carSwiper swiper">
+                        <div class="swiper-wrapper">
+                              <div class="swiper-slide">
+                                    <div class="ct_slider_item">
+                                          <div class="ct_card_item_animated">
+                                                <h1 class="ct_fs_44 ct_fw_800 text-white">Electric Class
+                                                </h1>
+                                                <img src="img/car_slide_1.png" alt="">
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="swiper-slide">
+                                    <div class="ct_slider_item">
+                                          <div class="ct_card_item_animated">
+                                                <h1 class="ct_fs_64 ct_fw_800 text-white">Business SUV</h1>
+                                                <img src="img/car_slide_2.png" alt="">
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="swiper-slide">
+                                    <div class="ct_slider_item">
+                                          <div class="ct_card_item_animated">
+                                                <h1 class="ct_fs_64 ct_fw_800 text-white">Luxury Sedan</h1>
+                                                <img src="img/car_slide_3.png" alt="">
+                                          </div>
+                                    </div>
+                              </div>
+                              <div class="swiper-slide">
+                                    <div class="ct_slider_item">
+                                          <div class="ct_card_item_animated">
+                                                <h1 class="ct_fs_64 ct_fw_800 text-white">SUV</h1>
+                                                <img src="img/car_slide_4.png" alt="">
+                                          </div>
+                                    </div>
+                              </div>
+                        </div>
+                  </div> -->
                   <div class="col-md-12">
                         <div class="ct_home_banner">
                               <ng-container *appRole="'buyer'">
@@ -12,49 +49,49 @@
                                     <h1 class="ct_ff_Epilogue ct_fs_74 ct_fw_700 text-white text-center  mb-0">List Your
                                           Car <span class="ct_text_red">Today</span></h1>
                                     <div class="mt-4 text-center">
-                                          <a routerLink="/choose-listing-plan" class="ct_red_btn">List Your Car</a>
+                                          <button (click)="listCar()" class="ct_red_btn">List Your Car</button>
                                     </div>
                               </ng-container>
-                              <div class="owl-carousel owl-theme ct_login_slider">
-                                    <div class="item">
-                                          <div class="ct_slider_item">
-                                                <div class="ct_card_item_animated">
-                                                      <h1 class="ct_fs_44 ct_fw_800 text-white">Electric Class</h1>
-                                                      <img src="img/car_slide_1.png" alt="">
+                              <div class="carSwiper swiper">
+                                    <div class="swiper-wrapper">
+                                          <div class="swiper-slide">
+                                                <div class="ct_slider_item">
+                                                      <div class="ct_card_item_animated">
+                                                            <h1 class="ct_fs_44 ct_fw_800 text-white">Electric Class
+                                                            </h1>
+                                                            <img src="img/car_slide_1.png" alt="">
+                                                      </div>
                                                 </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_slider_item">
-                                                <div class="ct_card_item_animated">
-                                                      <h1 class="ct_fs_64 ct_fw_800 text-white">Business SUV</h1>
-                                                      <img src="img/car_slide_2.png" alt="">
+                                          <div class="swiper-slide">
+                                                <div class="ct_slider_item">
+                                                      <div class="ct_card_item_animated">
+                                                            <h1 class="ct_fs_64 ct_fw_800 text-white">Business SUV</h1>
+                                                            <img src="img/car_slide_2.png" alt="">
+                                                      </div>
                                                 </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_slider_item">
-                                                <div class="ct_card_item_animated">
-                                                      <h1 class="ct_fs_64 ct_fw_800 text-white">Luxury Sedan</h1>
-                                                      <img src="img/car_slide_3.png" alt="">
+                                          <div class="swiper-slide">
+                                                <div class="ct_slider_item">
+                                                      <div class="ct_card_item_animated">
+                                                            <h1 class="ct_fs_64 ct_fw_800 text-white">Luxury Sedan</h1>
+                                                            <img src="img/car_slide_3.png" alt="">
+                                                      </div>
                                                 </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_slider_item">
-                                                <div class="ct_card_item_animated">
-                                                      <h1 class="ct_fs_64 ct_fw_800 text-white">SUV</h1>
-                                                      <img src="img/car_slide_4.png" alt="">
+                                          <div class="swiper-slide">
+                                                <div class="ct_slider_item">
+                                                      <div class="ct_card_item_animated">
+                                                            <h1 class="ct_fs_64 ct_fw_800 text-white">SUV</h1>
+                                                            <img src="img/car_slide_4.png" alt="">
+                                                      </div>
                                                 </div>
                                           </div>
                                     </div>
                               </div>
                         </div>
-
                   </div>
-
             </div>
-
       </div>
 </section>
 
@@ -167,16 +204,13 @@
                               <div class="ct_counter_box">
                                     <div class="ct_counter_icon">
                                           <img src="img/car_listed_icon.svg" alt="">
-
                                     </div>
                                     <div>
                                           <h4 class="ct_fs_35 ct_fw_700 ct_ff_Epilogue mb-0 text-white counter-value"
                                                 data-count="500">0</h4>
                                           <p class="mb-0 text-white"> Available Cars</p>
                                     </div>
-
                               </div>
-
                         </div>
                         <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
                               <div class="ct_counter_box">
@@ -247,126 +281,133 @@
                                           <br> value, and popularity. Don’t miss out on the best deals available right
                                           now.
                                     </p>
-
                               </div>
-
                         </div>
-
                   </div>
 
                   <div class="row mt-5 animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="col-md-12">
-                              <div class="owl-carousel owl-theme ct_listing_slider">
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_11.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html" class="ct_fs_22 ct_fw_600">BMW</a>
-                                                      </figcaption>
+                              <div class="mySwiper swiper ct_listing_slider">
+                                    <div class="swiper-wrapper">
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_11.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">BMW</a>
+                                                            </figcaption>
 
-                                                </figure>
+                                                      </figure>
 
+                                                </div>
+                                          </div>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_22.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">SUV</a>
+                                                            </figcaption>
+
+                                                      </figure>
+
+                                                </div>
+                                          </div>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_33.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Sedan</a>
+                                                            </figcaption>
+
+                                                      </figure>
+
+                                                </div>
+                                          </div>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_44.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+
+                                                      </figure>
+
+                                                </div>
+                                          </div>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_4.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+
+                                                      </figure>
+
+                                                </div>
+                                          </div>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_4.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+
+                                                      </figure>
+
+                                                </div>
                                           </div>
                                     </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_22.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html" class="ct_fs_22 ct_fw_600">SUV</a>
-                                                      </figcaption>
 
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_33.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Sedan</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_44.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
                               </div>
 
                         </div>
-
                   </div>
 
             </div>
@@ -391,124 +432,124 @@
                               </div>
 
                         </div>
-
                   </div>
 
                   <div class="row mt-5 animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="col-md-12">
-                              <div class="owl-carousel owl-theme ct_listing_slider">
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_11.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html" class="ct_fs_22 ct_fw_600">BMW</a>
-                                                      </figcaption>
+                              <div class="mySwiper swiper ct_listing_slider">
+                                    <div class="swiper-wrapper">
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_11.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">BMW</a>
+                                                            </figcaption>
 
-                                                </figure>
+                                                      </figure>
 
+                                                </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_22.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html" class="ct_fs_22 ct_fw_600">SUV</a>
-                                                      </figcaption>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_22.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">SUV</a>
+                                                            </figcaption>
 
-                                                </figure>
+                                                      </figure>
 
+                                                </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_33.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Sedan</a>
-                                                      </figcaption>
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_33.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Sedan</a>
+                                                            </figcaption>
 
-                                                </figure>
+                                                      </figure>
 
+                                                </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_44.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_44.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+                                                      </figure>
+                                                </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_4.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+                                                      </figure>
+                                                </div>
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a href="car-detail.html"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
+                                          <div class="swiper-slide">
+                                                <div class="ct_listing_card">
+                                                      <figure class="mb-0">
+                                                            <div class="ct_listing_img">
+                                                                  <img src="img/car_4.jpg" alt="">
+                                                                  <i class="fa-regular fa-heart"></i>
+                                                            </div>
+                                                            <figcaption>
+                                                                  <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF
+                                                                        32,445.00
+                                                                  </h4>
+                                                                  <a href="car-detail.html"
+                                                                        class="ct_fs_22 ct_fw_600">Ferrari</a>
+                                                            </figcaption>
+                                                      </figure>
+                                                </div>
                                           </div>
                                     </div>
                               </div>
-
                         </div>
-
                   </div>
-
             </div>
       </section>
 </ng-container>
@@ -519,8 +560,7 @@
                   <div class="row animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="col-md-12">
                               <div class="text-center">
-                                    <h2 class="ct_fs_44 ct_fw_700 mb-0">Top <span
-                                                class="ct_text_red">Cars</span>
+                                    <h2 class="ct_fs_44 ct_fw_700 mb-0">Top <span class="ct_text_red">Cars</span>
                                     </h2>
                                     <span class="ct_line_animation"></span>
                                     <p class="mt-2">Explore our handpicked selection of top-rated cars, carefully chosen
@@ -536,119 +576,161 @@
 
                   <div class="row mt-5 animate__animated animate__fadeInUp animate__delay-1s">
                         <div class="col-md-12">
-                              <div class="owl-carousel owl-theme ct_listing_slider">
-                                    <div class="item">
-                                          <div class="ct_listing_card">
+                              <div class="mySwiper swiper ct_listing_slider">
+                                    <div class="swiper-wrapper">
+                                          <div class=" swiper-slide ct_browse_car_card">
                                                 <figure class="mb-0">
-                                                      <div class="ct_listing_img">
+                                                      <div class="ct_browse_card_img">
                                                             <img src="img/car_11.jpg" alt="">
                                                             <i class="fa-regular fa-heart"></i>
+
                                                       </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
+                                                      <figcaption class="mt-3">
+                                                            <div
+                                                                  class="d-flex align-items-center justify-content-between mb-2">
+                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
+                                                                        45,900</span>
+                                                                  <small class="ct_fs_14 ct_text_op_6">/ Leasing ab
+                                                                        499-.
+                                                                        CHF</small>
+                                                            </div>
                                                             <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">BMW</a>
+                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
+                                                                  C-Class</a>
+                                                            <ul>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Automatic</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
+                                                                              Type</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Electric</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
+                                                                              Person</p>
+                                                                  </li>
+                                                            </ul>
+
+                                                            <div class="mt-4">
+                                                                  <a routerLink="/car-detail"
+                                                                        class="ct_red_btn w-100 text-center">View
+                                                                        More</a>
+                                                            </div>
                                                       </figcaption>
 
                                                 </figure>
 
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
+                                          <div class=" swiper-slide ct_browse_car_card">
                                                 <figure class="mb-0">
-                                                      <div class="ct_listing_img">
+                                                      <div class="ct_browse_card_img">
                                                             <img src="img/car_22.jpg" alt="">
                                                             <i class="fa-regular fa-heart"></i>
+
                                                       </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
+                                                      <figcaption class="mt-3">
+                                                            <div
+                                                                  class="d-flex align-items-center justify-content-between mb-2">
+                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
+                                                                        45,900</span>
+                                                                  <small class="ct_fs_14 ct_text_op_6">/ Leasing ab
+                                                                        499-.
+                                                                        CHF</small>
+                                                            </div>
                                                             <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">SUV</a>
+                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
+                                                                  C-Class</a>
+                                                            <ul>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Automatic</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
+                                                                              Type</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Electric</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
+                                                                              Person</p>
+                                                                  </li>
+                                                            </ul>
+
+                                                            <div class="mt-4">
+                                                                  <a routerLink="/car-detail"
+                                                                        class="ct_red_btn w-100 text-center">View
+                                                                        More</a>
+                                                            </div>
                                                       </figcaption>
 
                                                 </figure>
 
                                           </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
+                                          <div class=" swiper-slide ct_browse_car_card">
                                                 <figure class="mb-0">
-                                                      <div class="ct_listing_img">
+                                                      <div class="ct_browse_card_img">
                                                             <img src="img/car_33.jpg" alt="">
                                                             <i class="fa-regular fa-heart"></i>
+
                                                       </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
+                                                      <figcaption class="mt-3">
+                                                            <div
+                                                                  class="d-flex align-items-center justify-content-between mb-2">
+                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
+                                                                        45,900</span>
+                                                                  <small class="ct_fs_14 ct_text_op_6">/ Leasing ab
+                                                                        499-.
+                                                                        CHF</small>
+                                                            </div>
                                                             <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">Sedan</a>
+                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
+                                                                  C-Class</a>
+                                                            <ul>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Automatic</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
+                                                                              Type</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              Electric</p>
+                                                                  </li>
+                                                                  <li>
+                                                                        <small
+                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
+                                                                              Person</p>
+                                                                  </li>
+                                                            </ul>
+
+                                                            <div class="mt-4">
+                                                                  <a routerLink="/car-detail"
+                                                                        class="ct_red_btn w-100 text-center">View
+                                                                        More</a>
+                                                            </div>
                                                       </figcaption>
 
                                                 </figure>
-
                                           </div>
                                     </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_44.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
 
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
-                                    <div class="item">
-                                          <div class="ct_listing_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_listing_img">
-                                                            <img src="img/car_4.jpg" alt="">
-                                                            <i class="fa-regular fa-heart"></i>
-                                                      </div>
-                                                      <figcaption>
-                                                            <h4 class="ct_fs_18 ct_fw_500 text-white mb-0">CHF 32,445.00
-                                                            </h4>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_22 ct_fw_600">Ferrari</a>
-                                                      </figcaption>
-
-                                                </figure>
-
-                                          </div>
-                                    </div>
                               </div>
-
                         </div>
-
                   </div>
 
             </div>
@@ -755,78 +837,65 @@
                         <div class="text-center">
                               <h2 class="ct_fs_44 ct_fw_700 mb-0">CarZone <span class="ct_text_red">Reels</span> </h2>
                               <span class="ct_line_animation"></span>
-
                         </div>
-
                   </div>
-
             </div>
 
             <div class="row mt-5 animate__animated animate__fadeInUp animate__delay-1s">
                   <div class="col-md-12">
-                        <div class="owl-carousel owl-theme ct_listing_slider">
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
-
-                                          </a>
-
+                        <div class="reelSwiper swiper ct_listing_slider">
+                              <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
+                                    </div>
+                                    <div class="swiper-slide">
+                                          <div class="ct_reel_card">
+                                                <img src="img/car-1.png" alt="">
+                                                <a href="#" class="ct_play_icon">
+                                                      <i class="fa-solid fa-play"></i>
+                                                </a>
+                                          </div>
                                     </div>
                               </div>
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
 
-                                          </a>
-
-                                    </div>
-                              </div>
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
-
-                                          </a>
-
-                                    </div>
-                              </div>
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
-
-                                          </a>
-
-                                    </div>
-                              </div>
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
-
-                                          </a>
-
-                                    </div>
-                              </div>
-                              <div class="item">
-                                    <div class="ct_reel_card">
-                                          <img src="img/car-1.png" alt="">
-                                          <a href="#" class="ct_play_icon">
-                                                <i class="fa-solid fa-play"></i>
-
-                                          </a>
-
-                                    </div>
-                              </div>
                         </div>
-
                   </div>
 
             </div>

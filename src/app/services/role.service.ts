@@ -1,13 +1,13 @@
 // role.service.ts
 import { Injectable, signal } from '@angular/core';
 
-export type UserRole = 'buyer' | 'seller';
+export type UserRole = 'buyer' | 'seller' | undefined;
 
 @Injectable({
       providedIn: 'root',
 })
 export class RoleService {
-      private role = signal<UserRole>('buyer');
+      private role = signal<UserRole>(undefined);
       currentRole = this.role.asReadonly();
 
       constructor() {
@@ -19,7 +19,7 @@ export class RoleService {
 
       setRole(role: UserRole) {
             this.role.set(role);
-            localStorage.setItem('app_role', role);
+            localStorage.setItem('app_role', role ? role : '');
       }
 
       getRole(): UserRole {

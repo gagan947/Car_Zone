@@ -13,6 +13,7 @@
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
+    "@angular/fire": "^19.2.0",
     "@angular/forms": "^19.2.0",
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
@@ -20,7 +21,9 @@
     "ng-zorro-antd": "^19.3.1",
     "ngx-intl-tel-input-gg": "^1.0.12",
     "ngx-quill": "^28.0.1",
+    "ngx-scanner-qrcode": "^1.7.5",
     "rxjs": "~7.8.0",
+    "swiper": "^12.0.2",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },

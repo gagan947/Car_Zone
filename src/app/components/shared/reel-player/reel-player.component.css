@@ -1,0 +1,35 @@
+ .mySwiper {
+       height: 100vh;
+       /* Fullscreen like reels */
+       width: 100%;
+ }
+
+ .swiper-slide {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       height: 100vh;
+       /* One reel per screen */
+ }
+
+
+ ::ng-deep .ct_footer_bg,
+ ::ng-deep header {
+       display: none;
+ }
+
+ .mobile-frame {
+       width: 500px;
+       height: 100vh;
+       border-radius: 10px;
+       position: relative;
+       overflow: hidden;
+       margin: 0 auto;
+
+ }
+
+ .videoPreview {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+ }

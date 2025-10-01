@@ -1,0 +1,12 @@
+.ct_green_text {
+      color: darkgreen;
+}
+
+.progress.ct_custom_progress_bar {
+      height: 8px;
+      background: #c8c4c5;
+}
+
+.ct_custom_progress_bar .progress-bar {
+      background-color: var(--red);
+}

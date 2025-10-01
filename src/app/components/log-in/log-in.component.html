@@ -3,21 +3,30 @@
             <div class="row">
                   <div class="col-xxl-6 col-xl-7 col-lg-8 mx-auto">
                         <div class="ct_login_white_bg ct_custom_scroll">
-                              <img src="img/logo_white.svg" alt="">
+                              <img src="img/carzone_logo.png" alt="">
                               <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">Welcome To <span
                                           class="ct_text_red">CarZone</span> </h4>
-                              <form action="index.html">
+                              <form [formGroup]="Form" (ngSubmit)="onSubmit()">
                                     <div class="form-group mb-4">
                                           <label for="" class="mb-2 ct_fw_600 text-white">Email Address</label>
                                           <input type="email" class="form-control ct_input"
-                                                placeholder="Enter Email Address">
+                                                placeholder="Enter Email Address" formControlName="email">
+                                          <small
+                                                class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
                                     </div>
                                     <div class="form-group mb-2">
                                           <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
                                           <div class="position-relative">
-                                                <input type="password" class="form-control ct_input"
-                                                      placeholder="Enter Password">
-                                                <i class="fa-solid fa-eye-slash ct_show_eye"></i>
+                                                <div class="position-relative">
+                                                      <input [type]="isShowPassword ? 'text' : 'password'"
+                                                            class="form-control ct_input" placeholder="Enter Password"
+                                                            formControlName="password">
+                                                      <i class="fa-solid ct_show_eye"
+                                                            [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                                            (click)="isShowPassword = !isShowPassword"></i>
+                                                </div>
+                                                <small
+                                                      class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
                                           </div>
                                     </div>
                                     <div class="text-end">
@@ -25,28 +34,95 @@
                                     </div>
 
                                     <div class="text-center mt-4">
-                                          <button class="ct_red_btn  px-5" routerLink="/">Log In</button>
+                                          <app-submit-button [class]="'ct_red_btn px-5'" [isLoading]="loading"
+                                                [text]="'Log In'"></app-submit-button>
                                     </div>
-                                    <div class="ct_sign_in_text mt-4">
-                                          <p class="mb-0">Or Login In With</p>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-center gap-3">
-                                          <button class="ct_google_btn">
-                                                <img src="img/devicon_google.png" alt="">
-                                                <h6 class="mb-0 ct_fs_16">Google</h6>
-                                          </button>
-                                          <button class="ct_google_btn">
-                                                <img src="img/logos_facebook.png" alt="">
-                                                <h6 class="mb-0 ct_fs_16">Facebook</h6>
-                                          </button>
-                                    </div>
-                                    <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Don’t you
-                                                have an account? </span>
-                                          <a routerLink="/signup" class="ct_text_red ct_fw_600">Sign Up</a>
-                                    </p>
                               </form>
+                              <div class="ct_sign_in_text mt-4">
+                                    <p class="mb-0">Or Login In With</p>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-center gap-3">
+                                    <button class="ct_google_btn">
+                                          <img src="img/devicon_google.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Google</h6>
+                                    </button>
+                                    <button class="ct_google_btn">
+                                          <img src="img/logos_facebook.png" alt="">
+                                          <h6 class="mb-0 ct_fs_16">Facebook</h6>
+                                    </button>
+                              </div>
+                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Don’t you
+                                          have an account? </span>
+                                    @if(role() == 'buyer'){
+                                    <a routerLink="/signup" class="ct_text_red ct_fw_600">Sign Up</a>
+                                    }@else if (role() == 'seller') {
+                                    <a routerLink="/seller-signup" class="ct_text_red ct_fw_600">Sign Up</a>
+                                    }@else {
+                                    <a data-bs-toggle="modal" data-bs-target="#ct_login_modal"
+                                          class="ct_text_red ct_fw_600">Sign Up</a>
+                                    }
+                              </p>
                         </div>
                   </div>
             </div>
       </div>
 </section>
+
+<div class="modal fade modal-md ct_login_bg" id="ct_login_modal" tabindex="-1" aria-labelledby="ct_login_modalLabel"
+      aria-hidden="true" data-bs-target="#staticBackdr">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                  <div class="modal-body pb-4">
+                        <img src="img/carzone_logo.png" alt="" class="mb-4 mx-auto d-block logo_image">
+                        <h5 class="ct_fs_20 ct_fw_600 text-white text-center">Choose your role to continue</h5>
+                        <div class="row mt-5">
+                              <div class="col-sm-6 mb-4 mb-sm-0">
+                                    <a (click)="switchRole('buyer')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
+                                          <img src="img/buyer_icon.svg" alt="">
+                                          <h6 class="mb-0 ct_fs_20 ct_fw_600">Buyer</h6>
+                                    </a>
+                              </div>
+                              <div class="col-sm-6 mb-4 mb-sm-0">
+                                    <a (click)="switchRole('seller')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
+                                          <img src="img/seller_login_icon.svg" alt="">
+                                          <h6 class="mb-0 ct_fs_20 ct_fw_600">Seller</h6>
+
+                                    </a>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+
+
+<div class="modal fade modal-md ct_login_bg" id="ct_login_modal_1" tabindex="-1" aria-labelledby="ct_login_modalLabel"
+      aria-hidden="true" data-bs-target="#staticBackdr">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                  <div class="modal-body pb-4">
+                        <img src="img/carzone_logo.png" alt="" class="mb-4 mx-auto d-block logo_image">
+                        <h5 class="ct_fs_20 ct_fw_600 text-white text-center">Choose your role to continue</h5>
+                        <div class="row mt-5">
+                              <div class="col-sm-6 mb-4 mb-sm-0">
+                                    <a (click)="switchRole1('buyer')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
+                                          <img src="img/buyer_icon.svg" alt="">
+                                          <h6 class="mb-0 ct_fs_20 ct_fw_600">Buyer</h6>
+                                    </a>
+                              </div>
+                              <div class="col-sm-6 mb-4 mb-sm-0">
+                                    <a (click)="switchRole1('seller')" class="ct_login_author_card"
+                                          data-bs-dismiss="modal">
+                                          <img src="img/seller_login_icon.svg" alt="">
+                                          <h6 class="mb-0 ct_fs_20 ct_fw_600">Seller</h6>
+
+                                    </a>
+                              </div>
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>

@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
+import { loginGuard } from './guards/login.guard';
 
 export const routes: Routes = [
       {
             path: '',
             loadComponent: () => import('./components/main/main.component').then(m => m.MainComponent),
+            canActivateChild: [authGuard],
             children: [
                   {
                         path: '',
@@ -91,26 +93,31 @@ export const routes: Routes = [
                         loadComponent: () => import('./components/seller components/my-listings/my-listings.component').then(m => m.MyListingsComponent)
                   },
                   {
-                        path: 'payment-successful',
+                        path: 'payment-success',
                         loadComponent: () => import('./components/seller components/payment-successful/payment-successful.component').then(m => m.PaymentSuccessfulComponent)
                   },
-                  // {
-                  //       path:'payment-failed',
-                  //       loadComponent: () => import('./components/seller components/payment-failed/payment-failed.component').then(m => m.PaymentFailedComponent)
-                  // },
+                  {
+                        path: 'payment-failed',
+                        loadComponent: () => import('./components/seller components/payment-failed/payment-failed.component').then(m => m.PaymentFailedComponent)
+                  },
                   {
                         path: 'request-additional-slots',
                         loadComponent: () => import('./components/seller components/request-additional-slots/request-additional-slots.component').then(m => m.RequestAdditionalSlotsComponent)
                   },
                   {
-                        path:'our-visitors',
-                        loadComponent : () => import('./components/our-visitors/our-visitors.component').then(m => m.OurVisitorsComponent)
-                  }
+                        path: 'our-visitors',
+                        loadComponent: () => import('./components/our-visitors/our-visitors.component').then(m => m.OurVisitorsComponent)
+                  },
+                  {
+                        path: 'reel-player',
+                        loadComponent: () => import('./components/shared/reel-player/reel-player.component').then(m => m.ReelPlayerComponent)
+                  },
             ]
       },
       {
             path: 'login',
-            loadComponent: () => import('./components/log-in/log-in.component').then(m => m.LogInComponent)
+            loadComponent: () => import('./components/log-in/log-in.component').then(m => m.LogInComponent),
+            canActivate: [loginGuard]
       },
       {
             path: 'signup',
@@ -124,4 +131,12 @@ export const routes: Routes = [
             path: 'forgot-password',
             loadComponent: () => import('./components/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent),
       },
+      {
+            path: 'otp-verification',
+            loadComponent: () => import('./components/otp-verification/otp-verification.component').then(m => m.OtpVerificationComponent),
+      },
+      {
+            path: 'reset-password',
+            loadComponent: () => import('./components/reset-password/reset-password.component').then(m => m.ResetPasswordComponent),
+      }
 ];

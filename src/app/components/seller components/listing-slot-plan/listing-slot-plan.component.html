@@ -3,37 +3,76 @@
             <div class="row">
                   <div class="col-md-8 mx-auto">
                         <div class="ct_light_red_bg">
-                              <h5 class="ct_fs_20 ct_fw_600">15 Slots Bundle</h5>
-                              <p class="mb-0">CHF 449.25 / month</p>
-                        </div>
+                              <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-3">
+                                    <h5 class="ct_fs_20 ct_fw_600 mb-0">{{planList.total_slots}} Total Slots</h5>
+                                    @if(planList.is_active){
+                                    <span class="ct_green_text ct_fw_600">Active</span>
+                                    }
+                              </div>
+                              <div class="progress ct_custom_progress_bar">
+                                    <div class="progress-bar" role="progressbar"
+                                          [style.width.%]="(convert(planList.cars_listed, 'used') / convert(planList.cars_listed, 'total')) * 100"
+                                          [attr.aria-valuenow]="convert(planList.cars_listed, 'used')"
+                                          [attr.aria-valuemin]="0"
+                                          [attr.aria-valuemax]="convert(planList.cars_listed, 'total')">
+                                    </div>
+                              </div>
+                              <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-3 mt-1">
+                                    <p class="mb-0">{{convert(planList.cars_listed, 'used')}} Used</p>
+                                    <p class="mb-0">
+                                          {{(convert(planList.cars_listed, 'total') - convert(planList.cars_listed, 'used'))}}
+                                          Available
+                                    </p>
 
-                        <div class="mt-4 ct_outline_bg ">
-                              <h4 class="ct_fs_20 ct_fw_600 mb-3"><i class="fa-solid fa-calendar me-1"></i>Slots & Plan
-                                    Details</h4>
-                              <ul class="ct_plan_detail_list">
+                              </div>
+                              <ul class="ct_plan_detail_list mt-2">
                                     <li>
                                           <p class="mb-0">Valid Till</p>
-                                          <p class="mb-0 ct_fw_600">14 May 2025</p>
+                                          <p class="mb-0 ct_fw_600">{{planList.end_date | date: 'MMM yyyy'}}</p>
                                     </li>
                                     <li>
                                           <p class="mb-0">Cars Listed</p>
-                                          <p class="mb-0 ct_fw_600">11 / 15</p>
+                                          <p class="mb-0 ct_fw_600">{{planList.cars_listed}}</p>
                                     </li>
                                     <li>
                                           <p class="mb-0">Cars Swapped</p>
-                                          <p class="mb-0 ct_fw_600">2 this month</p>
+                                          <p class="mb-0 ct_fw_600">{{planList.cars_swapped}} this month</p>
                                     </li>
                                     <li>
                                           <p class="mb-0">Days Left</p>
-                                          <p class="mb-0 ct_fw_600">17 days</p>
+                                          <p class="mb-0 ct_fw_600">{{planList.days_left}} days</p>
                                     </li>
                               </ul>
-
                         </div>
 
+                        <div class="mt-4">
+                              <ul class="ct_plan_detail_list">
+                                    @for (item of planList.history; track $index) {
+                                    <li>
+                                          <div
+                                                class="d-flex align-items-star justify-content-between gap-2 w-100 ct_outline_bg">
+                                                <div>
+                                                      <p class="ct_fs_16 ct_fw_600 mb-0">{{item.purchased_slots}} Slot
+                                                      </p>
+                                                      <p class="ct_fs_16 ct_fw_600 mb-0 text-capitalize">Type :
+                                                            {{item.purchase_type}}
+                                                      </p>
+                                                      <p class="ct_fs_16 ct_text_op_6 mb-0">
+                                                            {{item.start_date | date:'MMM yyy'}} -
+                                                            {{item.end_date | date:'MMM yyy'}}
+                                                      </p>
+                                                </div>
+                                                <div>
+                                                      <p class="mb-0 ct_text_red ct_fs_16 ct_fw_600">
+                                                            {{item.prorated_price}}
+                                                            CHF/month</p>
+                                                </div>
+                                          </div>
+                                    </li>
+                                    }
+                              </ul>
+                        </div>
                   </div>
-
             </div>
-
       </div>
 </section>

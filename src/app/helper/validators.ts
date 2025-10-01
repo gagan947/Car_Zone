@@ -35,7 +35,7 @@ export function strongPasswordValidator(
 
 export function passwordMismatchValidator(): ValidatorFn {
       return (control: AbstractControl): { [key: string]: boolean } | null => {
-            const password = control.get('newPassword');
+            const password = control.get('newPassword') || control.get('password');
             const confirmPassword = control.get('confirmPassword');
 
             if (!password || !confirmPassword) {
@@ -126,4 +126,13 @@ function parseTime(time: string): number {
 export function integerValidator(control: AbstractControl) {
       const value = control.value;
       return Number.isInteger(Number(value)) ? null : { notInteger: true };
+}
+
+export function vinValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+            const value = control.value?.toUpperCase();
+            if (!value) return null;
+            const vinRegex = /^[A-HJ-NPR-Z0-9]{17}$/;
+            return vinRegex.test(value) ? null : { invalidVIN: true };
+      };
 }

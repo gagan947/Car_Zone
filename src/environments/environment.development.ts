@@ -1,4 +1,16 @@
 export const environment = {
       production: false,
-      apiUrl: 'http://192.168.29.131:4005/api/'
+      apiUrl: 'https://13.51.226.81:4000/api/',
+
+
+      firebaseConfig: {
+            apiKey: "AIzaSyB1Ko8WHeXDxdYAOjisHn8qVZOIkGrxudE",
+            authDomain: "zynq-53745.firebaseapp.com",
+            projectId: "zynq-53745",
+            storageBucket: "zynq-53745.firebasestorage.app",
+            messagingSenderId: "30895314430",
+            appId: "1:30895314430:web:d3e6fa8d56ae9d8d615caf",
+            measurementId: "G-18FTE8J8TQ",
+            vapidKey: "BL_80-eBfWYKCw31-4rdm_Q4DTc_KI56XGE6rgA1HqE4kfKVM9k_gd_oSW8ihZo5vpNLXPUcyciOBCF7STuL0G4"
+      }
 };
