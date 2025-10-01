@@ -20,8 +20,8 @@
  }
 
  .mobile-frame {
-       width: 500px;
-       height: calc(100vh - 80px);
+       width: 100%;
+       height: calc(100vh - 120px);
        border-radius: 10px;
        position: relative;
        overflow: hidden;
@@ -29,6 +29,7 @@
        display: flex;
        align-items: center;
        flex-direction: column;
+       max-width: 500px;
 
  }
 
@@ -47,4 +48,15 @@
     padding: 10px;
     background-color: #00000069;
     color: #fff;
+}
+
+.ct_back_btn{
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      position: absolute;
+      top: 10px;
 }
