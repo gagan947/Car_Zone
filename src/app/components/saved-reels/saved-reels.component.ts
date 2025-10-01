@@ -22,7 +22,7 @@ export class SavedReelsComponent {
 
   getSavedReels() {
     this.service.get('user/fetchCarReels').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      // this.savedReels = res.data
+      this.savedReels = res.data.data
     })
   }
 
