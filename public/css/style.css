@@ -866,6 +866,7 @@ footer:before {
   justify-content: center;
   border-radius: 100px;
   color: var(--red);
+  cursor: pointer;
 }
 
 .ct_reel_card img {

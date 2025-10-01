@@ -1,5 +1,9 @@
-<section class="">
+<section class="w-100 mx-auto" style="max-width: 500px;">
+      <div class="ct_back_btn">
+            <i class="fa-solid fa-arrow-left"></i>Back
+      </div>
       <div class="mySwiper swiper">
+
             <div class="swiper-wrapper">
                   @for (item of carReels; track $index) {
                   @if(item.carReel){
@@ -8,6 +12,10 @@
                               <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="none"
                                     class="videoPreview">
                               </video>
+                              <div class="ct_play_icon">
+                                    <i class="fa-solid fa-play"></i>
+
+                              </div>
                               <div
                                     class="d-flex align-items-start justify-content-between gap-3 ct_reel_title_top w-100">
                                     <div>
