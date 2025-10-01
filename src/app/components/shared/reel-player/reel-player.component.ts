@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
+import { ActivatedRoute } from '@angular/router';
 declare var Swiper: any
 
 @Component({
@@ -16,8 +17,12 @@ export class ReelPlayerComponent {
   private destroy$ = new Subject<void>();
   carReels: any = []
   swiper: any;
-  constructor(private service: CommonService, private message: NzMessageService) {
-
+  reelId: any
+  currentIndex: number = 0
+  constructor(private service: CommonService, private message: NzMessageService, private route: ActivatedRoute) {
+    this.route.queryParamMap.subscribe(params => {
+      this.reelId = params.get('id')
+    })
   }
 
   ngOnInit(): void {
@@ -25,15 +30,14 @@ export class ReelPlayerComponent {
   }
 
   getReels() {
-    this.service.get('user/fetchAllCarReels?page=4')
+    this.service.get('user/fetchAllCarReel')
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         this.carReels = res.data.data;
-
-        // give Angular time to render the DOM
+        this.currentIndex = res.data.data.findIndex((item: any) => item.id == this.reelId);
         setTimeout(() => {
           this.initSwiper();
-        }, 0);
+        }, 100);
       });
   }
 
@@ -47,6 +51,7 @@ export class ReelPlayerComponent {
       this.swiper = new Swiper('.mySwiper', {
         direction: 'vertical',
         loop: false,
+        currrentIndex: 4,
         mousewheel: {
           forceToAxis: true,
           sensitivity: 1,
@@ -55,9 +60,10 @@ export class ReelPlayerComponent {
         touchReleaseOnEdges: true,
         slidesPerView: 1,
         spaceBetween: 0,
+        initialSlide: this.currentIndex,
         resistance: true,
         resistanceRatio: 0.85,
-        speed: 300, // Add transition speed
+        speed: 300,
         on: {
           init: () => {
             console.log('Swiper initialized');
@@ -117,7 +123,6 @@ export class ReelPlayerComponent {
   }
 
   private playActiveVideo(video: HTMLVideoElement) {
-    // Double ensure video is muted
     video.muted = true;
     video.volume = 0;
 
@@ -173,7 +178,6 @@ export class ReelPlayerComponent {
       }
     };
 
-    // Check periodically if video gets paused
     const interval = setInterval(() => {
       if (video.paused) {
         checkAndRestart();
@@ -181,7 +185,6 @@ export class ReelPlayerComponent {
 
       if (playAttempts >= maxPlayAttempts) {
         clearInterval(interval);
-        // this.addVideoPlayButton(video);
       }
     }, 1000);
 

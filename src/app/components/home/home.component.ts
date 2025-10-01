@@ -30,16 +30,18 @@ export class HomeComponent {
     new Swiper('.carSwiper', {
       direction: 'horizontal',
       slidesPerView: 1,
+      animation: true,
+      animateIn: 'fadeIn',
+      animateOut: 'fadeOut',
+      MouseEvents: false,
       loop: true,
+      freeMode: true,
+      centeredSlides: true,
       autoplay: {
         delay: 2000,
         disableOnInteraction: false
       },
-       speed: 2500,    
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      }
+      speed: 400
     });
 
     const swiper = new Swiper('.mySwiper', {

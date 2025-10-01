@@ -1,14 +1,15 @@
 <div class="mySwiper swiper">
       <div class="swiper-wrapper">
             @for (item of carReels; track $index) {
+            @if(item.carReel){
             <div class="swiper-slide">
                   <div class="mobile-frame">
-                        <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="auto"
+                        <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="none"
                               class="videoPreview">
-                              Your browser does not support the video tag.
                         </video>
                   </div>
             </div>
+            }
             }
       </div>
 </div>

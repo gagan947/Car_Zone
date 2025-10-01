@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
@@ -13,8 +13,10 @@ import { Router } from '@angular/router';
 })
 export class ReelsComponent {
   private destroy$ = new Subject<void>();
-  carReels: any
-
+  carReels: any = [];
+  private observer!: IntersectionObserver;
+  @ViewChild('anchor', { static: false }) anchor!: ElementRef;
+  page: number = 1
   constructor(private service: CommonService, private message: NzMessageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -22,14 +24,33 @@ export class ReelsComponent {
   }
 
   getReels() {
-    this.service.get('user/fetchAllCarReels').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.carReels = res.data.data
+    this.isLoading = true;
+    this.service.get('user/fetchAllCarReels?page=' + this.page + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.carReels = [...this.carReels, ...res.data.data];
+      this.isLoading = false;
+      this.hasMore = res.data.currentPage < res.data.totalPages
+      this.page++
     })
   }
 
   openReel(item: any) {
-    this.router.navigate(['reel-player'])
+    this.router.navigate(['reel-player'], { queryParams: { id: item.id } });
   }
+
+  isLoading = false;
+  hasMore = true;
+
+  @HostListener('window:scroll', [])
+  onScroll(): void {
+    const threshold = 300; // px from bottom
+    const pos = window.innerHeight + window.scrollY;
+    const max = document.body.offsetHeight;
+
+    if (!this.isLoading && this.hasMore && pos >= max - threshold) {
+      this.getReels();
+    }
+  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();
