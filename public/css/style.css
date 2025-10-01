@@ -873,7 +873,7 @@ footer:before {
 }
 
 
-.ct_login_slider .owl-item.active .ct_gradient_box {
+.ct_login_slider .swiper-slide-active .ct_gradient_box {
   transition: 2s ease all;
 }
 
@@ -882,13 +882,13 @@ footer:before {
   top: 50px;
 }
 
-.ct_login_slider .owl-item.active .ct_slider_item img {
+.ct_login_slider .swiper-slide-active .ct_slider_item img {
   animation: bounce-in-right 3s ease;
   transform: translateX(-1900px);
   transition: 2s ease all;
 }
 
-.ct_login_slider .owl-item.active .ct_card_item_animated h1 {
+.ct_login_slider .swiper-slide-active .ct_card_item_animated h1 {
   animation: fade-out 3s linear infinite;
 }
 
@@ -953,6 +953,7 @@ footer:before {
   height: 400px;
   object-fit: contain;
   aspect-ratio: 1/2;
+  width: 100%;
 
 }
 
