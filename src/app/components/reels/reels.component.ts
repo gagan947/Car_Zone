@@ -51,6 +51,17 @@ export class ReelsComponent {
     }
   }
 
+  saveReel(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.service.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  removeFromSaved(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.service.delete('user/removeSavedCarsReel', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();
