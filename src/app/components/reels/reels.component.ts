@@ -1,9 +1,9 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-reels',
@@ -17,9 +17,10 @@ export class ReelsComponent {
   private observer!: IntersectionObserver;
   @ViewChild('anchor', { static: false }) anchor!: ElementRef;
   page: number = 1
-  constructor(private service: CommonService, private message: NzMessageService, private router: Router) { }
+  constructor(private service: CommonService, private loader: LoaderService, private router: Router) { }
 
   ngOnInit(): void {
+    this.loader.show()
     this.getReels()
   }
 
@@ -28,6 +29,7 @@ export class ReelsComponent {
     this.service.get('user/fetchAllCarReels?page=' + this.page + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carReels = [...this.carReels, ...res.data.data];
       this.isLoading = false;
+      this.loader.hide()
       this.hasMore = res.data.currentPage < res.data.totalPages
       this.page++
     })

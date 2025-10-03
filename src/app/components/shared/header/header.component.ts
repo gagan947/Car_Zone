@@ -19,6 +19,7 @@ export class HeaderComponent {
   @ViewChild('close') close: ElementRef | undefined;
   userData: any
   destroy$ = new Subject<void>();
+  selectedLang: string = 'en'
   constructor(private router: Router, public authService: AuthService, private commonService: CommonService, private toster: NzMessageService) {
     if (this.authService.isLogedIn()) {
       this.commonService.getProfile()
@@ -61,5 +62,39 @@ export class HeaderComponent {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  onCustomLangChange(lang: string) {
+    this.selectedLang = lang;
+    // this.commonService.setLang(lang);
+  }
+
+  getLanguage(langCode: string) {
+    switch (langCode) {
+      case 'de':
+        return 'German';
+      case 'en':
+        return 'English';
+      case 'it':
+        return 'Italian';
+      case 'fr':
+        return 'French';
+      default:
+        return 'English';
+    }
+  }
+  getImage(langCode: string) {
+    switch (langCode) {
+      case 'de':
+        return 'img/german.png';
+      case 'en':
+        return 'img/USA.png';
+      case 'it':
+        return 'img/itli.png';
+      case 'fr':
+        return 'img/french.png';
+      default:
+        return 'img/USA.png';
+    }
   }
 }

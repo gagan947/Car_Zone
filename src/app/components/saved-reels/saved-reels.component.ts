@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-saved-reels',
@@ -14,16 +14,21 @@ import { Router, RouterLink } from '@angular/router';
 export class SavedReelsComponent {
   private destroy$ = new Subject<void>();
   savedReels: any = []
-  constructor(private service: CommonService, private message: NzMessageService, private router: Router) { }
+  constructor(private service: CommonService, private loader: LoaderService, private router: Router) { }
 
   ngOnInit(): void {
     this.getSavedReels()
   }
 
   getSavedReels() {
+    this.loader.show()
     this.service.get('user/fetchCarReels').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.savedReels = res.data.data
-    })
+      this.loader.hide()
+    },
+      err => {
+        this.loader.hide()
+      })
   }
 
   removeFromSaved(item: any) {

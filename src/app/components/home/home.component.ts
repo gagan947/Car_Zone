@@ -1,21 +1,29 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, HostListener } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { RoleDirective } from '../../directives/role.directive';
 import { CommonService } from '../../services/common.service';
+import { Subject, takeUntil } from 'rxjs';
+import { CommonModule } from '@angular/common';
 declare var Swiper: any;
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, RoleDirective],
+  imports: [RouterLink, RoleDirective, CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [],
 })
 export class HomeComponent {
   userData: any
+  private destroy$ = new Subject<void>();
+  carReels: any = [];
   constructor(private commonService: CommonService, private router: Router) {
     effect(() => {
       this.userData = this.commonService.userData
     })
+  }
+
+  ngOnInit(): void {
+    this.getReels()
   }
 
   listCar() {
@@ -46,27 +54,80 @@ export class HomeComponent {
 
     const swiper = new Swiper('.mySwiper', {
       direction: 'horizontal',
-      slidesPerView: 2,
+      slidesPerView: 1,
       spaceBetween: 10,
       loop: true,
       mousewheel: false,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      }
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 2,
+        },
+      },
     });
 
     new Swiper('.reelSwiper', {
       direction: 'horizontal',
-      slidesPerView: 3,
-      spaceBetween: 10,
+      slidesPerView: 1,
+      spaceBetween: 15,
       loop: true,
       mousewheel: false,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
-      }
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 2,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 4,
+        },
+      },
     });
 
+  }
+
+  getReels() {
+    this.isLoading = true;
+    this.commonService.get('user/fetchAllCarReels?page=' + 1 + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.carReels = res.data.data;
+      this.isLoading = false;
+    })
+  }
+
+  openReel(item: any) {
+    this.router.navigate(['reel-player'], { queryParams: { id: item.id } });
+  }
+
+  isLoading = false;
+
+  saveReel(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.commonService.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  removeFromSaved(item: any) {
+    item.isSavedReel = !item.isSavedReel
+    this.commonService.delete('user/removeSavedCarsReel', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

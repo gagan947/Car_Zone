@@ -1,5 +1,5 @@
-<section class="w-100 mx-auto" style="max-width: 500px;">
-      <div class="ct_back_btn">
+<section class="w-100 mx-auto" style="max-width: 800px;">
+      <div class="ct_back_btn" style="cursor: pointer;" (click)="location.back()">
             <i class="fa-solid fa-arrow-left"></i>Back
       </div>
       <div class="mySwiper swiper">
@@ -9,12 +9,13 @@
                   @if(item.carReel){
                   <div class="swiper-slide">
                         <div class="mobile-frame">
-                              <video [src]="item.carReel" autoplay playsinline muted="true" loop preload="none"
+                              <video #video [src]="item.carReel" autoplay playsinline loop preload="none"
                                     class="videoPreview">
                               </video>
-                              <div class="ct_play_icon">
-                                    <i class="fa-solid fa-play"></i>
-
+                              <div class="playOverlay" (click)="togglePlay(video)">
+                                    <div class="ct_play_icon" [ngClass]="isPlaying ? 'invisible' : 'visible'">
+                                          <i class="fa-solid" [ngClass]="isPlaying ? 'fa-pause' : 'fa-play' "></i>
+                                    </div>
                               </div>
                               <div
                                     class="d-flex align-items-start justify-content-between gap-3 ct_reel_title_top w-100">

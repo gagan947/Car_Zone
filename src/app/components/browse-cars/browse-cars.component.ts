@@ -7,6 +7,7 @@ import { carData } from '../../helper/carData';
 import { FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { LoaderService } from '../../services/loader.service';
 
 @Component({
   selector: 'app-browse-cars',
@@ -33,7 +34,7 @@ export class BrowseCarsComponent {
   selectedFuels: string[] = [];
   selectedTransmissions: string[] = [];
   priceRange: any = [1000, 2000000]
-  constructor(private service: CommonService) { }
+  constructor(private service: CommonService, private loader: LoaderService) { }
 
   ngOnInit(): void {
     this.getCars()
@@ -41,8 +42,12 @@ export class BrowseCarsComponent {
   }
 
   getCars() {
+    this.loader.show()
     this.service.get('user/fetchOtherSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data
+      this.loader.hide()
+    }, err => {
+      this.loader.hide()
     })
   }
 
@@ -105,6 +110,20 @@ export class BrowseCarsComponent {
     );
 
     this.service.get('user/fetchOtherSellerCarsList', params).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.carsList = res.data
+    })
+  }
+
+  onFilterClear() {
+    this.selectedBrand = null;
+    this.selectedModal = null;
+    this.selectedFuels = [];
+    this.selectedTransmissions = [];
+    this.selectedSittingCapacity = null;
+    this.selectedSellerType = null;
+    this.priceRange = [1000, 2000000];
+
+    this.service.get('user/fetchOtherSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data
     })
   }

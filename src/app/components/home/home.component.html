@@ -845,54 +845,31 @@
                   <div class="col-md-12">
                         <div class="reelSwiper swiper ct_listing_slider">
                               <div class="swiper-wrapper">
+                                    @for (item of carReels; track $index) {
                                     <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
+                                          <div class="ct_reels_card">
+                                                <div class="mt-3 py-2" (click)="openReel(item)">
+                                                      <div class="mobile-frame">
+                                                            <video [src]="item.carReel" [poster]="item.reelThumbnails"
+                                                                  class="videoPreview"></video>
+                                                      </div>
+                                                </div>
+                                                <div
+                                                      class="d-flex align-items-start justify-content-between gap-3 mt-1">
+                                                      <div>
+                                                            <p class="mb-0 ct_fw_600">{{item.fullModel}}
+                                                            </p>
+
+                                                            <p class="mb-0 ct_fw_500">{{item.carReelInfo}}
+                                                            </p>
+                                                      </div>
+                                                      <i class="fa-bookmark"
+                                                            [ngClass]="item.isSavedReel ? 'fa-solid' : 'fa-regular'"
+                                                            (click)="item.isSavedReel ? removeFromSaved(item) : saveReel(item)"></i>
+                                                </div>
                                           </div>
                                     </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_reel_card">
-                                                <img src="img/car-1.png" alt="">
-                                                <a href="#" class="ct_play_icon">
-                                                      <i class="fa-solid fa-play"></i>
-                                                </a>
-                                          </div>
-                                    </div>
+                                    }
                               </div>
 
                         </div>

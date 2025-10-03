@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RoleDirective } from '../../directives/role.directive';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { carData } from '../../helper/carData';
+import { LoaderService } from '../../services/loader.service';
+import { NzMessageService } from 'ng-zorro-antd/message';
 declare var Swiper: any;
 @Component({
   selector: 'app-car-detail',
@@ -17,7 +19,7 @@ export class CarDetailComponent {
   carData: any
   carId: any
   conditions = carData.conditions
-  constructor(private service: CommonService, private route: ActivatedRoute) {
+  constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService) {
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
     })
@@ -28,9 +30,14 @@ export class CarDetailComponent {
   }
 
   getCarDetail() {
+    this.loader.show()
     this.service.get('user/getCar/' + this.carId + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.carData = res.data
-    })
+      this.carData = res.data;
+      this.loader.hide()
+    },
+      err => {
+        this.loader.hide()
+      })
   }
 
   mainImage(imags: any[]): string {
@@ -55,6 +62,29 @@ export class CarDetailComponent {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       }
+    });
+
+    new Swiper('.otherSwiper', {
+      direction: 'horizontal',
+      slidesPerView: 1,
+      spaceBetween: 15,
+      loop: false,
+      mousewheel: false,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      },
     });
   }
 
@@ -97,6 +127,13 @@ export class CarDetailComponent {
   removeFromWishlist(item: any) {
     item.isWishlist = !item.isWishlist
     this.service.delete('user/removeCarFromWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
+  }
+
+  deleteListing(item: any) {
+    this.service.delete('user/deleteCar/' + item.id + '?user_id=' + item.user_id + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.router.navigate(['my-listings'])
+      this.message.success('Car deleted successfully')
     })
   }
 }

@@ -853,11 +853,11 @@ footer:before {
 }
 
 .ct_play_icon {
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   z-index: 1;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 40px;
   height: 40px;
   background-color: #fff;

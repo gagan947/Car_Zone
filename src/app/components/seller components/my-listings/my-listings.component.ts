@@ -27,6 +27,14 @@ export class MyListingsComponent {
     })
   }
 
+  get activeCars() {
+    return this.carList.filter(c => c.is_active);
+  }
+
+  get expiredCars() {
+    return this.carList.filter(c => !c.is_active);
+  }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

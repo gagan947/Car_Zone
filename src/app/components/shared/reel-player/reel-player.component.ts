@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
@@ -19,7 +19,8 @@ export class ReelPlayerComponent {
   swiper: any;
   reelId: any
   currentIndex: number = 0
-  constructor(private service: CommonService, private message: NzMessageService, private route: ActivatedRoute) {
+  isPlaying: boolean = true
+  constructor(private service: CommonService, private message: NzMessageService, private route: ActivatedRoute, public location: Location) {
     this.route.queryParamMap.subscribe(params => {
       this.reelId = params.get('id')
     })
@@ -86,44 +87,29 @@ export class ReelPlayerComponent {
 
     console.log('Total videos found:', allVideos.length);
 
-    // Pause and reset all videos
     allVideos.forEach((vid, index) => {
       vid.pause();
       vid.currentTime = 0;
-      // Ensure all videos are muted
       vid.muted = true;
       vid.volume = 0;
-      console.log(`Video ${index} paused and reset, muted: ${vid.muted}`);
     });
 
     const activeSlide = document.querySelector('.swiper-slide-active');
     if (!activeSlide) {
-      console.log('No active slide found');
       return;
     }
 
     const activeVideo = activeSlide.querySelector<HTMLVideoElement>('video');
     if (!activeVideo) {
-      console.log('No video found in active slide');
       return;
     }
-
-    console.log('Active video found:', activeVideo);
-    console.log('Video src:', activeVideo.src);
-    console.log('Video readyState:', activeVideo.readyState);
-    console.log('Video muted before fix:', activeVideo.muted);
-
-    // Force mute the active video
     activeVideo.muted = true;
     activeVideo.volume = 0;
-
-    console.log('Video muted after fix:', activeVideo.muted);
-
     this.playActiveVideo(activeVideo);
   }
 
   private playActiveVideo(video: HTMLVideoElement) {
-    video.muted = true;
+    video.muted = false;
     video.volume = 0;
 
     // Add these attributes to prevent power-saving pause
@@ -137,6 +123,7 @@ export class ReelPlayerComponent {
     video.style.height = '100%';
     video.style.display = 'block';
 
+    this.isPlaying = true
     const playPromise = video.play();
 
     if (playPromise !== undefined) {
@@ -145,23 +132,18 @@ export class ReelPlayerComponent {
           console.log('Video playing successfully');
           console.log('Video muted status:', video.muted);
           console.log('Video paused status:', video.paused);
-
-          // Sometimes Chrome still pauses for power saving, so we need to monitor
           this.monitorVideoPlayback(video);
         })
         .catch((error) => {
           console.warn('Autoplay failed:', error);
           console.log('Video muted status on error:', video.muted);
-
-          // If still failing, try with user gesture
-          // this.addVideoPlayButton(video);
         });
     }
   }
 
   private monitorVideoPlayback(video: HTMLVideoElement) {
     let playAttempts = 0;
-    const maxPlayAttempts = 3;
+    const maxPlayAttempts = 0;
 
     const checkAndRestart = () => {
       if (video.paused && playAttempts < maxPlayAttempts) {
@@ -244,6 +226,16 @@ export class ReelPlayerComponent {
     item.isSavedReel = !item.isSavedReel
     this.service.delete('user/removeSavedCarsReel', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
     })
+  }
+
+  togglePlay(video: HTMLVideoElement) {
+    if (video.paused) {
+      this.isPlaying = true;
+      video.play();
+    } else {
+      this.isPlaying = false;
+      video.pause();
+    }
   }
 
   ngOnDestroy(): void {
