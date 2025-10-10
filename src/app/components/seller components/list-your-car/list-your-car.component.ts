@@ -8,7 +8,6 @@ import { CommonService } from '../../../services/common.service';
 import { NoWhitespaceDirective, vinValidator } from '../../../helper/validators';
 import { ValidationErrorService } from '../../../services/validation-error.service';
 import { CommonModule } from '@angular/common';
-import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import { HttpClient } from '@angular/common/http';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { carData } from '../../../helper/carData';
@@ -38,6 +37,7 @@ export class ListYourCarComponent {
   fuelTypes = carData.fuelTypes
   transmissions = carData.transmissions
   conditions = carData.conditions
+  sittingCapacity = carData.sittingCapacity
   loading: boolean = false
   constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router) {
     this.initForm()
@@ -84,7 +84,7 @@ export class ListYourCarComponent {
 
   getBrands() {
     this.service.get('user/brand').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.brandList = res.data.Results
+      this.brandList = res.data
     })
   }
 

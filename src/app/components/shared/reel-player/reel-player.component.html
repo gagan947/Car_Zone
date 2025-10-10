@@ -9,8 +9,8 @@
                   @if(item.carReel){
                   <div class="swiper-slide">
                         <div class="mobile-frame">
-                              <video #video [src]="item.carReel" autoplay playsinline loop preload="none"
-                                    class="videoPreview">
+                              <video #video [src]="item.carReel" autoplay playsinline webkit-playsinline loop
+                                    preload="none" class="videoPreview">
                               </video>
                               <div class="playOverlay" (click)="togglePlay(video)">
                                     <div class="ct_play_icon" [ngClass]="isPlaying ? 'invisible' : 'visible'">

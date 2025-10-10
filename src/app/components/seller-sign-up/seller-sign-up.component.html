@@ -237,13 +237,12 @@
 
                                     <div class="text-center mt-4">
                                           @if(formStep === 1 && Form.get('typeOfSeller')?.value == 'business'){
-                                          <button class="ct_red_btn px-5"
-                                                (click)="formStep = formStep + 1">Continue</button>
+                                          <button type="button" class="ct_red_btn px-5"
+                                                (click)="nextStep()">Continue</button>
                                           }@else {
                                           <app-submit-button [text]="'Sign Up'" [class]="'ct_red_btn px-5'"
                                                 [isLoading]="loading"></app-submit-button>
                                           }
-
                                     </div>
                               </form>
 

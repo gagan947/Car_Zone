@@ -8,10 +8,11 @@ import { FormsModule } from '@angular/forms';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { LoaderService } from '../../services/loader.service';
+import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 
 @Component({
   selector: 'app-browse-cars',
-  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule],
+  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule, ChfFormatPipe],
   templateUrl: './browse-cars.component.html',
   styleUrl: './browse-cars.component.css'
 })

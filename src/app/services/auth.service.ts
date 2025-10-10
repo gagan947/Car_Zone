@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from './common.service';
+import { RoleService } from './role.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-      constructor(private router: Router) { }
+      constructor(private router: Router, private roleService: RoleService) { }
 
       setValues(token: string, userInfo: any) {
             localStorage.setItem('CarZoneToken', token)
@@ -26,5 +28,6 @@ export class AuthService {
             localStorage.removeItem('CarZoneToken');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('app_role');
+            this.roleService.setRole(undefined);
       };
 }

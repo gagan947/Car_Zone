@@ -4,10 +4,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 import { CommonModule } from '@angular/common';
+import { ChfFormatPipe } from '../../../pipes/chf-format.pipe';
 
 @Component({
   selector: 'app-my-listings',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ChfFormatPipe],
   templateUrl: './my-listings.component.html',
   styleUrl: './my-listings.component.css'
 })

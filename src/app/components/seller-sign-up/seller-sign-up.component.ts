@@ -81,6 +81,18 @@ export class SellerSignUpComponent {
 
   }
 
+  nextStep() {
+    if (this.Form.get('fullName')?.invalid || this.Form.get('email')?.invalid || this.Form.get('phoneNumber')?.invalid || this.Form.get('password')?.invalid || this.Form.get('confirmPassword')?.invalid) {
+      this.Form.get('fullName')?.markAsTouched();
+      this.Form.get('email')?.markAsTouched();
+      this.Form.get('phoneNumber')?.markAsTouched();
+      this.Form.get('password')?.markAsTouched();
+      this.Form.get('confirmPassword')?.markAsTouched();
+      return
+    }
+    this.formStep = this.formStep + 1
+  }
+
   getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(

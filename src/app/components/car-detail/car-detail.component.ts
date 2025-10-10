@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { carData } from '../../helper/carData';
 import { LoaderService } from '../../services/loader.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 declare var Swiper: any;
 @Component({
   selector: 'app-car-detail',
-  imports: [RouterLink, RoleDirective, CommonModule],
+  imports: [RouterLink, RoleDirective, CommonModule, ChfFormatPipe],
   templateUrl: './car-detail.component.html',
   styleUrl: './car-detail.component.css'
 })

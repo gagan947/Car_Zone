@@ -4,13 +4,13 @@ export const environment = {
 
 
       firebaseConfig: {
-            apiKey: "AIzaSyB1Ko8WHeXDxdYAOjisHn8qVZOIkGrxudE",
-            authDomain: "zynq-53745.firebaseapp.com",
-            projectId: "zynq-53745",
-            storageBucket: "zynq-53745.firebasestorage.app",
-            messagingSenderId: "30895314430",
-            appId: "1:30895314430:web:d3e6fa8d56ae9d8d615caf",
-            measurementId: "G-18FTE8J8TQ",
-            vapidKey: "BL_80-eBfWYKCw31-4rdm_Q4DTc_KI56XGE6rgA1HqE4kfKVM9k_gd_oSW8ihZo5vpNLXPUcyciOBCF7STuL0G4"
+            apiKey: "AIzaSyBrgUOgzD8t49fhu6DqJlROjmvtI-QxaGc",
+            authDomain: "carzone-94989.firebaseapp.com",
+            projectId: "carzone-94989",
+            storageBucket: "carzone-94989.firebasestorage.app",
+            messagingSenderId: "978911494264",
+            appId: "1:978911494264:web:fc3d4909ae3166bbb5ad8d",
+            measurementId: "G-VWTJG9VVY2",
+            vapidKey: "BOiEc41vKhEWS3uzO1ZBOkuEAw-BegHGAj8DVC3qj_inuEbc_bmvN4hZpDZ23_bWFSw_SCBGAh4WZPlI8BECQ4U"
       }
 };

@@ -117,10 +117,33 @@
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for="" class="mb-2 ct_fw_600">Sitting
                                                                               Capacity</label>
-                                                                        <input type="number"
+                                                                        <!-- <input type="number"
                                                                               class="form-control ct_input"
                                                                               placeholder="Enter eg. 7"
-                                                                              formControlName="sittingCapacity" />
+                                                                              formControlName="sittingCapacity" /> -->
+
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="Select"
+                                                                              formControlName="sittingCapacity">
+                                                                              @for (item of sittingCapacity; track
+                                                                              $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item" [nzValue]="item"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{item}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item === carFormOne.get('sittingCapacity')?.value">
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
                                                                         <small
                                                                               class="text-danger">{{validationErrorService.getErrorMessage("Sitting capacity", carFormOne.get("sittingCapacity"))}}</small>
                                                                   </div>

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../services/loader.service';
+import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ChfFormatPipe],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })

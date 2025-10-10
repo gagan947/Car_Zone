@@ -1745,7 +1745,7 @@ a.add img {
   -moz-appearance: none;
   appearance: none;
   border-radius: 12px;
-  padding-left: 35px;
+  padding-left: 15px;
   height: 48px;
   transition: border-color 0.15sease-in-out, box-shadow 0.15sease-in-out;
 }

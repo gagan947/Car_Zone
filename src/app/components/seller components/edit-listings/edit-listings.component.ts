@@ -34,6 +34,7 @@ export class EditListingsComponent {
   fuelTypes = carData.fuelTypes
   transmissions = carData.transmissions
   conditions = carData.conditions
+  sittingCapacity = carData.sittingCapacity
   loading: boolean = false;
   carId: any
   constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
@@ -95,7 +96,7 @@ export class EditListingsComponent {
 
   getBrands() {
     this.service.get('user/brand').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.brandList = res.data.Results;
+      this.brandList = res.data;
       this.getCarDetail()
     })
   }

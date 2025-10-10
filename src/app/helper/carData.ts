@@ -73,6 +73,8 @@ export const carData = {
             },
       ],
 
+      sittingCapacity: [2,4,5,6,7],
+
       sellerTypes: [
             { title: 'Private', key: 'personal' },
             { title: 'Official', key: 'business' },
