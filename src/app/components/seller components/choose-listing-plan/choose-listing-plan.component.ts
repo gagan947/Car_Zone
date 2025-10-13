@@ -15,7 +15,7 @@ export class ChooseListingPlanComponent {
   private destroy$ = new Subject<void>();
   planList: any[] = []
   selectedPlan: any = null;
-
+  isUsed: boolean = false
   constructor(private service: CommonService, private message: NzMessageService) { }
 
   ngOnInit(): void {
@@ -24,11 +24,15 @@ export class ChooseListingPlanComponent {
 
   getPlans() {
     this.service.get('user/getAllPlan').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.isUsed = res.alreadyUsed == 1 ? true : false
       this.planList = res.plans
     })
   }
 
   selectPlan(plan: any) {
+    if (this.isUsed && plan.plan_type == 'basic') {
+      return;
+    }
     this.selectedPlan = plan;
   }
 

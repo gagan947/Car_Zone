@@ -14,7 +14,8 @@
                                                             class="d-flex align-items-center justify-content-between gap-2 mb-2">
                                                             <h4 class="ct_fs_20 ct_fw_600 mb-0">{{item.name}}</h4>
                                                             @if (item.name == 'Basic Plan') {
-                                                            <span class="ct_custom_badge">Starter</span>
+                                                            <span
+                                                                  class="ct_custom_badge">{{isUsed ? 'Used' : 'Starter'}}</span>
                                                             }
                                                       </div>
                                                       <h3 class="ct_fs_24 ct_fw_700 mb-0 ct_text_red mb-1">

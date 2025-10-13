@@ -57,7 +57,8 @@ export class CarDetailComponent {
   ngAfterViewInit(): void {
     const swiper = new Swiper('.mySwiper', {
       direction: 'horizontal',
-      loop: false,
+      slidesPerView: 1,
+      loop: true,
       mousewheel: false,
       navigation: {
         nextEl: '.swiper-button-next',

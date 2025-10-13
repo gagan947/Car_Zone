@@ -2,7 +2,7 @@ import { Component, effect, ElementRef, ViewChild } from '@angular/core';
 import { ChatService } from '../../services/chat.service';
 import { Subscription } from 'rxjs';
 import { CommonService } from '../../services/common.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -27,11 +27,7 @@ export class ChatsComponent {
   userData: any;
   searchTerm = '';
 
-  constructor(private chatService: ChatService, private commonService: CommonService) {
-
-  }
-
-  ngOnInit() {
+  constructor(private chatService: ChatService, private commonService: CommonService, public location:Location) {
     effect(() => {
       this.userData = this.commonService.userData()
       if (this.userData) {
@@ -43,6 +39,10 @@ export class ChatsComponent {
         });
       }
     })
+  }
+
+  ngOnInit() {
+
   }
 
   openChat(item: any) {

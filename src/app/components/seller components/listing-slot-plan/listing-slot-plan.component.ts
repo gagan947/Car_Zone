@@ -3,11 +3,12 @@ import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
-
+import { RouterLink } from '@angular/router';
+import { LoaderService } from '../../../services/loader.service';
 
 @Component({
   selector: 'app-listing-slot-plan',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './listing-slot-plan.component.html',
   styleUrl: './listing-slot-plan.component.css'
 })
@@ -16,16 +17,22 @@ export class ListingSlotPlanComponent {
   planList: any
   selectedPlan: any = null;
 
-  constructor(private service: CommonService, private message: NzMessageService) { }
+  constructor(private service: CommonService, private loader: LoaderService) { }
 
   ngOnInit(): void {
+    this.loader.show()
     this.getPlans()
   }
 
   getPlans() {
     this.service.get('user/getMyPlan').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.planList = res.planData
-    })
+      this.loader.hide()
+    },
+      err => {
+        this.loader.hide()
+      }
+    )
   }
 
   convert(val: string, type: 'used' | 'total'): number {

@@ -66,7 +66,7 @@ export class BrowseCarsComponent {
 
   getBrands() {
     this.service.get('user/brand').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.brandList = res.data.Results
+      this.brandList = res.data
     })
   }
 
