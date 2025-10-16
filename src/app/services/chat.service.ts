@@ -61,6 +61,8 @@ export class ChatService {
                   avatar: otherUser.avatar,
                   lastMsg: inputValue.trim(),
                   createdAt: serverTimestamp(),
+                  // carImage: otherUser.carImage,
+                  // carName: otherUser.carName,
             };
 
             const otherUserList = {
@@ -73,7 +75,6 @@ export class ChatService {
                   avatar: currentUser.profileImage || '',
                   name: currentUser.fullName || currentUser.name || '',
             };
-
             await this.uploadMessage(myMsg, userList, otherUserList, senderId, receiverId, roomId);
       }
 
@@ -100,6 +101,7 @@ export class ChatService {
                         addDoc(chatMessagesRef, { ...myMsg, createdAt: serverTimestamp() }),
                         batch.commit(),
                   ]);
+                  sessionStorage.removeItem('sellerData');
             } catch (err) {
                   console.error('uploadMessage error:', err);
                   throw err;
@@ -108,47 +110,30 @@ export class ChatService {
 
       // ---------------- Pagination fetch ----------------
       // currentMessages expected in "newest-first" order (desc). Component can reverse on render.
-      async fetchMessages(roomId: string, hasMore: boolean, currentMessages: any[]) {
-            // return currentMessages when there is no more to fetch
-            if (!hasMore) return { messages: currentMessages, hasMore: false };
-
-            // if caller passed empty currentMessages => treat as new room session (reset pagination)
-            if (!currentMessages || currentMessages.length === 0) {
-                  this.resetPagination(roomId);
-            }
-
+      async fetchMessages(roomId: string) {
             try {
                   const chatRef = collection(this.firestore, 'chatroom', roomId, 'chats');
 
-                  // build query: newest-first
-                  let q = query(chatRef, orderBy('createdAt', 'asc'), limit(this.MESSAGES_LIMIT));
-
-                  const lastDoc = this.lastDocMap.get(roomId) || null;
-                  if (lastDoc) {
-                        q = query(chatRef, orderBy('createdAt', 'asc'), startAfter(lastDoc), limit(this.MESSAGES_LIMIT));
-                  }
+                  // Get all messages ordered by creation time (ascending or descending as per your UI)
+                  const q = query(chatRef, orderBy('createdAt', 'desc'));
 
                   const snapshot = await getDocs(q);
+
                   if (!snapshot.empty) {
-                        const newMessages = snapshot.docs.map((d) => {
+                        const messages = snapshot.docs.map((d) => {
                               const data = d.data() as any;
-                              // normalize createdAt to millis (if present)
-                              const createdAt = data.createdAt && (data.createdAt.toMillis ? data.createdAt.toMillis() : data.createdAt);
+                              const createdAt =
+                                    data.createdAt && (data.createdAt.toMillis ? data.createdAt.toMillis() : data.createdAt);
                               return { id: d.id, ...data, createdAt };
                         });
 
-                        // set lastDoc to oldest of the loaded batch (last element in snapshot)
-                        this.lastDocMap.set(roomId, snapshot.docs[snapshot.docs.length - 1]);
-
-                        // keep newest-first order by appending older results to the end
-                        const combined = [...currentMessages, ...newMessages];
-                        return { messages: combined, hasMore: newMessages.length === this.MESSAGES_LIMIT };
+                        return { messages, hasMore: false }; // no pagination needed
                   } else {
-                        return { messages: currentMessages, hasMore: false };
+                        return { messages: [], hasMore: false };
                   }
             } catch (err) {
                   console.error('fetchMessages error:', err);
-                  return { messages: currentMessages, hasMore: false };
+                  return { messages: [], hasMore: false };
             }
       }
 
@@ -158,7 +143,7 @@ export class ChatService {
             // stop old listener for this room
             this.stopListening(roomId);
 
-            const chatsQuery = query(collection(this.firestore, 'chatroom', roomId, 'chats'), orderBy('createdAt', 'asc'));
+            const chatsQuery = query(collection(this.firestore, 'chatroom', roomId, 'chats'), orderBy('createdAt', 'desc'));
             let isInitialLoad = true;
             const processed = new Set<string>();
             this.processedIdsMap.set(roomId, processed);
@@ -205,18 +190,37 @@ export class ChatService {
             return unsubscribe;
       }
 
-      async markAllMessagesSeen(currentUserId: string, otherUserId: string) {
+      async markAllMessagesSeen(userId: string, roomId: string, messages: any[] = []) {
             try {
-                  // Update "seen" for current user's chat list
-                  const currentUserChatRef = doc(this.firestore, `users/${currentUserId}/usersList/${otherUserId}`);
-                  await updateDoc(currentUserChatRef, { Seen: true });
+                  const db = this.firestore;
 
-                  // Optionally update in the other user's chat list too
-                  const otherUserChatRef = doc(this.firestore, `users/${otherUserId}/usersList/${currentUserId}`);
-                  await updateDoc(otherUserChatRef, { Seen: true });
+                  // Reference to the user document inside 'usersList'
+                  const userListRef = doc(collection(db, 'users', String(userId), 'usersList'), String(roomId));
+
+                  // Update 'Seen' and 'mgsCount' fields
+                  const initialBatch = writeBatch(db);
+                  initialBatch.update(userListRef, { Seen: true, mgsCount: 0 });
+                  await initialBatch.commit();
+
+                  // Filter unseen messages for this user
+                  const unseenMessages = messages.filter(
+                        (msg: any) => msg.sendTo === userId && !msg.seen
+                  );
+
+                  if (unseenMessages.length > 0) {
+                        const batch = writeBatch(db);
+
+                        unseenMessages.forEach((msg: any) => {
+                              const msgRef = doc(collection(db, 'chatroom', String(roomId), 'chats'), String(msg.id));
+                              batch.update(msgRef, { seen: true });
+                        });
+
+                        await batch.commit();
+                  }
             } catch (error) {
-                  console.error('Error marking chat as seen:', error);
+                  console.error('Error updating seen status and message count:', error);
             }
+
       }
 
       stopListening(roomId: string) {
@@ -238,7 +242,7 @@ export class ChatService {
             return new Observable((observer) => {
                   const userDocRef = doc(this.firestore, `users/${userId}`);
                   const usersListRef = collection(userDocRef, 'usersList');
-                  const q = query(usersListRef, orderBy('createdAt', 'asc'));
+                  const q = query(usersListRef, orderBy('createdAt', 'desc'));
 
                   const unsubscribe = onSnapshot(q, (snapshot) => {
                         const list = snapshot.docs.map(d => {
@@ -252,7 +256,6 @@ export class ChatService {
                         observer.error(err);
                   });
 
-                  // cleanup
                   return () => {
                         try { unsubscribe(); } catch (e) { }
                   };

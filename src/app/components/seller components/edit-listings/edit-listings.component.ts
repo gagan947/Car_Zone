@@ -102,9 +102,9 @@ export class EditListingsComponent {
   }
 
   getModalList(brand: any) {
-    const brandId = this.brandList.find((item: any) => item.MakeName.toLowerCase() == brand.toLowerCase())?.MakeId
+    const brandId = this.brandList.find((item: any) => item.make_display.toLowerCase() == brand.toLowerCase())?.make_id
     this.service.get('user/getModel/' + brandId).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.modalList = res.data.models
+      this.modalList = res.data
     })
   }
 

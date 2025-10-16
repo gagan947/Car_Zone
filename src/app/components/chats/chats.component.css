@@ -3,9 +3,13 @@
 }
 
 
-.ct_ads_card_w_100{
+.ct_ads_card_w_100 {
       width: 100px;
       height: 50px;
       object-fit: cover;
       border-radius: 5px;
+}
+
+.cursor-pointer {
+      cursor: pointer;
 }

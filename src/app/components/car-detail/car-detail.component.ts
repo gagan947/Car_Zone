@@ -138,4 +138,20 @@ export class CarDetailComponent {
       this.message.success('Car deleted successfully')
     })
   }
+
+  contactSeller(item: any) {
+    let sellerData = {
+      id: item.user_id,
+      name: item.fullName,
+      email: item.email,
+      profileImage: item.profileImage,
+      // carId: item.id,
+      // carImage: item.carImages[0],
+      // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
+    }
+
+    this.service.sellerData.set(sellerData)
+    sessionStorage.setItem('sellerData', JSON.stringify(sellerData))
+    this.router.navigate(['/chats'])
+  }
 }

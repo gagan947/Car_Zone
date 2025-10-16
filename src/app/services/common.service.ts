@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class CommonService {
   baseUrl = environment.apiUrl
   userData = signal<any>(null);
+  sellerData = signal<any>(null);
 
   constructor(private http: HttpClient, private router: Router) { }
 

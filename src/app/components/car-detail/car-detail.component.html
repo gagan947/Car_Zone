@@ -43,10 +43,12 @@
 
                               <div class="ct_address_info mt-4">
                                     <ul>
+                                          @if(carData?.location){
                                           <li>
                                                 <i class="fa-solid fa-location-dot"></i>
                                                 <p class="mb-0">{{carData?.location}}</p>
                                           </li>
+                                          }
                                           <li>
                                                 <i class="fa-solid fa-clock"></i>
                                                 <p class="mb-0">{{timeAgo(carData?.createdAt)}}</p>
@@ -64,7 +66,8 @@
                               </div>
                               <div class="mt-5">
                                     <ng-container *appRole="'buyer'">
-                                          <a routerLink="/chats" class="ct_red_btn w-100 text-center">Contact Seller</a>
+                                          <a (click)="contactSeller(carData)"
+                                                class="ct_red_btn w-100 text-center">Contact Seller</a>
                                     </ng-container>
                                     <ng-container *appRole="'seller'">
                                           <a routerLink="/edit-listing" [queryParams]="{id: carData?.id}"
@@ -148,8 +151,8 @@
                                     <div class="ct_small_grey_card">
                                           <img src="img/icon_1.png" alt="" class="ct_flex_shrink_0">
                                           <div>
-                                                <h6 class="ct_fs_16 ct_fw_600 mb-1">Milage</h6>
-                                                <p class="mb-0">{{carData?.carMileage}} km/ltr</p>
+                                                <h6 class="ct_fs_16 ct_fw_600 mb-1">Kilometers</h6>
+                                                <p class="mb-0">{{carData?.carMileage}} km</p>
 
                                           </div>
                                     </div>

@@ -13,17 +13,18 @@
                                                       <nz-select class="form-control ct_input" nzPlaceHolder="Select"
                                                             [nzShowSearch]="true" formControlName="brandName">
                                                             @for (item of brandList; track $index) {
-                                                            <nz-option nzCustomContent [nzLabel]="item.MakeName"
-                                                                  [nzValue]="item.MakeName" class="ct_custom_select">
+                                                            <nz-option nzCustomContent [nzLabel]="item.make_display"
+                                                                  [nzValue]="item.make_display"
+                                                                  class="ct_custom_select">
                                                                   <div
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                               <p class="m-0">
-                                                                                    {{item.MakeName}}
+                                                                                    {{item.make_display}}
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
-                                                                              [checked]="item.MakeName == carFormOne.get('brandName')?.value" />
+                                                                              [checked]="item.make_display == carFormOne.get('brandName')?.value" />
                                                                   </div>
                                                             </nz-option>
                                                             }
@@ -113,12 +114,13 @@
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4 text-start">
-                                                      <label for="" class="mb-2 ct_fw_600">Mileage
+                                                      <label for="" class="mb-2 ct_fw_600">Kilometer
                                                             (km)</label>
                                                       <input type="number" class="form-control ct_input"
-                                                            placeholder="Enter Mileage" formControlName="carMileage" />
+                                                            placeholder="Enter Kilometer"
+                                                            formControlName="carMileage" />
                                                       <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Mileage", carFormOne.get("carMileage"))}}</small>
+                                                            class="text-danger">{{validationErrorService.getErrorMessage("Kilometer", carFormOne.get("carMileage"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">

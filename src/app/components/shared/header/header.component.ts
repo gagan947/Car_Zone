@@ -6,10 +6,11 @@ import { AuthService } from '../../../services/auth.service';
 import { CommonService } from '../../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, RoleDirective],
+  imports: [RouterLink, RouterLinkActive, RoleDirective, TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -20,7 +21,11 @@ export class HeaderComponent {
   userData: any
   destroy$ = new Subject<void>();
   selectedLang: string = 'en'
-  constructor(private router: Router, public authService: AuthService, private commonService: CommonService, private toster: NzMessageService) {
+  constructor(private router: Router, public authService: AuthService, private commonService: CommonService, private toster: NzMessageService, private translate: TranslateService) {
+    this.translate.setDefaultLang('en');
+    this.translate.use(localStorage.getItem('lang') || 'en');
+    this.selectedLang = localStorage.getItem('lang') || 'en';
+
     if (this.authService.isLogedIn()) {
       this.commonService.getProfile()
     }
@@ -66,7 +71,8 @@ export class HeaderComponent {
 
   onCustomLangChange(lang: string) {
     this.selectedLang = lang;
-    // this.commonService.setLang(lang);
+    // this.translate.use(lang);
+    // localStorage.setItem('lang', lang);
   }
 
   getLanguage(langCode: string) {

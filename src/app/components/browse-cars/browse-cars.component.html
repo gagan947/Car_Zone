@@ -27,17 +27,18 @@
                                                             [ngModelOptions]="{standalone: true}"
                                                             (ngModelChange)="getModalList($event)">
                                                             @for (item of brandList; track $index) {
-                                                            <nz-option nzCustomContent [nzLabel]="item.MakeName"
-                                                                  [nzValue]="item.MakeName" class="ct_custom_select">
+                                                            <nz-option nzCustomContent [nzLabel]="item.make_display"
+                                                                  [nzValue]="item.make_display"
+                                                                  class="ct_custom_select">
                                                                   <div
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                               <p class="m-0">
-                                                                                    {{item.MakeName}}
+                                                                                    {{item.make_display}}
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
-                                                                              [checked]="item.MakeName == selectedBrand" />
+                                                                              [checked]="item.make_display == selectedBrand" />
                                                                   </div>
                                                             </nz-option>
                                                             }
