@@ -11,8 +11,8 @@
                                           <label for="" class="mb-2 ct_fw_600 text-white">Email Address</label>
                                           <input type="email" class="form-control ct_input"
                                                 placeholder="Enter Email Address" formControlName="email">
-                                          <small
-                                                class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
+                                          <small class="text-danger">{{validationErrorService.getErrorMessage("Email",
+                                                Form.get("email"))}}</small>
                                     </div>
                                     <div class="form-group mb-2">
                                           <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
@@ -25,8 +25,8 @@
                                                             [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                                                             (click)="isShowPassword = !isShowPassword"></i>
                                                 </div>
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("Password",
+                                                      Form.get("password"))}}</small>
                                           </div>
                                     </div>
                                     <div class="text-end">
@@ -61,7 +61,16 @@
                                     <a data-bs-toggle="modal" data-bs-target="#ct_login_modal"
                                           class="ct_text_red ct_fw_600">Sign Up</a>
                                     }
+
                               </p>
+                              @if(role() == 'buyer'){
+                              <p routerLink="/" class="text-white text-center ct_fw_600" style="cursor: pointer;">
+                                    Continue as Guest</p>
+                              } @else {
+                              <p routerLink="/home" class="text-white text-center ct_fw_600" style="cursor: pointer;">
+                                    Continue as Guest</p>
+                              }
+
                         </div>
                   </div>
             </div>
