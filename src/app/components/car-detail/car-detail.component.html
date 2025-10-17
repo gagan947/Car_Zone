@@ -4,13 +4,16 @@
                   <div class="col-xxl-5 col-xl-5 col-lg-7  mb-4 mb-lg-0">
                         <div class="p-0" [ngClass]="carData?.carImages.length > 1 ? 'ct_gallery' : 'ct_gallery_1'">
                               <div class="ct_gallery_left">
-                                    <img [src]="carData?.carImages[0]" class="img-fluid" alt="Main">
+                                    <img [src]="carData?.carImages[0]" class="img-fluid" alt="Main"
+                                          data-bs-toggle="modal" data-bs-target="#ct_show_all_photos"
+                                          style="cursor: pointer;">
                               </div>
                               @if(carData?.carImages.length > 1){
                               <div class="ct_gallery_right"
                                     [ngClass]="carData?.carImages.length == 2 ? 'ct_gallery_right_1_img' : carData?.carImages.length == 3 ? 'ct_gallery_right_2_img' : carData?.carImages.length == 4 ? 'ct_gallery_right_4_img' : ''">
                                     @for (item of carData?.carImages.slice(1, 5); track $index) {
-                                    <img [src]="item" class="img-fluid" alt="Bathroom">
+                                    <img [src]="item" class="img-fluid" alt="Bathroom" data-bs-toggle="modal"
+                                          data-bs-target="#ct_show_all_photos">
                                     }
                                     <button class="ct_show_all_images_btn" data-bs-toggle="modal"
                                           data-bs-target="#ct_show_all_photos">
@@ -43,12 +46,12 @@
 
                               <div class="ct_address_info mt-4">
                                     <ul>
-                                          @if(carData?.location){
+                                          <!-- @if(carData?.location){
                                           <li>
                                                 <i class="fa-solid fa-location-dot"></i>
                                                 <p class="mb-0">{{carData?.location}}</p>
                                           </li>
-                                          }
+                                          } -->
                                           <li>
                                                 <i class="fa-solid fa-clock"></i>
                                                 <p class="mb-0">{{timeAgo(carData?.createdAt)}}</p>
@@ -82,7 +85,8 @@
                   </div>
                   <div class="col-xxl-3 col-xl-3 mt-4 mt-xl-0 mb-lg-0">
                         <div class="ct_seller_company_add">
-                              <img src="img/brand_img.jpg" alt="">
+                              <!-- <img src="img/brand_img.jpg" alt=""> -->
+                              <h2 style="font-weight: 900;">Leasding Possibilities</h2>
                               <h6 class="mb-0 ct_fs_20 ct_fw_600 mb-3 mt-2">Autowelt von Rotz AG</h6>
 
                               <ul>
@@ -274,7 +278,6 @@
                                                       <option value="">120 Month</option>
                                                 </select>
                                           </div>
-
                                     </div>
                                     <div class="col-md-6">
                                           <div class="form-group mb-3">
@@ -305,7 +308,8 @@
                   </div>
                   <div class="col-md-4 mb-4">
                         <div class="ct_calculated_buyer_card">
-                              <img src="img/brand_img.jpg" alt="">
+                              <!-- <img src="img/brand_img.jpg" alt=""> -->
+                              <h2 style="font-weight: 900;">Leasding Possibilities</h2>
                               <div class="mt-4">
                                     <h5 class="ct_fs_20 ct_fw_700">1618.58/ <small
                                                 class="ct_fs_14 ct_text_op_6">Month</small></h5>

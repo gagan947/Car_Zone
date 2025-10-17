@@ -15,7 +15,7 @@
                               </div>
                         </div>
                         <div class="row">
-                              <div class="col-lg-3 mb-4">
+                              <div class="col-lg-3 mb-4 position-sticky top-0">
                                     <div class="ct_filter_bg d-lg-block d-none">
                                           <h4 class="ct_fs_20 ct_fw_700 mb-4">Filter</h4>
                                           <form action="">
@@ -26,7 +26,9 @@
                                                             [nzShowSearch]="true" [(ngModel)]="selectedBrand"
                                                             [ngModelOptions]="{standalone: true}"
                                                             (ngModelChange)="getModalList($event)">
+                                                            
                                                             @for (item of brandList; track $index) {
+                                                                  
                                                             <nz-option nzCustomContent [nzLabel]="item.make_display"
                                                                   [nzValue]="item.make_display"
                                                                   class="ct_custom_select">
@@ -70,6 +72,19 @@
                                                 }
 
                                                 <div class="form-group mb-3">
+                                                      <label for="" class="mb-1 ct_fw_600">Year Range</label>
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center gap-2">
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Min" [(ngModel)]="yearRange[0]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Max" [(ngModel)]="yearRange[1]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                      </div>
+                                                </div>
+
+                                                <div class="form-group mb-3">
                                                       <label for="" class="mb-1 ct_fw_600">Price Range (CHF)</label>
                                                       <nz-slider [nzTooltipVisible]="'never'" nzRange [nzStep]="1000"
                                                             [nzMin]="0" [nzMax]="100000" [(ngModel)]="priceRange"
@@ -87,6 +102,22 @@
                                                                   [ngModelOptions]="{standalone: true}" />
                                                       </div>
                                                 </div>
+
+                                                <div class="form-group mb-3">
+                                                      <label for="" class="mb-1 ct_fw_600">Milage Range</label>
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center gap-2">
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Min" [(ngModel)]="milageRange[0]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Max" [(ngModel)]="milageRange[1]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                      </div>
+                                                </div>
+
+
+
                                                 <div class="form-group mb-3">
                                                       <label for="" class="mb-2 ct_fw_600">Fuel Type</label>
                                                       <ul>
@@ -131,7 +162,7 @@
                                                       </ul>
                                                 </div>
 
-                                                <div class="form-group mb-3">
+                                                <!-- <div class="form-group mb-3">
                                                       <label for="" class="mb-2 ct_fw_600">Sitting Capacity</label>
                                                       <nz-select class="form-control ct_input" nzPlaceHolder="All"
                                                             [nzShowSearch]="true" [(ngModel)]="selectedSittingCapacity"
@@ -152,8 +183,8 @@
                                                             </nz-option>
                                                             }
                                                       </nz-select>
-                                                </div>
-                                                <div class="form-group mb-3">
+                                                </div> -->
+                                                <!-- <div class="form-group mb-3">
                                                       <label for="" class="mb-2 ct_fw_600">Seller Type</label>
                                                       @for (item of sellerTypes; track $index) {
                                                       <div class="d-flex flex-wrap gap-1 align-items-center mb-1">
@@ -165,7 +196,7 @@
                                                                   class="ms-1 ct_fw_600">{{item.title}}</label>
                                                       </div>
                                                       }
-                                                </div>
+                                                </div> -->
 
                                                 <div class="">
                                                       <button class="ct_red_btn w-100 ct_flex_1 mb-3"
@@ -191,16 +222,21 @@
                                                       <figure class="mb-0">
                                                             <div class="ct_browse_card_img">
                                                                   <img [src]="item.carImages[0] || 'img/placeHolder.webp'"
-                                                                        alt="">
+                                                                        alt="" routerLink="/car-detail"
+                                                                        [queryParams]="{id: item.id}"
+                                                                        style="cursor: pointer;">
                                                                   <i class="fa-heart ct_text_red"
                                                                         [ngClass]="item.isWishlist ? 'fa-solid' : 'fa-regular'"
                                                                         (click)="item.isWishlist ? removeFromWishlist(item) : addToWishlist(item)"></i>
                                                             </div>
-                                                            <figcaption class="mt-3">
+                                                            <figcaption routerLink="/car-detail"
+                                                                  [queryParams]="{id: item.id}" style="cursor: pointer;"
+                                                                  class="mt-3">
                                                                   <div
                                                                         class="d-flex align-items-center justify-content-between mb-2">
                                                                         <span
-                                                                              class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">{{item.totalPrice | chfFormat}}</span>
+                                                                              class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">{{item.totalPrice
+                                                                              | chfFormat}}</span>
                                                                         <small class="ct_fs_14 ct_text_op_6">/ Leasing
                                                                               ab 499-. CHF</small>
                                                                   </div>

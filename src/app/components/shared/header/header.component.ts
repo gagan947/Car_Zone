@@ -7,10 +7,12 @@ import { CommonService } from '../../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { CommonModule } from '@angular/common';
+import { ModalService } from '../../../services/modal.service';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive, RoleDirective, TranslateModule],
+  imports: [RouterLink, RouterLinkActive, RoleDirective, TranslateModule, CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -21,10 +23,14 @@ export class HeaderComponent {
   userData: any
   destroy$ = new Subject<void>();
   selectedLang: string = 'en'
-  constructor(private router: Router, public authService: AuthService, private commonService: CommonService, private toster: NzMessageService, private translate: TranslateService) {
+  userRole: any;
+  token: any
+  constructor(private router: Router, public authService: AuthService, private commonService: CommonService, private toster: NzMessageService, private translate: TranslateService, private modalService: ModalService) {
     this.translate.setDefaultLang('en');
+    this.token = this.authService.getToken();
     this.translate.use(localStorage.getItem('lang') || 'en');
     this.selectedLang = localStorage.getItem('lang') || 'en';
+    this.userRole = localStorage.getItem('app_role');
 
     if (this.authService.isLogedIn()) {
       this.commonService.getProfile()
@@ -89,6 +95,7 @@ export class HeaderComponent {
         return 'English';
     }
   }
+
   getImage(langCode: string) {
     switch (langCode) {
       case 'de':
@@ -103,4 +110,17 @@ export class HeaderComponent {
         return 'img/USA.png';
     }
   }
+
+  notifications() {
+    if (this.token) {
+      this.router.navigateByUrl('/notifications');
+    } else {
+      this.modalService.openLoginModal();
+    }
+  }
+
+  openLogin(): void {
+    this.modalService.openLoginModal();
+  }
+
 }

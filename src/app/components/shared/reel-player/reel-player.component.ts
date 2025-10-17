@@ -4,6 +4,8 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { ModalService } from '../../../services/modal.service';
 declare var Swiper: any
 
 @Component({
@@ -19,19 +21,24 @@ export class ReelPlayerComponent {
   swiper: any;
   reelId: any
   currentIndex: number = 0
+  token: any
   isPlaying: boolean = true
-  constructor(private service: CommonService, private message: NzMessageService, private route: ActivatedRoute, public location: Location) {
+  constructor(private service: CommonService, private authService: AuthService, private route: ActivatedRoute, public location: Location, private modalService: ModalService) {
     this.route.queryParamMap.subscribe(params => {
       this.reelId = params.get('id')
     })
   }
 
   ngOnInit(): void {
+    this.token = this.authService.getToken();
     this.getReels()
   }
 
   getReels() {
-    this.service.get('user/fetchAllCarReel')
+    const endpoint = this.token
+      ? `user/fetchAllCarReels`
+      : `user/asGuestUsersfetchAllCarReels`;
+    this.service.get(endpoint)
       .pipe(takeUntil(this.destroy$))
       .subscribe((res: any) => {
         this.carReels = res.data.data;
@@ -216,10 +223,31 @@ export class ReelPlayerComponent {
   //   video.parentElement?.appendChild(playButton);
   // }
 
-  saveReel(item: any) {
-    item.isSavedReel = !item.isSavedReel
-    this.service.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-    })
+  // saveReel(item: any) {
+  //   item.isSavedReel = !item.isSavedReel
+  //   this.service.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+  //   })
+  // }
+    saveReel(item: any) {
+    // Optimistically toggle saved state
+    item.isSavedReel = !item.isSavedReel;
+
+    this.service.post('user/saveCarReels', { carId: item.id })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res: any) => {
+          // ✅ Successfully saved reel
+        },
+        error: (err) => {
+          console.error('Save reel API failed:', err);
+
+          // ❌ Revert the toggle if API fails
+          item.isSavedReel = !item.isSavedReel;
+
+          // 🧩 Open login modal on error
+          this.modalService.openLoginModal();
+        }
+      });
   }
 
   removeFromSaved(item: any) {

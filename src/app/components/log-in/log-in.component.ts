@@ -9,6 +9,8 @@ import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { RoleService, UserRole } from '../../services/role.service';
 import { AuthService } from '../../services/auth.service';
+import { Auth } from '@angular/fire/auth';
+import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 declare var bootstrap: any;
 
 @Component({
@@ -24,7 +26,7 @@ export class LogInComponent {
   private destroy$ = new Subject<void>();
   private roleService = inject(RoleService);
   role = this.roleService.currentRole;
-  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router) {
+  constructor(private auth: Auth, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router) {
     this.Form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -32,16 +34,16 @@ export class LogInComponent {
   }
 
   ngOnInit(): void {
-    if (!this.role()) {
-      const modalElement = document.getElementById('ct_login_modal_1');
-      if (modalElement) {
-        const modal = new bootstrap.Modal(modalElement, {
-          backdrop: 'static',
-          keyboard: false
-        });
-        modal.show();
-      }
-    }
+    // if (!this.role()) {
+    //   const modalElement = document.getElementById('ct_login_modal_1');
+    //   if (modalElement) {
+    //     const modal = new bootstrap.Modal(modalElement, {
+    //       backdrop: 'static',
+    //       keyboard: false
+    //     });
+    //     modal.show();
+    //   }
+    // }
   }
 
   onSubmit() {
@@ -63,7 +65,11 @@ export class LogInComponent {
         this.loading = false
         this.toastr.success(res.message)
         this.authService.setValues(res.data.jwt_token, res.data.userId)
-        this.router.navigate(['/'])
+        if (this.role() == 'buyer') {
+          this.router.navigate(['/'])
+        } else {
+          this.router.navigate(['/home'])
+        }
       },
       error: (error) => {
         this.loading = false
@@ -93,5 +99,50 @@ export class LogInComponent {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+
+
+
+
+  async signInWithGoogle() {
+    try {
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(this.auth, provider, browserPopupRedirectResolver);
+      console.log('User signed in:', result.user);
+      this.googleLogin(result.user);
+    } catch (error) {
+      console.error('Error during sign-in:', error);
+    }
+  }
+
+  googleLogin(userDet: any) {
+    this.loading = true;
+
+    const fullName = userDet.displayName;
+
+    let formData = {
+      email: this.Form.value.email,
+      fullName: fullName,
+      isSeller: this.role() == 'seller' ? 1 : 0
+    }
+    this.commonService.post('user/socialLogin', formData).subscribe({
+      next: (res: any) => {
+        this.loading = false;
+        this.toastr.success(res.message);
+        this.authService.setValues(res.token, res.user.id);
+        if (this.role() == 'buyer') {
+          this.router.navigate(['/']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+      },
+      error: (error) => {
+        this.loading = false;
+        this.toastr.error(error);
+      }
+    });
+  }
+
+
 }
 

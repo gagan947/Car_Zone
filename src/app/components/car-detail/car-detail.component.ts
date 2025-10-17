@@ -8,6 +8,8 @@ import { carData } from '../../helper/carData';
 import { LoaderService } from '../../services/loader.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
+import { ModalService } from '../../services/modal.service';
+import { AuthService } from '../../services/auth.service';
 declare var Swiper: any;
 @Component({
   selector: 'app-car-detail',
@@ -19,8 +21,9 @@ export class CarDetailComponent {
   private destroy$ = new Subject<void>();
   carData: any
   carId: any
+  token: any
   conditions = carData.conditions
-  constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService) {
+  constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService, private modalService: ModalService, private authService: AuthService) {
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
     })
@@ -28,18 +31,30 @@ export class CarDetailComponent {
 
   ngOnInit(): void {
     this.getCarDetail()
+    this.token = this.authService.getToken();
   }
 
   getCarDetail() {
-    this.loader.show()
-    this.service.get('user/getCar/' + this.carId + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.carData = res.data;
-      this.loader.hide()
-    },
-      err => {
-        this.loader.hide()
-      })
+    this.loader.show();
+
+    const endpoint = this.token
+      ? `user/getCar/${this.carId}`
+      : `user/asGuestUserGetCar/${this.carId}`;
+
+    this.service.get(endpoint)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res: any) => {
+          this.carData = res.data;
+          this.loader.hide();
+        },
+        error: (err) => {
+          console.error('Failed to fetch car details:', err);
+          this.loader.hide();
+        }
+      });
   }
+
 
   mainImage(imags: any[]): string {
     return imags[0];
@@ -55,39 +70,42 @@ export class CarDetailComponent {
   }
 
   ngAfterViewInit(): void {
-    const swiper = new Swiper('.mySwiper', {
-      direction: 'horizontal',
-      slidesPerView: 1,
-      loop: true,
-      mousewheel: false,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      }
-    });
+    setTimeout(() => {
+      const swiper = new Swiper('.mySwiper', {
+        direction: 'horizontal',
+        slidesPerView: 1,
+        loop: true,
+        mousewheel: false,
 
-    new Swiper('.otherSwiper', {
-      direction: 'horizontal',
-      slidesPerView: 1,
-      spaceBetween: 15,
-      loop: false,
-      mousewheel: false,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      breakpoints: {
-        640: {
-          slidesPerView: 1,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }
+      });
+
+      new Swiper('.otherSwiper', {
+        direction: 'horizontal',
+        slidesPerView: 1,
+        spaceBetween: 15,
+        loop: true,
+        mousewheel: false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
-        768: {
-          slidesPerView: 2,
+        breakpoints: {
+          640: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
         },
-        1024: {
-          slidesPerView: 3,
-        },
-      },
-    });
+      });
+    }, 1000);
   }
 
   timeAgo(dateString: string): string {
@@ -140,18 +158,22 @@ export class CarDetailComponent {
   }
 
   contactSeller(item: any) {
-    let sellerData = {
-      id: item.user_id,
-      name: item.fullName,
-      email: item.email,
-      profileImage: item.profileImage,
-      // carId: item.id,
-      // carImage: item.carImages[0],
-      // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
-    }
+    if (this.token) {
+      let sellerData = {
+        id: item.user_id,
+        name: item.fullName,
+        email: item.email,
+        profileImage: item.profileImage,
+        // carId: item.id,
+        // carImage: item.carImages[0],
+        // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
+      }
 
-    this.service.sellerData.set(sellerData)
-    sessionStorage.setItem('sellerData', JSON.stringify(sellerData))
-    this.router.navigate(['/chats'])
+      this.service.sellerData.set(sellerData)
+      sessionStorage.setItem('sellerData', JSON.stringify(sellerData))
+      this.router.navigate(['/chats'])
+    } else {
+      this.modalService.openLoginModal();
+    }
   }
 }

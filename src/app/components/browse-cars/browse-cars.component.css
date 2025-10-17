@@ -15,3 +15,21 @@
    width: 18px;
    accent-color: var(--red);
  }
+
+ ::ng-deep body {
+   overflow: unset;
+ }
+
+ ::ng-deep .modal-open {
+   padding: 0px !important;
+ }
+
+ .ct_filter_bg {
+   background-color: #f2f2f2;
+   height: 100vh;
+   padding: 40px 15px;
+   border-radius: 15px;
+   position: sticky;
+   top: 0px;
+   overflow-y: auto;
+ }

@@ -12,42 +12,68 @@
                                                 <i class="fa-solid fa-xmark"></i>
                                           </div>
                                           <li>
-                                                <a routerLink="/" routerLinkActive="active"
-                                                      [routerLinkActiveOptions]="{ exact: true }">{{ 'Home' | translate }}</a>
+                                                <a routerLink="/home" routerLinkActive="active"
+                                                      [routerLinkActiveOptions]="{ exact: true }">{{ 'Home' | translate
+                                                      }}</a>
                                           </li>
                                           <ng-container *appRole="'buyer'">
                                                 <li>
-                                                      <a routerLink="/browse-cars" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{ 'BrowseCars' | translate }}</a>
+                                                      <a routerLink="/" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{ 'BrowseCars'
+                                                            | translate }}</a>
                                                 </li>
                                                 <li>
                                                       <a routerLink="/reels" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Reels' | translate}}</a>
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Reels' |
+                                                            translate}}</a>
                                                 </li>
                                                 <li>
                                                       <a routerLink="/chats" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' | translate}}</a>
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
+                                                            translate}}</a>
                                                 </li>
                                           </ng-container>
+
+                                          <ng-container *ngIf="userRole == ''">
+                                                <li>
+                                                      <a routerLink="/" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{ 'BrowseCars'
+                                                            | translate }}</a>
+                                                </li>
+                                                <li>
+                                                      <a routerLink="/reels" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Reels' |
+                                                            translate}}</a>
+                                                </li>
+                                                <li>
+                                                      <a (click)="openLogin()" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
+                                                            translate}}</a>
+                                                </li>
+                                          </ng-container>
+
                                           <ng-container *appRole="'seller'">
                                                 <li>
                                                       <a routerLink="/my-listings" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{'MyListings' | translate}}</a>
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'MyListings' |
+                                                            translate}}</a>
                                                 </li>
 
                                                 <li>
                                                       <a routerLink="/chats" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' | translate}}</a>
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
+                                                            translate}}</a>
                                                 </li>
                                                 <li>
                                                       <a routerLink="/our-visitors" routerLinkActive="active"
-                                                            [routerLinkActiveOptions]="{ exact: true }">{{'OurVisitors' | translate}}</a>
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'OurVisitors'
+                                                            | translate}}</a>
                                                 </li>
                                           </ng-container>
                                     </ul>
                               </div>
                               <div class="ct_right_nav">
-                                    <a routerLink="/notifications" class="text-dark ct_fs_20 ct_notification_icon">
+                                    <a (click)="notifications()" class="text-dark ct_fs_20 ct_notification_icon">
                                           <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M12 6.43994V9.76994" stroke="#fff" stroke-width="1.5"
@@ -106,8 +132,9 @@
                                                             class="ct_img_30">
                                                       <div class="text-start">
                                                             <p class="mb-0 ct_fw_500">{{userData()?.fullName}}</p>
-                                                            <small
-                                                                  class="ct_text_939393">{{ role() === 'buyer' ? ('Buyer' | translate) : ('Seller' | translate) }}</small>
+                                                            <small class="ct_text_939393">{{ role() === 'buyer' ?
+                                                                  ('Buyer' | translate) : ('Seller' | translate)
+                                                                  }}</small>
                                                       </div>
                                                 </div>
                                                 <i class="fa-solid fa-angle-down ms-auto"></i>
@@ -116,7 +143,8 @@
                                                 <li>
                                                       <a (click)="switchRole(role() === 'buyer' ? 'seller' : 'buyer')"
                                                             class="dropdown-item" href="javascript:void(0)">
-                                                            {{ role() === 'buyer' ? ('SwitchToSellerMode' | translate) : ('SwitchToBuyerMode' | translate) }}
+                                                            {{ role() === 'buyer' ? ('SwitchToSellerMode' | translate) :
+                                                            ('SwitchToBuyerMode' | translate) }}
 
                                                       </a>
                                                 </li>
@@ -159,8 +187,9 @@
                                           </ul>
                                     </div>
                                     }@else {
-                                    <a class="ct_red_btn" data-bs-toggle="modal"
-                                          data-bs-target="#ct_login_modal">{{'Login' | translate}}</a>
+                                    <!-- <a class="ct_red_btn" data-bs-toggle="modal"
+                                          data-bs-target="#ct_login_modal">{{'Login' | translate}}</a> -->
+                                    <a class="ct_red_btn" (click)="openLogin()">{{'Login' | translate}}</a>
                                     }
                                     <div class="ct_menu_bar">
                                           <i class="fa-solid fa-bars-staggered"></i>
@@ -179,7 +208,6 @@
             <div class="modal-content">
                   <div class="modal-header pb-0 border-0">
                         <button type="button" class="btn-close ct_close" data-bs-dismiss="modal" aria-label="Close">
-
                         </button>
                   </div>
                   <div class="modal-body">

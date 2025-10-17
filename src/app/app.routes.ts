@@ -6,16 +6,24 @@ export const routes: Routes = [
       {
             path: '',
             loadComponent: () => import('./components/main/main.component').then(m => m.MainComponent),
-            canActivateChild: [authGuard],
+            // canActivateChild: [authGuard],
             children: [
-                  {
-                        path: '',
+                   {
+                        path: 'home',
                         loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
                   },
                   {
-                        path: 'browse-cars',
+                        path: '',
                         loadComponent: () => import('./components/browse-cars/browse-cars.component').then(m => m.BrowseCarsComponent)
                   },
+                  // {
+                  //       path: '',
+                  //       loadComponent: () => import('./components/home/home.component').then(m => m.HomeComponent),
+                  // },
+                  // {
+                  //       path: 'browse-cars',
+                  //       loadComponent: () => import('./components/browse-cars/browse-cars.component').then(m => m.BrowseCarsComponent)
+                  // },
                   {
                         path: 'reels',
                         loadComponent: () => import('./components/reels/reels.component').then(m => m.ReelsComponent)

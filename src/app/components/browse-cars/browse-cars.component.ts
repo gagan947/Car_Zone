@@ -9,6 +9,8 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { LoaderService } from '../../services/loader.service';
 import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
+import { AuthService } from '../../services/auth.service';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-browse-cars',
@@ -34,17 +36,21 @@ export class BrowseCarsComponent {
   selectedSellerType: any = null
   selectedFuels: string[] = [];
   selectedTransmissions: string[] = [];
-  priceRange: any = [1000, 2000000]
-  constructor(private service: CommonService, private loader: LoaderService) { }
+  priceRange: any = [1000, 2000000];
+  yearRange: any = [2000, 2025];
+  milageRange: any = [20, 60];
+  token: any;
+  constructor(private service: CommonService, private loader: LoaderService, private authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit(): void {
+    this.token = this.authService.getToken();
     this.getCars()
     this.getBrands()
   }
 
   getCars() {
     this.loader.show()
-    this.service.get('user/fetchOtherSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data
       this.loader.hide()
     }, err => {
@@ -52,11 +58,30 @@ export class BrowseCarsComponent {
     })
   }
 
+  // addToWishlist(item: any) {
+  //   item.isWishlist = !item.isWishlist
+  //   this.service.post('user/addToWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+  //   })
+  // }
   addToWishlist(item: any) {
-    item.isWishlist = !item.isWishlist
-    this.service.post('user/addToWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-    })
+    item.isWishlist = !item.isWishlist;
+
+    this.service.post('user/addToWishlist', { carId: item.id })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (res: any) => {
+          // success response
+        },
+        error: (err) => {
+          console.error('Wishlist API failed:', err);
+
+          item.isWishlist = !item.isWishlist;
+
+          this.modalService.openLoginModal();
+        }
+      });
   }
+
 
   removeFromWishlist(item: any) {
     item.isWishlist = !item.isWishlist
@@ -103,14 +128,18 @@ export class BrowseCarsComponent {
         carModel: this.selectedModal,
         fuelType: this.selectedFuels.length > 0 ? this.selectedFuels.join(',') : null,
         transmission: this.selectedTransmissions.length > 0 ? this.selectedTransmissions.join(',') : null,
-        sittingCapacity: this.selectedSittingCapacity,
-        sellerType: this.selectedSellerType,
-        priceRange: this.priceRange ? this.priceRange?.join(',') : null
+        //sittingCapacity: this.selectedSittingCapacity,
+        //sellerType: this.selectedSellerType,
+        priceRange: this?.priceRange ? this.priceRange?.join(',') : null,
+        min_year: this?.yearRange[0],
+        max_year: this?.yearRange[1],
+        min_mileage: this?.milageRange[0],
+        max_mileage: this?.milageRange[1]
       })
         .filter(([key, value]) => value !== null)
     );
 
-    this.service.get('user/fetchOtherSellerCarsList', params).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList', params).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data
     })
   }
@@ -124,7 +153,7 @@ export class BrowseCarsComponent {
     this.selectedSellerType = null;
     this.priceRange = [1000, 2000000];
 
-    this.service.get('user/fetchOtherSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data
     })
   }
@@ -134,7 +163,7 @@ export class BrowseCarsComponent {
   search(event: any) {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
-      this.service.get('user/fetchOtherSellerCarsList', { search: event.target.value.trim() })
+      this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList', { search: event.target.value.trim() })
         .pipe(takeUntil(this.destroy$))
         .subscribe((res: any) => {
           this.carsList = res.data;
