@@ -34,7 +34,7 @@
                                                 </li>
                                           </ng-container>
 
-                                          <ng-container *ngIf="userRole == ''">
+                                          <ng-container *ngIf="!userRole">
                                                 <li>
                                                       <a routerLink="/" routerLinkActive="active"
                                                             [routerLinkActiveOptions]="{ exact: true }">{{ 'BrowseCars'
