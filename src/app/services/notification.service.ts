@@ -42,7 +42,7 @@ export class NotificationService {
                   const body = payload.notification?.body || '';
                   new Notification(title, {
                         body: body,
-                        icon: 'img/carzone_logo.png',
+                        icon: 'img/carzone_logo_black.png',
                   });
             });
       }

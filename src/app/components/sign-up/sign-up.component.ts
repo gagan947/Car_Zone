@@ -11,6 +11,7 @@ import { CountryISO, NgxIntlTelInputModule, SearchCountryField } from 'ngx-intl-
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth';
 
 @Component({
   selector: 'app-sign-up',
@@ -100,6 +101,60 @@ export class SignUpComponent {
       }
     })
   }
+
+  // onSubmit() {
+  //   if (this.Form.invalid) {
+  //     this.Form.markAllAsTouched();
+  //     return;
+  //   }
+
+  //   this.loading = true;
+
+  //   const formData = {
+  //     fullName: this.Form.value.fullName,
+  //     email: this.Form.value.email,
+  //     phoneNumber: this.Form.value.phoneNumber.number,
+  //     password: this.Form.value.password,
+  //     address: this.Form.value.address,
+  //     latitude: this.lat,
+  //     longitude: this.lng,
+  //     countryCode: this.Form.value.phoneNumber.dialCode,
+  //     language: 'en',
+  //     isSeller: 0
+  //   };
+
+  //   // Step 1: Register user on your backend
+  //   this.commonService.post('user/signUp', formData).pipe(takeUntil(this.destroy$)).subscribe({
+  //     next: async (res: any) => {
+  //       try {
+  //         // Step 2: Create user in Firebase
+  //         const auth = getAuth();
+  //         const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+
+  //         // Step 3: Update Firebase profile with full name
+  //         await updateProfile(userCredential.user, {
+  //           displayName: formData.fullName
+  //         });
+
+  //         console.log('User created in Firebase:', userCredential.user);
+
+  //       } catch (firebaseError: any) {
+  //         console.error('Firebase signup error:', firebaseError);
+  //       }
+
+  //       this.loading = false;
+  //       this.toastr.success(res.message);
+  //       sessionStorage.setItem('email', this.Form.value.email);
+  //       sessionStorage.setItem('isForgotPassword', '0');
+  //       this.router.navigate(['/otp-verification']);
+  //     },
+  //     error: (error) => {
+  //       this.loading = false;
+  //       this.toastr.error(error);
+  //     }
+  //   });
+  // }
+
 
   ngOnDestroy(): void {
     this.destroy$.next();

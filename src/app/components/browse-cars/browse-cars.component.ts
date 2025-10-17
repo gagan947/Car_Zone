@@ -40,12 +40,25 @@ export class BrowseCarsComponent {
   yearRange: any = [2000, 2025];
   milageRange: any = [20, 60];
   token: any;
+
+  years: number[] = [];
+
   constructor(private service: CommonService, private loader: LoaderService, private authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit(): void {
     this.token = this.authService.getToken();
     this.getCars()
     this.getBrands()
+    const currentYear = new Date().getFullYear();
+    for (let i = 0; i <= 30; i++) {
+      this.years.push(currentYear - i);
+    }
+  }
+
+  // Disable all years before the selected start year
+  isYearDisabled(year: number): boolean {
+    if (!this.yearRange[0]) return false;
+    return year < this.yearRange[0];
   }
 
   getCars() {
