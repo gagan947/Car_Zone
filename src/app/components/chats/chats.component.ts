@@ -37,9 +37,11 @@ export class ChatsComponent {
         this.sub1 = this.chatService.getChatList(this.userData.id).subscribe(list => {
           this.chatList = list;
           this.filteredChatList = list;
+        });
+        this.loader.show()
+        setTimeout(() => {
           if (sellerData.name) {
             const existingChat = this.chatList.find(chat => chat.id == sellerData.id);
-
             if (existingChat) {
               this.openChat(existingChat)
             } else {
@@ -53,7 +55,8 @@ export class ChatsComponent {
               console.log('Created new chat:', this.currentChat);
             }
           }
-        });
+          this.loader.hide()
+        }, 1500);
         this.roomId = sellerData.id < this.userData.id ? this.userData.id + '' + sellerData.id : sellerData.id + '' + this.userData.id;
       }
     })
@@ -70,7 +73,7 @@ export class ChatsComponent {
     this.messages = [];
     this.hasMore = true;
 
-    this.loadMessages();
+    // this.loadMessages();
     this.listenRealTime();
     this.chatService.markAllMessagesSeen(this.userData.id, this.roomId, this.messages);
   }
