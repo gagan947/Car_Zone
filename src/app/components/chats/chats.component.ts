@@ -33,20 +33,28 @@ export class ChatsComponent {
       const sellerData = JSON.parse(sessionStorage.getItem('sellerData') || '{}') || this.commonService.sellerData();
       if (this.userData && sellerData) {
         this.currentUserId = this.userData.id;
+
         this.sub1 = this.chatService.getChatList(this.userData.id).subscribe(list => {
           this.chatList = list;
           this.filteredChatList = list;
-        });
-        if (sellerData.name) {
-          this.currentChat = {
-            id: sellerData.id,
-            name: sellerData.name,
-            avatar: sellerData.profileImage,
-            // carImage: sellerData.carImage,
-            // carName: sellerData.carName
+          if (sellerData.name) {
+            const existingChat = this.chatList.find(chat => chat.id == sellerData.id);
+
+            if (existingChat) {
+              this.openChat(existingChat)
+            } else {
+              this.currentChat = {
+                id: sellerData.id,
+                name: sellerData.name,
+                avatar: sellerData.profileImage,
+                // carImage: sellerData.carImage,
+                // carName: sellerData.carName
+              };
+              console.log('Created new chat:', this.currentChat);
+            }
           }
-          this.roomId = sellerData.id < this.userData.id ? this.userData.id + '' + sellerData.id : sellerData.id + '' + this.userData.id;
-        }
+        });
+        this.roomId = sellerData.id < this.userData.id ? this.userData.id + '' + sellerData.id : sellerData.id + '' + this.userData.id;
       }
     })
   }

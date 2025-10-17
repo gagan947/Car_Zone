@@ -160,10 +160,10 @@ export class CarDetailComponent {
   contactSeller(item: any) {
     if (this.token) {
       let sellerData = {
-        id: item.user_id,
-        name: item.fullName,
-        email: item.email,
-        profileImage: item.profileImage,
+        id: item.sellerDetails.id,
+        name: item.sellerDetails.fullName,
+        email: item.sellerDetails.email,
+        profileImage: item.sellerDetails.profileImage,
         // carId: item.id,
         // carImage: item.carImages[0],
         // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
