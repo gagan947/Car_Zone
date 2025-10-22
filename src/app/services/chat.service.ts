@@ -19,6 +19,7 @@ import {
       where
 } from 'firebase/firestore';
 import { Observable } from 'rxjs';
+import { CommonService } from './common.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChatService {
@@ -29,7 +30,7 @@ export class ChatService {
       private unsubscribeMap = new Map<string, Unsubscribe>();
       private processedIdsMap = new Map<string, Set<string>>();
 
-      constructor(private firestore: Firestore) { }
+      constructor(private firestore: Firestore, private service: CommonService) { }
 
       // ---------------- Send message ----------------
       async sendMessage(inputValue: string, currentUser: any, otherUser: any, roomId: string) {
@@ -102,6 +103,7 @@ export class ChatService {
                         batch.commit(),
                   ]);
                   sessionStorage.removeItem('sellerData');
+                  this.service.sellerData.set(null)
             } catch (err) {
                   console.error('uploadMessage error:', err);
                   throw err;
