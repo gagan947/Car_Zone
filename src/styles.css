@@ -197,3 +197,21 @@ small {
 .ant-slider-rail {
       background-color: #f0151e42 !important;
 }
+
+.ant-select-multiple .ant-select-selection-placeholder {
+      top: 40% !important;
+}
+
+.ant-select-item-option-state.ng-star-inserted {
+      display: none !important;
+}
+
+.ct_package_select_custom .ct_input {
+      height: auto !important;
+      max-height: 150px;
+      overflow-y: auto;
+}
+
+.ant-select-multiple .ant-select-selector {
+      align-items: start !important;
+}

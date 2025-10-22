@@ -19,13 +19,13 @@
                                     <div class="ct_filter_bg d-lg-block d-none">
                                           <h4 class="ct_fs_20 ct_fw_700 mb-4">Filter</h4>
                                           <form action="">
-                                                <div class="form-group mb-3 text-start">
+                                                <div class="form-group mb-3 text-start ct_package_select_custom">
                                                       <label for="" class="mb-2 ct_fw_600">Brand
                                                             Name</label>
-                                                      <nz-select class="form-control ct_input" nzPlaceHolder="All"
+                                                      <nz-select class="form-control ct_input " nzPlaceHolder="All"
                                                             [nzShowSearch]="true" [(ngModel)]="selectedBrand"
                                                             [ngModelOptions]="{standalone: true}"
-                                                            (ngModelChange)="getModalList($event)">
+                                                            (ngModelChange)="getModalList($event)" nzMode="tags">
 
                                                             @for (item of brandList; track $index) {
 
@@ -40,18 +40,18 @@
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
-                                                                              [checked]="item.make_display == selectedBrand" />
+                                                                              [checked]="selectedBrand.includes(item.make_display)" />
                                                                   </div>
                                                             </nz-option>
                                                             }
                                                       </nz-select>
                                                 </div>
                                                 @if(modalList.length > 0){
-                                                <div class="form-group mb-3 text-start">
+                                                <div class="form-group mb-3 text-start ct_package_select_custom">
                                                       <label for="" class="mb-2 ct_fw_600">Car Model</label>
                                                       <nz-select class="form-control ct_input" nzPlaceHolder="All"
                                                             [nzShowSearch]="true" [(ngModel)]="selectedModal"
-                                                            [ngModelOptions]="{standalone: true}">
+                                                            [ngModelOptions]="{standalone: true}" nzMode="tags">
                                                             @for (item of modalList; track $index) {
                                                             <nz-option nzCustomContent [nzLabel]="item.modelName"
                                                                   [nzValue]="item.modelName" class="ct_custom_select">
@@ -63,7 +63,7 @@
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
-                                                                              [checked]="item.modelName == selectedModal" />
+                                                                              [checked]="selectedModal.includes(item.modelName)" />
                                                                   </div>
                                                             </nz-option>
                                                             }

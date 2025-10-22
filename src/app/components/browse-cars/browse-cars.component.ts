@@ -30,8 +30,10 @@ export class BrowseCarsComponent {
   sittingCapacity = [1, 2, 3, 4, 5, 6, 7]
   sellerTypes = carData.sellerTypes
 
-  selectedBrand: any = null
-  selectedModal: any = null
+  // selectedBrand: any = null
+  selectedBrand: string[] = [];
+  // selectedModal: any = null
+  selectedModal: string[] = [];
   selectedSittingCapacity: any = null
   selectedSellerType: any = null
   selectedFuels: string[] = [];
@@ -108,12 +110,40 @@ export class BrowseCarsComponent {
     })
   }
 
-  getModalList(brand: any) {
-    const brandId = this.brandList.find((item: any) => item.make_display.toLowerCase() == brand.toLowerCase())?.make_id
-    this.service.get('user/getModel/' + brandId).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.modalList = res.data
-    })
+  // getModalList(brand: any) {
+  //   const brandId = this.brandList.find((item: any) => item.make_display.toLowerCase() == brand.toLowerCase())?.make_id
+  //   this.service.get('user/getModel/' + brandId).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+  //     this.modalList = res.data
+  //   })
+  // }
+
+  getModalList(selectedBrands: string[]) {
+    if (!selectedBrands || selectedBrands.length === 0) {
+      this.modalList = [];
+      return;
+    }
+
+    // Clear old model list or combine results if needed
+    this.modalList = [];
+
+    selectedBrands.forEach((brand: string) => {
+      const brandData = this.brandList.find(
+        (item: any) => item.make_display.toLowerCase() === brand.toLowerCase()
+      );
+
+      if (brandData) {
+        const brandId = brandData.make_id;
+        this.service
+          .get('user/getModel/' + brandId)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((res: any) => {
+            // ✅ either replace or merge results
+            this.modalList = [...this.modalList, ...res.data];
+          });
+      }
+    });
   }
+
 
   getFilteredData(event: any) {
     this.priceRange = event
@@ -137,8 +167,8 @@ export class BrowseCarsComponent {
   onFilterApply() {
     const params = Object.fromEntries(
       Object.entries({
-        brandName: this.selectedBrand,
-        carModel: this.selectedModal,
+        brandName: this.selectedBrand?.length > 0 ? this.selectedBrand.join(',') : null,
+        carModel: this.selectedModal?.length > 0 ? this.selectedModal.join(',') : null,
         fuelType: this.selectedFuels.length > 0 ? this.selectedFuels.join(',') : null,
         transmission: this.selectedTransmissions.length > 0 ? this.selectedTransmissions.join(',') : null,
         //sittingCapacity: this.selectedSittingCapacity,
@@ -158,8 +188,8 @@ export class BrowseCarsComponent {
   }
 
   onFilterClear() {
-    this.selectedBrand = null;
-    this.selectedModal = null;
+    this.selectedBrand = [];
+    this.selectedModal = [];
     this.selectedFuels = [];
     this.selectedTransmissions = [];
     this.selectedSittingCapacity = null;
