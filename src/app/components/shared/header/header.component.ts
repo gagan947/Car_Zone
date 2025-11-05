@@ -77,8 +77,8 @@ export class HeaderComponent {
 
   onCustomLangChange(lang: string) {
     this.selectedLang = lang;
-    // this.translate.use(lang);
-    // localStorage.setItem('lang', lang);
+    this.translate.use(lang);
+    localStorage.setItem('lang', lang);
   }
 
   getLanguage(langCode: string) {

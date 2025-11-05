@@ -17,35 +17,37 @@
                                     </div>
 
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Full Name</label>
-                                          <input type="text" class="form-control ct_input" placeholder="Enter Full Name"
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'FullName' | translate}}</label>
+                                          <input type="text" class="form-control ct_input"
+                                                placeholder="{{'Enter' | translate}} {{'FullName' | translate | lowercase}}"
                                                 formControlName="fullName">
-                                          <small
-                                                class="text-danger">{{validationErrorService.getErrorMessage("Full name", Form.get("fullName"))}}</small>
+                                          <small class="text-danger">{{validationErrorService.getErrorMessage("Full
+                                                name", Form.get("fullName"))}}</small>
                                     </div>
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Email Address</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'EmailAddress' | translate}}</label>
                                           <input type="email" class="form-control ct_input"
-                                                placeholder="Enter Email Address" formControlName="email" readonly>
+                                                placeholder="{{'Enter' | translate}} {{'EmailAddress' | translate | lowercase}}"
+                                                formControlName="email" readonly>
                                     </div>
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Phone Number</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'PhoneNumber' | translate}}</label>
                                           <ngx-intl-tel-input name="phone"
                                                 [cssClass]="'form-control ct_input w-full ps-5 ct_pe_90'"
                                                 [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
-                                                [searchCountryFlag]="true" [customPlaceholder]="'Enter phone number'"
+                                                [searchCountryFlag]="true"
+                                                [customPlaceholder]="('Enter' | translate) + ' ' + ('PhoneNumber' | translate | lowercase)"
                                                 [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name, SearchCountryField.DialCode]"
                                                 [selectFirstCountry]="false" [selectedCountryISO]="selectedCountry"
                                                 [maxLength]="15" [phoneValidation]="true" formControlName="phoneNumber">
                                           </ngx-intl-tel-input>
-                                          <small
-                                                class="text-danger">{{validationErrorService.getErrorMessage("Phone number", Form.get("phoneNumber"))}}</small>
+                                          <small class="text-danger">{{validationErrorService.getErrorMessage("Phone
+                                                number", Form.get("phoneNumber"))}}</small>
                                     </div>
                                     <ng-container *appRole="'seller'">
                                           <div class="form-group mb-4">
-                                                <label for="" class="mb-2 ct_fw_600 ">Type of
-                                                      Seller
-                                                </label>
+                                                <label for="" class="mb-2 ct_fw_600 ">{{'TypeOfSeller' |
+                                                      translate}}</label>
                                                 <div class="d-flex justify-content-between align-items-center gap-3">
                                                       <label for="flexRadioDefault1"
                                                             class="d-flex align-items-center gap-3 custom_border"
@@ -55,10 +57,10 @@
                                                                   id="flexRadioDefault1" />
                                                             <div class="d-grid">
                                                                   <span class=" ct_fw_500">
-                                                                        Private Seller
+                                                                        {{'PrivateSeller' | translate}}
                                                                   </span>
                                                                   <span class=" fs_10">
-                                                                        For individual sellers
+                                                                        {{'ForIndividualSellers' | translate}}
                                                                   </span>
                                                             </div>
                                                       </label>
@@ -70,10 +72,10 @@
                                                                   id="flexRadioDefault2" />
                                                             <div class="d-grid">
                                                                   <span class=" ct_fw_500">
-                                                                        Official Seller
+                                                                        {{'OfficialSeller' | translate}}
                                                                   </span>
                                                                   <span class=" fs_10">
-                                                                        For business
+                                                                        {{'ForBusinesses' | translate}}
                                                                   </span>
                                                             </div>
                                                       </label>
@@ -84,8 +86,8 @@
                                     <ng-container
                                           *ngIf="Form.get('typeOfSeller')?.value == 'business' && role == 'seller'">
                                           <div class="form-group mb-4">
-                                                <label for="" class="mb-2 ct_fw_600 ">Legal
-                                                      Entity</label>
+                                                <label for="" class="mb-2 ct_fw_600 ">{{'LegalEntity' |
+                                                      translate}}</label>
                                                 <div
                                                       class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
                                                       <label for="flexRadioDefault4"
@@ -96,7 +98,7 @@
                                                                   value="Sole Proprietorship" id="flexRadioDefault4" />
                                                             <div class="d-grid">
                                                                   <span class=" ct_fw_500">
-                                                                        Sole proprietorship
+                                                                        {{'SoleProprietorship' | translate}}
                                                                   </span>
                                                             </div>
                                                       </label>
@@ -109,7 +111,7 @@
                                                                   id="flexRadioDefault5" />
                                                             <div class="d-grid">
                                                                   <span class=" ct_fw_500">
-                                                                        Limited Liability Company (GmbH)
+                                                                        {{'LimitedLiabilityCompany' | translate}}
                                                                   </span>
                                                             </div>
                                                       </label>
@@ -121,58 +123,61 @@
                                                                   id="flexRadioDefault6" />
                                                             <div class="d-grid">
                                                                   <span class=" ct_fw_500">
-                                                                        Corporation (AG)
+                                                                        {{'Corporation' | translate}}
                                                                   </span>
                                                             </div>
                                                       </label>
                                                 </div>
                                           </div>
                                           <div class="form-group mb-4">
-                                                <label for="" class="mb-2 ct_fw_600 ">Company
-                                                      Name</label>
+                                                <label for="" class="mb-2 ct_fw_600 ">{{'CompanyName' |
+                                                      translate}}</label>
                                                 <input type="text" class="form-control ct_input"
-                                                      placeholder="Enter Company Name" formControlName="companyName">
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("Company Name", Form.get("companyName"))}}</small>
+                                                      placeholder="{{'Enter' | translate}} {{'CompanyName' | translate | lowercase}}"
+                                                      formControlName="companyName">
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("Company
+                                                      Name", Form.get("companyName"))}}</small>
                                           </div>
                                           <div class="form-group mb-4">
                                                 <label for="" class="mb-2 ct_fw_600 ">
-                                                      VAT/business Registration Number <span
-                                                            class="ct_fw_400">(optional)</span></label>
+                                                      {{'VAT' | translate}} <span class="ct_fw_400">({{'Optional' |
+                                                            translate}})</span></label>
                                                 <input type="text" class="form-control ct_input"
-                                                      placeholder="Enter VAT/business Registration Number"
+                                                      placeholder="{{'Enter' | translate}} {{'VAT' | translate}}"
                                                       formControlName="vat">
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("VAT/business Registration Number", Form.get("vat"))}}</small>
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("VAT/businessRegistration
+                                                      Number", Form.get("vat"))}}</small>
                                           </div>
                                           <div class="form-group mb-4">
-                                                <label for="" class="mb-2 ct_fw_600 ">Company
-                                                      Address</label>
+                                                <label for="" class="mb-2 ct_fw_600 ">{{'CompanyAddress' |
+                                                      translate}}</label>
                                                 <textarea type="text" class="form-control ct_input h-auto"
-                                                      placeholder="Enter Company Address"
+                                                      placeholder="{{'Enter' | translate}} {{'CompanyAddress' | translate | lowercase}}"
                                                       formControlName="companyAddress"></textarea>
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("Company address", Form.get("companyAddress"))}}</small>
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("Company
+                                                      address", Form.get("companyAddress"))}}</small>
                                           </div>
                                           <div class="form-group mb-4">
                                                 <label for="" class="mb-2 ct_fw_600 ">
-                                                      City</label>
+                                                      {{'City' | translate}}</label>
                                                 <input type="text" class="form-control ct_input"
-                                                      placeholder="Enter City" formControlName="city">
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("City", Form.get("city"))}}</small>
+                                                      placeholder="{{'Enter' | translate}} {{'City' | translate | lowercase}}"
+                                                      formControlName="city">
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("City",
+                                                      Form.get("city"))}}</small>
                                           </div>
                                           <div class="form-group mb-4">
                                                 <label for="" class="mb-2 ct_fw_600 ">
-                                                      Pincode</label>
+                                                      {{'Pincode' | translate}}</label>
                                                 <input type="text" class="form-control ct_input"
-                                                      placeholder="Enter Pincode" formControlName="pincode">
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("Pincode", Form.get("pincode"))}}</small>
+                                                      placeholder="{{'Enter' | translate}} {{'Pincode' | translate | lowercase}}"
+                                                      formControlName="pincode">
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage("Pincode",
+                                                      Form.get("pincode"))}}</small>
                                           </div>
                                     </ng-container>
                                     <div class="text-center mt-4">
-                                          <button class="ct_red_btn">Save Changes</button>
+                                          <button class="ct_red_btn">{{'SaveChanges' | translate}}</button>
                                     </div>
                               </form>
                         </div>

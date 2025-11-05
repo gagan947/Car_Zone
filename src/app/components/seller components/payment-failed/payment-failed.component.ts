@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payment-failed',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './payment-failed.component.html',
   styleUrl: './payment-failed.component.css'
 })
 export class PaymentFailedComponent {
-
-}
+  constructor(private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+    } 
+  }

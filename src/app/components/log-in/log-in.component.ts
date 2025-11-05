@@ -11,11 +11,11 @@ import { RoleService, UserRole } from '../../services/role.service';
 import { AuthService } from '../../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-declare var bootstrap: any;
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-log-in',
-  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink, SubmitButtonComponent],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink, SubmitButtonComponent, TranslateModule],
   templateUrl: './log-in.component.html',
   styleUrl: './log-in.component.css'
 })
@@ -26,7 +26,8 @@ export class LogInComponent {
   private destroy$ = new Subject<void>();
   private roleService = inject(RoleService);
   role = this.roleService.currentRole;
-  constructor(private auth: Auth, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router) {
+  constructor(private auth: Auth, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.Form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -100,10 +101,6 @@ export class LogInComponent {
     this.destroy$.complete();
   }
 
-
-
-
-
   async signInWithGoogle() {
     try {
       const provider = new GoogleAuthProvider();
@@ -142,7 +139,5 @@ export class LogInComponent {
       }
     });
   }
-
-
 }
 

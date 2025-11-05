@@ -6,10 +6,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ValidationErrorService } from '../../services/validation-error.service';
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-forgot-password',
-  imports: [RouterLink, FormsModule, ReactiveFormsModule, SubmitButtonComponent],
+  imports: [RouterLink, FormsModule, ReactiveFormsModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './forgot-password.component.html',
   styleUrl: './forgot-password.component.css'
 })
@@ -18,7 +19,8 @@ export class ForgotPasswordComponent {
   Form: FormGroup;
   loading: boolean = false
 
-  constructor(private router: Router, private commonService: CommonService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService) {
+  constructor(private router: Router, private commonService: CommonService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.Form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
     })

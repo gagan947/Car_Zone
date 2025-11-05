@@ -4,17 +4,20 @@ import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { LoaderService } from '../../services/loader.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-saved-reels',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './saved-reels.component.html',
   styleUrl: './saved-reels.component.css'
 })
 export class SavedReelsComponent {
   private destroy$ = new Subject<void>();
   savedReels: any = []
-  constructor(private service: CommonService, private loader: LoaderService, private router: Router) { }
+  constructor(private service: CommonService, private loader: LoaderService, private router: Router, private translate:TranslateService) { 
+    this.translate.use(localStorage.getItem('lang') || 'en')
+  }
 
   ngOnInit(): void {
     this.getSavedReels()

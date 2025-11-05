@@ -4,73 +4,84 @@
                   <div class="col-xxl-6 col-xl-7 col-lg-8 mx-auto">
                         <div class="ct_login_white_bg ct_custom_scroll">
                               <img src="img/carzone_logo_black.png" alt="">
-                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">Welcome To <span
-                                          class="ct_text_red">CarZone</span> </h4>
+                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">{{'WelcomeTo' | translate}}
+                                    <span class="ct_text_red">CarZone</span>
+                              </h4>
                               <form [formGroup]="Form" (ngSubmit)="onSubmit()">
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 text-white">Email Address</label>
+                                          <label for="" class="mb-2 ct_fw_600 text-white">{{'EmailAddress' |
+                                                translate}}</label>
                                           <input type="email" class="form-control ct_input"
-                                                placeholder="Enter Email Address" formControlName="email">
-                                          <small class="text-danger">{{validationErrorService.getErrorMessage("Email",
+                                                placeholder="{{'PleaseEnterEmailAddress' | translate}}"
+                                                formControlName="email">
+                                          <small class="text-danger">{{validationErrorService.getErrorMessage(('Email' |
+                                                translate),
                                                 Form.get("email"))}}</small>
                                     </div>
                                     <div class="form-group mb-2">
-                                          <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
+                                          <label for="" class="mb-2 ct_fw_600 text-white">{{'Password' |
+                                                translate}}</label>
                                           <div class="position-relative">
                                                 <div class="position-relative">
                                                       <input [type]="isShowPassword ? 'text' : 'password'"
-                                                            class="form-control ct_input" placeholder="Enter Password"
+                                                            class="form-control ct_input"
+                                                            placeholder="{{'PleaseEnterYourPassword' | translate}}"
                                                             formControlName="password">
                                                       <i class="fa-solid ct_show_eye"
                                                             [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                                                             (click)="isShowPassword = !isShowPassword"></i>
                                                 </div>
-                                                <small class="text-danger">{{validationErrorService.getErrorMessage("Password",
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage(('Password'
+                                                      |
+                                                      translate),
                                                       Form.get("password"))}}</small>
                                           </div>
                                     </div>
                                     <div class="text-end">
-                                          <a routerLink="/forgot-password" class="ct_forgot_link">Forgot Password?</a>
+                                          <a routerLink="/forgot-password" class="ct_forgot_link">{{'ForgotPassword' |
+                                                translate}}?</a>
                                     </div>
 
                                     <div class="text-center mt-4">
                                           <app-submit-button [class]="'ct_red_btn px-5'" [isLoading]="loading"
-                                                [text]="'Log In'"></app-submit-button>
+                                                [text]="'Lon_In' | translate"></app-submit-button>
                                     </div>
                               </form>
                               <div class="ct_sign_in_text mt-4">
-                                    <p class="mb-0">Or Login In With</p>
+                                    <p class="mb-0">Or {{'LogInWith' | translate}}</p>
                               </div>
                               <div class="d-flex align-items-center justify-content-center gap-3">
                                     <button class="ct_google_btn" (click)="signInWithGoogle()">
                                           <img src="img/devicon_google.png" alt="">
                                           <h6 class="mb-0 ct_fs_16">Google</h6>
                                     </button>
-                                    <button class="ct_google_btn">
+                                    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+                                    <!-- <button class="ct_google_btn">
                                           <img src="img/logos_facebook.png" alt="">
                                           <h6 class="mb-0 ct_fs_16">Facebook</h6>
-                                    </button>
+                                    </button> -->
                               </div>
-                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Don’t you
-                                          have an account? </span>
+                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">{{'DonHaveAccount'
+                                          | translate}} </span>
                                     @if(role() == 'buyer'){
-                                    <a routerLink="/signup" class="ct_text_red ct_fw_600">Sign Up</a>
+                                    <a routerLink="/signup" class="ct_text_red ct_fw_600">{{'SignUp' | translate}}</a>
                                     }@else if (role() == 'seller') {
-                                    <a routerLink="/seller-signup" class="ct_text_red ct_fw_600">Sign Up</a>
+                                    <a routerLink="/seller-signup" class="ct_text_red ct_fw_600">{{'SignUp' |
+                                          translate}}</a>
                                     }@else {
                                     <a data-bs-toggle="modal" data-bs-target="#ct_login_modal"
-                                          class="ct_text_red ct_fw_600">Sign Up</a>
+                                          class="ct_text_red ct_fw_600">{{'SignUp' | translate}}</a>
                                     }
 
                               </p>
                               @if(role() == 'buyer'){
                               <p routerLink="/" class="text-white text-center ct_fw_600" style="cursor: pointer;">
-                                    Continue as Guest</p>
+                                    {{'ContinueAsGuest' | translate}}</p>
                               } @else {
                               <p routerLink="/home" class="text-white text-center ct_fw_600" style="cursor: pointer;">
-                                    Continue as Guest</p>
+                                    {{'ContinueAsGuest' | translate}}</p>
                               }
-
                         </div>
                   </div>
             </div>
@@ -97,7 +108,6 @@
                                           data-bs-dismiss="modal">
                                           <img src="img/seller_login_icon.svg" alt="">
                                           <h6 class="mb-0 ct_fs_20 ct_fw_600">Seller</h6>
-
                                     </a>
                               </div>
                         </div>

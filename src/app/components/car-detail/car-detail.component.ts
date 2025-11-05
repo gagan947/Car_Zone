@@ -10,10 +10,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 import { ModalService } from '../../services/modal.service';
 import { AuthService } from '../../services/auth.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 declare var Swiper: any;
 @Component({
   selector: 'app-car-detail',
-  imports: [RouterLink, RoleDirective, CommonModule, ChfFormatPipe],
+  imports: [RouterLink, RoleDirective, CommonModule, ChfFormatPipe, TranslateModule],
   templateUrl: './car-detail.component.html',
   styleUrl: './car-detail.component.css'
 })
@@ -23,7 +24,8 @@ export class CarDetailComponent {
   carId: any
   token: any
   conditions = carData.conditions
-  constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService, private modalService: ModalService, private authService: AuthService) {
+  constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService, private modalService: ModalService, private authService: AuthService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
     })

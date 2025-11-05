@@ -4,10 +4,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { NzMessageService } from 'ng-zorro-antd/message';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-choose-listing-plan',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, TranslateModule],
   templateUrl: './choose-listing-plan.component.html',
   styleUrl: './choose-listing-plan.component.css'
 })
@@ -16,7 +16,9 @@ export class ChooseListingPlanComponent {
   planList: any[] = []
   selectedPlan: any = null;
   isUsed: boolean = false
-  constructor(private service: CommonService, private message: NzMessageService) { }
+  constructor(private service: CommonService, private message: NzMessageService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit(): void {
     this.getPlans()

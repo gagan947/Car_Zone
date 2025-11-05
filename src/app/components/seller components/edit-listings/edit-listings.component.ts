@@ -11,10 +11,10 @@ import { NoWhitespaceDirective } from '../../../helper/validators';
 import { CommonService } from '../../../services/common.service';
 import { ValidationErrorService } from '../../../services/validation-error.service';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
-
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-listings',
-  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent],
+  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './edit-listings.component.html',
   styleUrl: './edit-listings.component.css'
 })
@@ -37,7 +37,8 @@ export class EditListingsComponent {
   sittingCapacity = carData.sittingCapacity
   loading: boolean = false;
   carId: any
-  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private route: ActivatedRoute) {
+  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private route: ActivatedRoute, private translate: TranslateService ) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
     })

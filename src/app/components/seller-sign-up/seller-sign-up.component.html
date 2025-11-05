@@ -4,86 +4,91 @@
                   <div class="col-xxl-6 col-xl-7 col-lg-8 mx-auto">
                         <div class="ct_login_white_bg ct_custom_scroll">
                               <img src="img/carzone_logo_black.png" alt="">
-                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">Welcome To <span
-                                          class="ct_text_red">CarZone</span> </h4>
+                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-3">{{'WelcomeTo' | translate}}
+                                    <span class="ct_text_red">CarZone</span> </h4>
                               <form [formGroup]="Form" (ngSubmit)="onSubmit()">
                                     @if(formStep === 1){
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 text-white">Full Name</label>
-                                          <input type="text" class="form-control ct_input" placeholder="Enter Full Name"
+                                          <label for="" class="mb-2 ct_fw_600 text-white">{{'FullName' |
+                                                translate}}</label>
+                                          <input type="text" class="form-control ct_input"
+                                                placeholder="{{'Enter' | translate}} {{'FullName' | translate}}"
                                                 formControlName="fullName">
-                                          <small
-                                                class="text-danger">{{validationErrorService.getErrorMessage("Full name", Form.get("fullName"))}}</small>
+                                          <small class="text-danger">{{validationErrorService.getErrorMessage(('FullName'
+                                                | translate), Form.get("fullName"))}}</small>
                                     </div>
                                     <div class="row">
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Email</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'Email' |
+                                                            translate}}</label>
                                                       <input type="email" class="form-control ct_input"
-                                                            placeholder="Enter Email" formControlName="email">
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Email", Form.get("email"))}}</small>
+                                                            placeholder="{{'Enter' | translate}} {{'Email' | translate}}"
+                                                            formControlName="email">
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('Email'
+                                                            | translate), Form.get("email"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Phone
-                                                            Number</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'PhoneNumber' |
+                                                            translate}}</label>
                                                       <ngx-intl-tel-input name="phone"
                                                             [cssClass]="'form-control ct_input w-full ps-5 ct_pe_90'"
                                                             [enableAutoCountrySelect]="true" [enablePlaceholder]="true"
                                                             [searchCountryFlag]="true"
-                                                            [customPlaceholder]="'Enter phone number'"
+                                                            [customPlaceholder]="('Enter' | translate) + ' ' + ('PhoneNumber' | translate)"
                                                             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]"
                                                             [selectFirstCountry]="false"
                                                             [selectedCountryISO]="selectedCountry" [maxLength]="15"
                                                             [phoneValidation]="true" formControlName="phoneNumber">
                                                       </ngx-intl-tel-input>
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Phone number", Form.get("phoneNumber"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('PhoneNumber'
+                                                            | translate), Form.get("phoneNumber"))}}</small>
                                                 </div>
-
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Password</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'Password' |
+                                                            translate}}</label>
                                                       <div class="position-relative">
                                                             <input [type]="isShowPassword ? 'text' : 'password'"
                                                                   class="form-control ct_input"
-                                                                  placeholder="Enter Password"
+                                                                  placeholder="{{'Enter' | translate}} {{'Password' | translate}}"
                                                                   formControlName="password">
                                                             <i class="fa-solid ct_show_eye"
                                                                   [ngClass]="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                                                                   (click)="isShowPassword = !isShowPassword"></i>
                                                       </div>
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Password", Form.get("password"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('Password'
+                                                            | translate), Form.get("password"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Confirm
-                                                            Password</label>
+                                                      <label for=""
+                                                            class="mb-2 ct_fw_600 text-white">{{'ConfirmPassword' |
+                                                            translate}}</label>
                                                       <div class="position-relative">
                                                             <input [type]="isShowConfirmPassword ? 'text' : 'password'"
                                                                   class="form-control ct_input"
-                                                                  placeholder="Enter Confirm Password"
+                                                                  placeholder="{{'Enter' | translate}} {{'ConfirmPassword' | translate}}"
                                                                   formControlName="confirmPassword">
                                                             <i class="fa-solid ct_show_eye"
                                                                   [ngClass]="isShowConfirmPassword ? 'fa-eye' : 'fa-eye-slash'"
                                                                   (click)="isShowConfirmPassword = !isShowConfirmPassword"></i>
                                                       </div>
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Confirm password", Form.get("confirmPassword"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('ConfirmPassword'
+                                                            | translate), Form.get("confirmPassword"))}}</small>
                                                       <small *ngIf="Form.errors?.['passwordMismatch'] && !Form.controls['confirmPassword'].errors?.['required']"
-                                                            class="text-danger">Password does not match</small>
+                                                            class="text-danger">{{'passwordNotMatch' |
+                                                            translate}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-12">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Type of
-                                                            Seller
-                                                      </label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'TypeOfSeller' |
+                                                            translate}}</label>
                                                       <div
                                                             class="d-flex justify-content-between align-items-center gap-3">
                                                             <label for="flexRadioDefault1"
@@ -94,10 +99,10 @@
                                                                         id="flexRadioDefault1" />
                                                                   <div class="d-grid">
                                                                         <span class="text-white ct_fw_500">
-                                                                              Private Seller
+                                                                              {{'PrivateSeller' | translate}}
                                                                         </span>
                                                                         <span class="text-white fs_10">
-                                                                              For individual sellers
+                                                                              {{'ForIndividualSellers' | translate}}
                                                                         </span>
                                                                   </div>
                                                             </label>
@@ -109,10 +114,10 @@
                                                                         id="flexRadioDefault2" />
                                                                   <div class="d-grid">
                                                                         <span class="text-white ct_fw_500">
-                                                                              Official Seller
+                                                                              {{'OfficialSeller' | translate}}
                                                                         </span>
                                                                         <span class="text-white fs_10">
-                                                                              For business
+                                                                              {{'ForBusinesses' | translate}}
                                                                         </span>
                                                                   </div>
                                                             </label>
@@ -121,11 +126,13 @@
                                           </div>
                                           @if(!lat && !lng){
                                           <div class="form-group mb-4">
-                                                <label for="" class="mb-2 ct_fw_600 text-white">Address</label>
+                                                <label for="" class="mb-2 ct_fw_600 text-white">{{'Address' |
+                                                      translate}}</label>
                                                 <textarea type="text" class="form-control ct_input h-auto"
-                                                      placeholder="Enter Address" formControlName="address"></textarea>
-                                                <small
-                                                      class="text-danger">{{validationErrorService.getErrorMessage("Address", Form.get("address"))}}</small>
+                                                      placeholder="{{'Enter' | translate}} {{'Address' | translate}}"
+                                                      formControlName="address"></textarea>
+                                                <small class="text-danger">{{validationErrorService.getErrorMessage(('Address'
+                                                      | translate), Form.get("address"))}}</small>
                                           </div>
                                           }
                                     </div>
@@ -133,8 +140,8 @@
                                     <div class="row">
                                           <div class="col-md-12">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Legal
-                                                            Entity</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'LegalEntity' |
+                                                            translate}}</label>
                                                       <div
                                                             class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
                                                             <label for="flexRadioDefault1"
@@ -146,7 +153,7 @@
                                                                         id="flexRadioDefault1" />
                                                                   <div class="d-grid">
                                                                         <span class="text-white ct_fw_500">
-                                                                              Sole proprietorship
+                                                                              {{'SoleProprietorship' | translate}}
                                                                         </span>
                                                                   </div>
                                                             </label>
@@ -159,7 +166,7 @@
                                                                         id="flexRadioDefault2" />
                                                                   <div class="d-grid">
                                                                         <span class="text-white ct_fw_500">
-                                                                              Limited Liability Company (GmbH)
+                                                                              {{'LimitedLiabilityCompany' | translate}}
                                                                         </span>
                                                                   </div>
                                                             </label>
@@ -172,7 +179,7 @@
                                                                         id="flexRadioDefault3" />
                                                                   <div class="d-grid">
                                                                         <span class="text-white ct_fw_500">
-                                                                              Corporation (AG)
+                                                                              {{'Corporation' | translate}}
                                                                         </span>
                                                                   </div>
                                                             </label>
@@ -181,55 +188,57 @@
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Company
-                                                            Name</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'CompanyName' |
+                                                            translate}}</label>
                                                       <input type="text" class="form-control ct_input"
-                                                            placeholder="Enter Company Name"
+                                                            placeholder="{{'Enter' | translate}} {{'CompanyName' | translate}}"
                                                             formControlName="companyName">
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Company Name", Form.get("companyName"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('CompanyName'
+                                                            | translate), Form.get("companyName"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">
-                                                            VAT/business Registration Number</label>
+                                                            {{'VAT' | translate}}</label>
                                                       <input type="text" class="form-control ct_input"
-                                                            placeholder="Enter VAT/business Registration Number"
+                                                            placeholder="{{'Enter' | translate}} {{'VAT' | translate}}"
                                                             formControlName="vat">
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("VAT/business Registration Number", Form.get("vat"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('VAT'
+                                                            | translate), Form.get("vat"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-12">
                                                 <div class="form-group mb-4">
-                                                      <label for="" class="mb-2 ct_fw_600 text-white">Company
-                                                            Address</label>
+                                                      <label for="" class="mb-2 ct_fw_600 text-white">{{'CompanyAddress'
+                                                            | translate}}</label>
                                                       <textarea type="text" class="form-control ct_input h-auto"
-                                                            placeholder="Enter Company Address"
+                                                            placeholder="{{'Enter' | translate}} {{'CompanyAddress' | translate}}"
                                                             formControlName="companyAddress"></textarea>
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Company address", Form.get("companyAddress"))}}</small>
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('CompanyAddress'
+                                                            | translate), Form.get("companyAddress"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">
-                                                            City</label>
+                                                            {{'City' | translate}}</label>
                                                       <input type="text" class="form-control ct_input"
-                                                            placeholder="Enter City" formControlName="city">
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("City", Form.get("city"))}}</small>
+                                                            placeholder="{{'Enter' | translate}} {{'City' | translate}}"
+                                                            formControlName="city">
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('City'
+                                                            | translate), Form.get("city"))}}</small>
                                                 </div>
                                           </div>
                                           <div class="col-md-6">
                                                 <div class="form-group mb-4">
                                                       <label for="" class="mb-2 ct_fw_600 text-white">
-                                                            Pincode</label>
+                                                            {{'Pincode' | translate}}</label>
                                                       <input type="text" class="form-control ct_input"
-                                                            placeholder="Enter Pincode" formControlName="pincode">
-                                                      <small
-                                                            class="text-danger">{{validationErrorService.getErrorMessage("Pincode", Form.get("pincode"))}}</small>
+                                                            placeholder="{{'Enter' | translate}} {{'Pincode' | translate}}"
+                                                            formControlName="pincode">
+                                                      <small class="text-danger">{{validationErrorService.getErrorMessage(('Pincode'
+                                                            | translate), Form.get("pincode"))}}</small>
                                                 </div>
                                           </div>
                                     </div>
@@ -238,7 +247,7 @@
                                     <div class="text-center mt-4">
                                           @if(formStep === 1 && Form.get('typeOfSeller')?.value == 'business'){
                                           <button type="button" class="ct_red_btn px-5"
-                                                (click)="nextStep()">Continue</button>
+                                                (click)="nextStep()">{{'Continue' | translate}}</button>
                                           }@else {
                                           <app-submit-button [text]="'Sign Up'" [class]="'ct_red_btn px-5'"
                                                 [isLoading]="loading"></app-submit-button>
@@ -260,10 +269,10 @@
                                     </button>
 
                               </div>
-                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">Already you
-                                          have an
-                                          account? </span> <a routerLink="/login" class="ct_text_red ct_fw_600">Log
-                                          In</a></p>
+                              <p class="mb-0 text-white text-center mt-3"><span class="ct_text_op_6">
+                                          {{'AlreadyHaveAnAccount' | translate}}? </span> <a routerLink="/login"
+                                          class="ct_text_red ct_fw_600">
+                                          {{'LogIn' | translate}}</a></p>
 
                         </div>
                   </div>

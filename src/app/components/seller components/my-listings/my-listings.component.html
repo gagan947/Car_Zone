@@ -10,19 +10,19 @@
                               <li class="nav-item" role="presentation">
                                     <button class="nav-link active" id="pills-All-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-All" type="button" role="tab" aria-controls="pills-All"
-                                          aria-selected="true">All</button>
+                                          aria-selected="true">{{'All' | translate}}</button>
                               </li>
                               <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-Active-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-Active" type="button" role="tab"
                                           aria-controls="pills-Active" aria-selected="false"
-                                          tabindex="-1">Active</button>
+                                          tabindex="-1">{{'Active' | translate}}</button>
                               </li>
                               <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-Expired-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-Expired" type="button" role="tab"
                                           aria-controls="pills-Expired" aria-selected="false"
-                                          tabindex="-1">Expired</button>
+                                          tabindex="-1">{{'Expired' | translate}}</button>
                               </li>
 
                         </ul>
@@ -41,7 +41,7 @@
                                                                   <div class="ct_status_badge" style="color: #fff;"
                                                                         [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                         <p class="mb-0">
-                                                                              {{item.is_active ? 'Active' : 'Expired'}}
+                                                                              {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
                                                                         </p>
 
                                                                   </div>
@@ -55,32 +55,31 @@
                                                                   <ul>
                                                                         <li>
                                                                               <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                                    class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.transmission}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                                    Type</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">
+                                                                                    {{'FuelType' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.fuelType}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
                                                                               <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                                    class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.sittingCapacity}}
-                                                                                    Person
+                                                                                    {{'Person' | translate}}
                                                                               </p>
                                                                         </li>
                                                                   </ul>
                                                                   <div class="mt-4">
                                                                         <a routerLink="/car-detail"
                                                                               [queryParams]="{id: item.id}"
-                                                                              class="ct_red_btn w-100 text-center">View
-                                                                              More</a>
+                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}</a>
                                                                   </div>
                                                             </figcaption>
                                                       </figure>
@@ -105,10 +104,10 @@
                                                 </div>
 
                                                 <!-- Message -->
-                                                <h2 class="fw-bold text-dark" style="z-index:1;">No Cars Found
+                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
                                                 </h2>
                                                 <p class="text-muted mt-2 mb-4" style="max-width: 400px; z-index:1;">
-                                                      We couldn’t find any cars matching your filters. <br>
+                                                      {{'NoCarsFoundDescription' | translate}} <br>
                                                 </p>
 
                                                 <!-- Decorative line -->
@@ -132,7 +131,7 @@
                                                                   <div class="ct_status_badge" style="color: #fff;"
                                                                         [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                         <p class="mb-0">
-                                                                              {{item.is_active ? 'Active' : 'Expired'}}
+                                                                              {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
                                                                         </p>
 
                                                                   </div>
@@ -146,32 +145,32 @@
                                                                   <ul>
                                                                         <li>
                                                                               <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                                    class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.transmission}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                                    Type</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">
+                                                                                    {{'FuelType' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.fuelType}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
                                                                               <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                                    class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.sittingCapacity}}
-                                                                                    Person
+                                                                                    {{'Person' | translate}}
                                                                               </p>
                                                                         </li>
                                                                   </ul>
                                                                   <div class="mt-4">
                                                                         <a routerLink="/car-detail"
                                                                               [queryParams]="{id: item.id}"
-                                                                              class="ct_red_btn w-100 text-center">View
-                                                                              More</a>
+                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}
+                                                                              </a>
                                                                   </div>
                                                             </figcaption>
                                                       </figure>
@@ -196,10 +195,10 @@
                                                 </div>
 
                                                 <!-- Message -->
-                                                <h2 class="fw-bold text-dark" style="z-index:1;">No Cars Found
+                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
                                                 </h2>
                                                 <p class="text-muted mt-2 mb-4" style="max-width: 400px; z-index:1;">
-                                                      We couldn’t find any cars matching your filters. <br>
+                                                      {{'NoCarsFoundDescription' | translate}} <br>
                                                 </p>
 
                                                 <!-- Decorative line -->
@@ -225,7 +224,7 @@
                                                                               style="color: #fff;"
                                                                               [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                               <p class="mb-0">
-                                                                                    {{item.is_active ? 'Active' : 'Expired'}}
+                                                                                    {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
                                                                               </p>
 
                                                                         </div>
@@ -239,33 +238,33 @@
                                                                         <ul>
                                                                               <li>
                                                                                     <small
-                                                                                          class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                                          class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.transmission}}
                                                                                     </p>
                                                                               </li>
                                                                               <li>
                                                                                     <small
-                                                                                          class="ct_text_op_6 ct_fw_600">Fuel
-                                                                                          Type</small>
+                                                                                          class="ct_text_op_6 ct_fw_600">
+                                                                                          {{'FuelType' | translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.fuelType}}
                                                                                     </p>
                                                                               </li>
                                                                               <li>
                                                                                     <small
-                                                                                          class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                                          class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.sittingCapacity}}
-                                                                                          Person
+                                                                                          {{'Person' | translate}}
                                                                                     </p>
                                                                               </li>
                                                                         </ul>
                                                                         <div class="mt-4">
                                                                               <a routerLink="/car-detail"
                                                                                     [queryParams]="{id: item.id}"
-                                                                                    class="ct_red_btn w-100 text-center">View
-                                                                                    More</a>
+                                                                                    class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}
+                                                                                    </a>
                                                                         </div>
                                                                   </figcaption>
                                                             </figure>
@@ -290,11 +289,11 @@
                                                       </div>
 
                                                       <!-- Message -->
-                                                      <h2 class="fw-bold text-dark" style="z-index:1;">No Cars Found
+                                                                        <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
                                                       </h2>
                                                       <p class="text-muted mt-2 mb-4"
                                                             style="max-width: 400px; z-index:1;">
-                                                            We couldn’t find any cars matching your filters. <br>
+                                                                  {{'NoCarsFoundDescription' | translate}} <br>
                                                       </p>
 
                                                       <!-- Decorative line -->

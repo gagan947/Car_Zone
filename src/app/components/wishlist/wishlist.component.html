@@ -18,17 +18,17 @@
                                                 class="position-absolute top-0 start-0 w-100 h-100 rounded-circle border border-3 border-danger opacity-25"></span>
                                     </div>
 
-                                    <h2 class="fw-bold text-dark mb-3" style="z-index:1;">No Cars Found In Your Wishlist
+                                    <h2 class="fw-bold text-dark mb-3" style="z-index:1;">{{'NoCarsFoundInYourWishlist' | translate}}
                                     </h2>
                                     <p class="text-muted" style="max-width: 400px; z-index:1;">
-                                          Looks like you haven’t added any cars to your wishlist yet.
+                                          {{'LooksLikeYouHaventAddedAnyCarsToYourWishlistYet' | translate}}
                                     </p>
 
                                     <div class="w-50 border-top border-danger opacity-50 mb-4" style="z-index:1;"></div>
 
                                     <a routerLink="/browse-cars" class="btn ct_red_btn px-4 rounded-pill shadow-sm"
                                           style="z-index:1;">
-                                          Browse Cars
+                                          {{'BrowseCars' | translate}}
                                     </a>
                               </div>
                               }@else{
@@ -55,32 +55,32 @@
                                                       <ul>
                                                             <li>
                                                                   <small
-                                                                        class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                        class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
                                                                   <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                         {{item.transmission}}
                                                                   </p>
                                                             </li>
                                                             <li>
-                                                                  <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                        Type</small>
+                                                                  <small class="ct_text_op_6 ct_fw_600">
+                                                                        {{'FuelType' | translate}}</small>
                                                                   <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                         {{item.fuelType}}
                                                                   </p>
                                                             </li>
                                                             <li>
                                                                   <small
-                                                                        class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                        class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
                                                                   <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                         {{item.sittingCapacity}}
-                                                                        Person
+                                                                        {{'Person' | translate}}
                                                                   </p>
                                                             </li>
                                                       </ul>
 
                                                       <div class="mt-4">
                                                             <a routerLink="/car-detail" [queryParams]="{id: item.carId}"
-                                                                  class="ct_red_btn w-100 text-center">View
-                                                                  More</a>
+                                                                  class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}
+                                                                  </a>
                                                       </div>
                                                 </figcaption>
 

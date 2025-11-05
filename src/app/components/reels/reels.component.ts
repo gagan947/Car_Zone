@@ -23,14 +23,14 @@ export class ReelsComponent {
   constructor(private service: CommonService, private loader: LoaderService, private router: Router, private authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit(): void {
-    //this.loader.show()
+    this.loader.show()
     this.token = this.authService.getToken();
     this.getReels()
   }
 
   getReels() {
     this.isLoading = true;
-    this.loader.show();
+    // this.loader.show();
 
     const endpoint = this.token
       ? `user/fetchAllCarReels?page=${this.page}`

@@ -5,10 +5,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 import { RouterLink } from '@angular/router';
 import { LoaderService } from '../../../services/loader.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-listing-slot-plan',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslateModule],
   templateUrl: './listing-slot-plan.component.html',
   styleUrl: './listing-slot-plan.component.css'
 })
@@ -17,7 +18,9 @@ export class ListingSlotPlanComponent {
   planList: any
   selectedPlan: any = null;
 
-  constructor(private service: CommonService, private loader: LoaderService) { }
+  constructor(private service: CommonService, private loader: LoaderService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit(): void {
     this.loader.show()

@@ -11,10 +11,11 @@ import { LoaderService } from '../../services/loader.service';
 import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-browse-cars',
-  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule, ChfFormatPipe],
+  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule, ChfFormatPipe, TranslateModule],
   templateUrl: './browse-cars.component.html',
   styleUrl: './browse-cars.component.css'
 })
@@ -45,7 +46,9 @@ export class BrowseCarsComponent {
 
   years: number[] = [];
 
-  constructor(private service: CommonService, private loader: LoaderService, private authService: AuthService, private modalService: ModalService) { }
+  constructor(private service: CommonService, private loader: LoaderService, private authService: AuthService, private modalService: ModalService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit(): void {
     this.token = this.authService.getToken();

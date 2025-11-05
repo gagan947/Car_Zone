@@ -5,10 +5,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { ChfFormatPipe } from '../../../pipes/chf-format.pipe';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-my-listings',
-  imports: [RouterLink, CommonModule, ChfFormatPipe],
+  imports: [RouterLink, CommonModule, ChfFormatPipe, TranslateModule],
   templateUrl: './my-listings.component.html',
   styleUrl: './my-listings.component.css'
 })
@@ -16,7 +17,9 @@ export class MyListingsComponent {
   private destroy$ = new Subject<void>();
   carList: any[] = []
 
-  constructor(private service: CommonService, private message: NzMessageService) { }
+  constructor(private service: CommonService, private message: NzMessageService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit(): void {
     this.getMyCars()

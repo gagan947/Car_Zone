@@ -2,17 +2,20 @@ import { Component } from '@angular/core';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notifications',
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './notifications.component.html',
   styleUrl: './notifications.component.css'
 })
 export class NotificationsComponent {
   private destroy$ = new Subject<void>();
   notifications: any
-  constructor(private service: CommonService, private message: NzMessageService) { }
+  constructor(private service: CommonService, private message: NzMessageService, public translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
+  }
 
   ngOnInit(): void {
     this.getNotificationList()

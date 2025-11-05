@@ -11,9 +11,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { carData } from '../../../helper/carData';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-list-your-car',
-  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent],
+  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './list-your-car.component.html',
   styleUrl: './list-your-car.component.css'
 })
@@ -39,7 +40,8 @@ export class ListYourCarComponent {
   conditions = carData.conditions
   sittingCapacity = carData.sittingCapacity
   loading: boolean = false
-  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router) {
+  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.initForm()
   }
 

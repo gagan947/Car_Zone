@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
+import { FormsModule, ReactiveFormsModule, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonService } from '../../services/common.service';
@@ -8,10 +8,11 @@ import { ValidationErrorService } from '../../services/validation-error.service'
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { passwordMismatchValidator, strongPasswordValidator } from '../../helper/validators';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-reset-password',
-  imports: [FormsModule, ReactiveFormsModule, SubmitButtonComponent, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, SubmitButtonComponent, CommonModule, TranslateModule],
   templateUrl: './reset-password.component.html',
   styleUrl: './reset-password.component.css'
 })
@@ -22,8 +23,8 @@ export class ResetPasswordComponent {
   isShowNewPassword: boolean = false;
   isShowConfPassword: boolean = false;
   email: string | undefined
-  constructor(private router: Router, private commonService: CommonService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService) {
-
+  constructor(private router: Router, private commonService: CommonService, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.email = sessionStorage.getItem('email') || ''
 
     this.Form = new FormGroup({

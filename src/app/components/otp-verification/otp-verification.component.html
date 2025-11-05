@@ -4,9 +4,10 @@
                   <div class="col-xxl-6 col-xl-7 col-lg-8 mx-auto">
                         <div class="ct_login_white_bg ct_custom_scroll">
                               <img src="img/carzone_logo_black.png" alt="">
-                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-0">OTP Verification</h4>
-                              <p class="mb-0 ct_text_op_5 text-white text-center mb-3">Enter OTP code sent to {{email}}
-                              </p>
+                              <h4 class="ct_fw_700 ct_fs_28 text-white text-center mb-0">{{'OTPVerification' |
+                                    translate}}</h4>
+                              <p class="mb-0 ct_text_op_5 text-white text-center mb-3">{{'EnterOTPCode' | translate}}
+                                    {{email}}</p>
                               <form (ngSubmit)="verifyOtp()">
                                     <div class="form-group mb-4 d-flex justify-content-center">
                                           <nz-input-otp [nzLength]="4" [(ngModel)]="otp"
@@ -16,25 +17,25 @@
                                           <div *ngIf="otpInput.touched && otpInput.invalid"
                                                 class="text-danger ct_fs_14 mt-1 d-block">
                                                 <div *ngIf="otpInput.errors?.['required']">
-                                                      Invalid OTP. Please enter a 4-digit number.
+                                                      {{'OtpError' | translate}}.
                                                 </div>
                                           </div>
                                     </div>
 
                                     <div>
                                           <p class="mb-0 text-white text-center mt-3">
-                                                Didn’t receive the code?
+                                                {{'DidReceiveTheOTP' | translate}}
                                                 <a class="ct_text_red ct_fs_14 ct_fw_600"
                                                       (click)="isResendDisabled ? null : resendOtp()"
                                                       [class.disabled]="isResendDisabled">
-                                                      Resend OTP
+                                                      {{'Resend' | translate}} OTP
                                                 </a>
                                                 <span *ngIf="isResendDisabled">({{ countdown
                                                       }}s)</span>
                                           </p>
                                     </div>
                                     <div class="text-center mt-4">
-                                          <app-submit-button [isLoading]="loading" [text]="'Verify'"
+                                          <app-submit-button [isLoading]="loading" [text]="'VerifyNow' | translate"
                                                 [class]="'ct_red_btn px-5'"></app-submit-button>
                                     </div>
                               </form>

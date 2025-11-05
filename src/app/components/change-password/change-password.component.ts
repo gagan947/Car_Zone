@@ -6,10 +6,11 @@ import { passwordMatchValidator, passwordMismatchValidator, strongPasswordValida
 import { CommonModule } from '@angular/common';
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { ValidationErrorService } from '../../services/validation-error.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-change-password',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SubmitButtonComponent],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.css'
 })
@@ -19,10 +20,9 @@ export class ChangePasswordComponent {
   isShowNewPassword: boolean = false;
   isShowConfPassword: boolean = false;
   loading: boolean = false
-  constructor(private service: CommonService, private toster: NzMessageService, public validationErrorService: ValidationErrorService) {
+  constructor(private service: CommonService, private toster: NzMessageService, public validationErrorService: ValidationErrorService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.initForm()
-  }
-  ngOnInit() {
   }
 
   initForm() {

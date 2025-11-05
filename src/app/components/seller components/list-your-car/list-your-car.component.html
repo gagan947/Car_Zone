@@ -7,13 +7,13 @@
                                     <!-- progressbar -->
                                     <ul id="ct_form_progressbar" class="ct_host_process_multi_form">
                                           <li class="ct_flex_1" [ngClass]="{ 'active': formStep >= 1}">
-                                                <h5>Car Details</h5>
+                                                <h5>{{'CarDetails' | translate}}</h5>
                                           </li>
                                           <li class="ct_flex_1" [ngClass]="{ 'active': formStep >= 2}">
-                                                <h5>Pricing & Location</h5>
+                                                <h5>{{'PricingLocation' | translate}}</h5>
                                           </li>
                                           <li id="ct_pricing" [ngClass]="{ 'active': formStep === 3}">
-                                                <h5>Upload Photos & Video</h5>
+                                                <h5>{{'UploadPhotosVideo' | translate}}</h5>
                                           </li>
                                     </ul>
                                     <fieldset *ngIf="formStep == 1" class="ct_mt_60 ct_white_bg">
@@ -22,30 +22,28 @@
                                                       <div class="row">
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Vehicle
-                                                                              Identification Number
-                                                                        </label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'VehicleIdentificationNumber' | translate}}</label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="Enter VIN"
+                                                                              placeholder="{{'Enter' | translate}} {{'VehicleIdentificationNumber' | translate}}"
                                                                               formControlName="vrn" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("VIN", carFormOne.get("vrn"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('VehicleIdentificationNumber' | translate), carFormOne.get("vrn"))}}</small>
                                                                   </div>
                                                             </div>
                                                             @if(entryType == 1){
                                                             <div class="col-md-12">
                                                                   <div class="d-flex align-items-center gap-2 mb-4">
                                                                         <!-- <button type="button" class="ct_red_btn w-100">
-                                                                              Continue
+                                                                              {{'Continue' | translate}}
                                                                         </button> -->
                                                                         <app-submit-button class="w-100"
-                                                                              [isLoading]="loading" [text]="'Continue'"
+                                                                              [isLoading]="loading" [text]="'Continue' | translate"
                                                                               [class]="'ct_red_btn w-100'"
                                                                               (click)="fetchCarDetailByVIN()"></app-submit-button>
                                                                         <h6 class="mb-0 text-nowrap">OR</h6>
                                                                         <button type="button" (click)="entryType = 2"
                                                                               class="ct_red_btn ct_outline_btn w-100">
-                                                                              Enter Manually
+                                                                              {{'EnterManually' | translate}}
                                                                         </button>
                                                                   </div>
                                                             </div>
@@ -53,10 +51,10 @@
                                                             @if(entryType === 2){
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Brand
-                                                                              Name</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'BrandName' | translate}}
+                                                                              </label>
                                                                         <nz-select class="form-control ct_input"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               [nzShowSearch]="true"
                                                                               formControlName="brandName">
                                                                               @for (item of brandList; track $index) {
@@ -79,15 +77,15 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Brand name", carFormOne.get("brandName"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('BrandName' | translate), carFormOne.get("brandName"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Car Model &
-                                                                              Variant</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'CarModel' | translate}} &
+                                                                              {{'CarVariant' | translate}}</label>
                                                                         <nz-select class="form-control ct_input"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               [nzShowSearch]="true"
                                                                               formControlName="carModel">
                                                                               @for (item of modalList; track $index) {
@@ -110,20 +108,20 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Car model", carFormOne.get("carModel"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('CarModel' | translate), carFormOne.get("carModel"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Sitting
-                                                                              Capacity</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'SittingCapacity' | translate}}
+                                                                              </label>
                                                                         <!-- <input type="number"
                                                                               class="form-control ct_input"
                                                                               placeholder="Enter eg. 7"
                                                                               formControlName="sittingCapacity" /> -->
 
                                                                         <nz-select class="form-control ct_input"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               formControlName="sittingCapacity">
                                                                               @for (item of sittingCapacity; track
                                                                               $index) {
@@ -145,15 +143,15 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Sitting capacity", carFormOne.get("sittingCapacity"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('SittingCapacity' | translate), carFormOne.get("sittingCapacity"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Select
-                                                                              Year</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'SelectYear' | translate}}
+                                                                              </label>
                                                                         <nz-select class="form-control ct_input"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               formControlName="selectYear">
                                                                               @for (year of years; track $index) {
                                                                               <nz-option nzCustomContent
@@ -174,27 +172,27 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Year", carFormOne.get("selectYear"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Year' | translate), carFormOne.get("selectYear"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Kilometer
-                                                                              (km)</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'Kilometer' | translate}}
+                                                                              </label>
                                                                         <input type="number"
                                                                               class="form-control ct_input"
-                                                                              placeholder="Enter Kilometer"
+                                                                              placeholder="{{'Enter' | translate}} {{'Kilometer' | translate}}"
                                                                               formControlName="carMileage" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Kilometer", carFormOne.get("carMileage"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Kilometer' | translate), carFormOne.get("carMileage"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Fuel
-                                                                              Type</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'FuelType' | translate}}
+                                                                              </label>
                                                                         <nz-select class="form-control ct_input"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               formControlName="fuelType">
                                                                               @for (type of fuelTypes; track $index) {
                                                                               <nz-option nzCustomContent
@@ -216,16 +214,17 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Fuel type", carFormOne.get("fuelType"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('FuelType' | translate), carFormOne.get("fuelType"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
-                                                                              class="mb-2 ct_fw_600">Transmission</label>
+                                                                              class="mb-2 ct_fw_600">{{'Transmission' | translate}}
+                                                                              </label>
                                                                         <nz-select
                                                                               class="form-control ct_input ct_custom_select"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               formControlName="transmission">
                                                                               @for (item of transmissions; track $index)
                                                                               {
@@ -248,49 +247,50 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Transmission", carFormOne.get("transmission"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Transmission' | translate), carFormOne.get("transmission"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Engine
-                                                                              Type</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'EngineType' | translate}}
+                                                                              </label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="Enter Engine Type"
+                                                                              placeholder="{{'Enter' | translate}} {{'EngineType' | translate}}"
                                                                               formControlName="engineType" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Engine Type", carFormOne.get("engineType"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('EngineType' | translate), carFormOne.get("engineType"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">CO₂
-                                                                              Emissions</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'Emissions' | translate}}
+                                                                              </label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="Enter CO2 emissions"
+                                                                              placeholder="{{'Enter' | translate}} {{'Emissions' | translate}}"
                                                                               formControlName="co2Emission" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("CO2 emissions", carFormOne.get("co2Emission"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Emissions' | translate), carFormOne.get("co2Emission"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Exterior
-                                                                              Colour</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'ExteriorColor' | translate}}
+                                                                              </label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="Enter Car Colour"
+                                                                              placeholder="{{'Enter' | translate}} {{'ExteriorColor' | translate}}"
                                                                               formControlName="carColor" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Exterior color", carFormOne.get("carColor"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('ExteriorColor' | translate), carFormOne.get("carColor"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
-                                                                              class="mb-2 ct_fw_600">Condition</label>
+                                                                              class="mb-2 ct_fw_600">{{'Condition' | translate}}
+                                                                              </label>
                                                                         <nz-select
                                                                               class="form-control ct_input ct_custom_select"
-                                                                              nzPlaceHolder="Select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
                                                                               formControlName="carCondition">
                                                                               @for (item of conditions; track $index) {
                                                                               <nz-option nzCustomContent
@@ -316,35 +316,35 @@
                                                                               }
                                                                         </nz-select>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Condition", carFormOne.get("carCondition"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Condition' | translate), carFormOne.get("carCondition"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Power
-                                                                              Output</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'PowerOutput' | translate}}      
+                                                                              </label>
                                                                         <input type="text" class="form-control ct_input"
-                                                                              placeholder="110 kW (150 PS)"
+                                                                              placeholder="{{'Enter' | translate}} {{'PowerOutput' | translate}}"
                                                                               formControlName="powerOutput" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Power output", carFormOne.get("powerOutput"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('PowerOutput' | translate), carFormOne.get("powerOutput"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">First
-                                                                              Registration Date</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'FirstRegistrationDate' | translate}}
+                                                                              </label>
                                                                         <input type="date" class="form-control ct_input"
-                                                                              placeholder="Select inspection date"
+                                                                              placeholder="{{'Select' | translate}} {{'InspectionDate' | translate}}"
                                                                               formControlName="first_registration_date" />
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Registration date", carFormOne.get("first_registration_date"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('FirstRegistrationDate' | translate), carFormOne.get("first_registration_date"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Features &
-                                                                              Specifications</label>
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'FeaturesSpecifications' | translate}}
+                                                                              </label>
                                                                         <ul class="d-flex align-items-center gap-3 flex-wrap  ct_para_scroll ct_custom_scroll ct_pe_30 mb-0"
                                                                               [ngClass]="{'mb-2' : selectedFeatures.length > 0}">
                                                                               @for (item of selectedFeatures; track
@@ -362,7 +362,7 @@
                                                                               <input type="text"
                                                                                     class="form-control ct_input"
                                                                                     #featureInput rows="4"
-                                                                                    placeholder="Enter Features & Specifications"
+                                                                                    placeholder="{{'Enter' | translate}} {{'FeaturesSpecifications' | translate}}"
                                                                                     formControlName="carFeatures"
                                                                                     (keydown.enter)="addFeature(featureInput.value); $event.preventDefault()" />
                                                                               <button type="button"
@@ -371,19 +371,20 @@
                                                                                           class="fa fa-plus"></i></button>
                                                                         </div>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Feature", carFormOne.get("carFeatures"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('FeaturesSpecifications' | translate), carFormOne.get("carFeatures"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
-                                                                              class="mb-2 ct_fw_600">Description</label>
+                                                                              class="mb-2 ct_fw_600">{{'Description' | translate}}
+                                                                              </label>
                                                                         <textarea type="text"
                                                                               class="form-control ct_input h-auto"
-                                                                              rows="4" placeholder="Enter Description"
+                                                                              rows="4" placeholder="{{'Enter' | translate}} {{'Description' | translate}}"
                                                                               formControlName="description"></textarea>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Description", carFormOne.get("description"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Description' | translate), carFormOne.get("description"))}}</small>
                                                                   </div>
                                                             </div>
                                                             }
@@ -394,7 +395,7 @@
                                                 @if(entryType === 2){
                                                 <button type="button" class="ct_red_btn float-end mt-4"
                                                       (click)="nextStep(carFormOne)">
-                                                      Next
+                                                      {{'Next' | translate}}
                                                 </button>
                                                 }
                                           </form>
@@ -405,29 +406,30 @@
                                                       <div class="row">
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
-                                                                        <label for="" class="mb-2 ct_fw_600">Total Price
+                                                                        <label for="" class="mb-2 ct_fw_600">{{'TotalPrice' | translate}}
                                                                         </label>
                                                                         <div class="position-relative">
                                                                               <input type="number"
-                                                                                    placeholder="Enter Amount"
+                                                                                    placeholder="{{'Enter' | translate}} {{'Amount' | translate}}"
                                                                                     class="form-control ct_input pe-5"
                                                                                     formControlName="totalPrice" />
                                                                               <span class="ct_show_eye">CHF</span>
                                                                         </div>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Total price", carFormTwo.get("totalPrice"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('TotalPrice' | translate), carFormTwo.get("totalPrice"))}}</small>
                                                                   </div>
                                                             </div>
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
-                                                                              class="mb-2 ct_fw_600">Location</label>
+                                                                              class="mb-2 ct_fw_600">{{'Location' | translate}}
+                                                                              </label>
                                                                         <textarea type="text"
                                                                               class="form-control ct_input h-auto"
-                                                                              rows="2" placeholder="Enter Location"
+                                                                              rows="2" placeholder="{{'Enter' | translate}} {{'Location' | translate}}"
                                                                               formControlName="location"></textarea>
                                                                         <small
-                                                                              class="text-danger">{{validationErrorService.getErrorMessage("Location", carFormTwo.get("location"))}}</small>
+                                                                              class="text-danger">{{validationErrorService.getErrorMessage(('Location' | translate), carFormTwo.get("location"))}}</small>
                                                                   </div>
                                                             </div>
                                                       </div>
@@ -435,17 +437,17 @@
 
                                                 <button type="button" class="ct_red_btn float-end"
                                                       (click)="nextStep(carFormTwo)">
-                                                      Next
+                                                      {{'Next' | translate}}
                                                 </button>
                                                 <button type="button" (click)="previousStep()"
                                                       class="ct_red_btn ct_outline_btn float-end me-3">
-                                                      Back
+                                                      {{'Back' | translate}}
                                                 </button>
                                           </form>
                                     </fieldset>
                                     <fieldset class="ct_white_bg">
                                           <div class="text-start mb-4">
-                                                <label for="" class="ct_fw_600 mb-2">Upload Photos
+                                                <label for="" class="ct_fw_600 mb-2">{{'UploadPhotos' | translate}}
                                                 </label>
                                                 <div class="ct_upload_product_main ct_upload_product_main_180">
                                                       <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -456,16 +458,16 @@
                                                       </svg>
 
                                                       <p class="text-center ct_fs_18 ct_text_op_07 mb-0">
-                                                            Upload your image here
+                                                            {{'UploadYourImageHere' | translate}}
                                                       </p>
-                                                      <small class="text-center d-block ct_text_op_6">Maximum 10 images
+                                                      <small class="text-center d-block ct_text_op_6">{{'Maximum10Images' | translate}}
                                                       </small>
                                                       <label for="ct_upload_product">
                                                             <input type="file" name="" id="ct_upload_product"
                                                                   class="d-none" accept="image/*"
                                                                   (change)="onCarImage($event)" multiple />
                                                             <div class="ct_browse_btn mt-3">
-                                                                  <span>Browse Files</span>
+                                                                  <span>{{'BrowseFiles' | translate}}</span>
                                                             </div>
                                                       </label>
                                                 </div>
@@ -483,11 +485,11 @@
                                                 </div>
                                                 <small *ngIf="previewCarImages.length == 0 && submitted"
                                                       class="text-danger">
-                                                      Please upload car images.
+                                                      {{'PleaseUploadCarImages' | translate}}
                                                 </small>
                                           </div>
                                           <div class="text-start mb-4">
-                                                <label for="" class="ct_fw_600 mb-2">Upload Car Reel
+                                                      <label for="" class="ct_fw_600 mb-2">{{'UploadCarReel' | translate}}
                                                 </label>
                                                 <div class="ct_upload_product_main ct_upload_product_main_180">
                                                       <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
@@ -498,17 +500,17 @@
                                                       </svg>
 
                                                       <p class="text-center ct_fs_18 ct_text_op_07 mb-0">
-                                                            Upload your video here
+                                                            {{'UploadYourVideoHere' | translate}}
                                                       </p>
-                                                      <small class="text-center d-block ct_text_op_6">MP4 video up to 60
-                                                            seconds
+                                                      <small class="text-center d-block ct_text_op_6">{{'MP4VideoUpTo60Seconds' | translate}}
+                                                            
                                                       </small>
                                                       <label for="ct_upload_video">
                                                             <input type="file" name="" id="ct_upload_video"
                                                                   class="d-none" accept="video/mp4"
                                                                   (change)="onFileSelected($event)" />
                                                             <div class="ct_browse_btn mt-3">
-                                                                  <span>Browse Files</span>
+                                                                        <span>{{'BrowseFiles' | translate}}</span>
                                                             </div>
                                                       </label>
                                                 </div>
@@ -528,13 +530,13 @@
                                           </button> -->
 
                                           <app-submit-button [class]="'ct_red_btn float-end'" [isLoading]="loading"
-                                                [text]="'Submit'" (click)="onSubmit()">
+                                                [text]="'Submit' | translate" (click)="onSubmit()">
                                           </app-submit-button>
 
                                           <button type="button"
                                                 class="ct_red_btn ct_outline_btn previous float-end me-3"
                                                 (click)="previousStep()">
-                                                Back
+                                                {{'Back' | translate}}
                                           </button>
                                     </fieldset>
                               </form>

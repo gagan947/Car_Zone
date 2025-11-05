@@ -34,7 +34,7 @@
                                                 </li>
                                           </ng-container>
 
-                                          <ng-container *ngIf="!userRole">
+                                          <!-- <ng-container *ngIf="!userRole">
                                                 <li>
                                                       <a routerLink="/" routerLinkActive="active"
                                                             [routerLinkActiveOptions]="{ exact: true }">{{ 'BrowseCars'
@@ -50,7 +50,7 @@
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
                                                             translate}}</a>
                                                 </li>
-                                          </ng-container>
+                                          </ng-container> -->
 
                                           <ng-container *appRole="'seller'">
                                                 <li>
@@ -256,7 +256,7 @@
       </div>
 </div>
 <!-- Login modal Css S -->
- 
+
 <!-- Modal -->
 <div class="modal fade modal-md ct_login_bg" id="ct_login_modal" tabindex="-1" aria-labelledby="ct_login_modalLabel"
       aria-hidden="true" data-bs-target="#staticBackdr">

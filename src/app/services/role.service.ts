@@ -7,7 +7,7 @@ export type UserRole = 'buyer' | 'seller' | undefined;
       providedIn: 'root',
 })
 export class RoleService {
-      private role = signal<UserRole>(undefined);
+      private role = signal<UserRole>('buyer');
       currentRole = this.role.asReadonly();
 
       constructor() {

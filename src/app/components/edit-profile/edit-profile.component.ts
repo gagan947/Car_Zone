@@ -10,10 +10,11 @@ import { ValidationErrorService } from '../../services/validation-error.service'
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../services/role.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [FormsModule, ReactiveFormsModule, NgxIntlTelInputModule, CommonModule, RoleDirective],
+  imports: [FormsModule, ReactiveFormsModule, NgxIntlTelInputModule, CommonModule, RoleDirective, TranslateModule],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
@@ -28,7 +29,8 @@ export class EditProfileComponent {
   profileImage: any
   imagePreview: any
   role: any
-  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router, private roleService: RoleService) {
+  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router, private roleService: RoleService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.Form = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), NoWhitespaceDirective.validate]],
       email: ['', [Validators.required, Validators.email]],

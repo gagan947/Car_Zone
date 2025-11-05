@@ -7,10 +7,11 @@ import { CommonService } from '../../services/common.service';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-otp-verification',
-  imports: [CommonModule, NzInputOtpComponent, FormsModule, ReactiveFormsModule, SubmitButtonComponent],
+  imports: [CommonModule, NzInputOtpComponent, FormsModule, ReactiveFormsModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './otp-verification.component.html',
   styleUrl: './otp-verification.component.css'
 })
@@ -24,7 +25,8 @@ export class OtpVerificationComponent {
   loading: boolean = false
   isForgotPassword: string | undefined
 
-  constructor(private router: Router, private toster: NzMessageService, private commonService: CommonService) {
+  constructor(private router: Router, private toster: NzMessageService, private commonService: CommonService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.email = sessionStorage.getItem('email') || ''
     this.isForgotPassword = sessionStorage.getItem('isForgotPassword') || ''
   }

@@ -9,7 +9,8 @@
                                           <div class="modal-content ">
                                                 <div
                                                       class="d-flex align-items-center justify-content-between gap-2 flex-wrap mb-3">
-                                                      <h4 class="ct_fs_16 mb-0 ct_fw_600 ct_nunito_font">Contacts</h4>
+                                                      <h4 class="ct_fs_16 mb-0 ct_fw_600 ct_nunito_font">{{'Contacts' |
+                                                            translate}}</h4>
                                                       <h4 class="ct_fs_16 mb-0 ct_fw_600 ct_nunito_font ct_text_op_05">
                                                             {{chatList.length}}
                                                       </h4>
@@ -17,7 +18,8 @@
                                                 <div class="position-relative">
                                                       <input type="text"
                                                             class="form-control ct_input ct_input_ps_40 ct_input_h_40 ct_border_op_10"
-                                                            placeholder="Search" (input)="filterChatList($event)">
+                                                            placeholder="{{'Search' | translate}}"
+                                                            (input)="filterChatList($event)">
                                                       <i class="fa-solid fa-search ct_input_icon_left"></i>
                                                 </div>
                                                 <div class="modal-body mt-4 ct_custom_scrollbar">
@@ -79,8 +81,9 @@
                                                                         </div>
 
                                                                         <h2 class="fw-bold text-dark mb-3 ct_fs_18"
-                                                                              style="z-index:1;">No Chat
-                                                                              Found</h2>
+                                                                              style="z-index:1;">{{'NoChatFound' |
+                                                                              translate}}
+                                                                        </h2>
                                                                   </div>
                                                                   }
                                                             </div>
@@ -135,7 +138,9 @@
                                                                                                       {{item.msg}}
                                                                                                       <span
                                                                                                             class="text-start d-block ct_fs_12 text-light me-1 text-nowrap opacity-75">
-                                                                                                            {{item.createdAt | date:'shortTime'}}</span>
+                                                                                                            {{item.createdAt
+                                                                                                            |
+                                                                                                            date:'shortTime'}}</span>
                                                                                                 </p>
                                                                                           </div>
                                                                                     </div>
@@ -147,7 +152,8 @@
                                                                                                 {{item.msg}}
                                                                                                 <span
                                                                                                       class="text-end d-block ct_fs_12 text-muted me-1 text-nowrap">
-                                                                                                      {{item.createdAt | date:'shortTime'}}</span>
+                                                                                                      {{item.createdAt |
+                                                                                                      date:'shortTime'}}</span>
                                                                                           </p>
                                                                                     </div>
                                                                               </li>
@@ -168,13 +174,13 @@
                                                                               </div> -->
                                                                         </label>
                                                                         <input type="text" class="form-control"
-                                                                              placeholder="Your message"
+                                                                              placeholder="{{'YourMessage' | translate}}"
                                                                               [(ngModel)]="inputValue"
                                                                               [ngModelOptions]="{standalone: true}"
                                                                               (keyup.enter)="sendMessage()" />
                                                                         <div class="ct_right_side_send_chat_btns cursor-pointer"
                                                                               (click)="sendMessage()">
-                                                                              Send <i
+                                                                              {{'Send' | translate}} <i
                                                                                     class="fa-solid fa-paper-plane"></i>
                                                                         </div>
                                                                   </form>
@@ -205,7 +211,8 @@
                                                                         stroke-linejoin="round" />
                                                             </svg>
                                                             <div>
-                                                                  <h4 class="ct_fs_20 ct_fw_600">Messages</h4>
+                                                                  <h4 class="ct_fs_20 ct_fw_600">{{'Messages' |
+                                                                        translate}}</h4>
                                                                   <p>Click on a contact to view messages.</p>
                                                                   <div class="">
                                                                         <a href="#"
@@ -236,7 +243,7 @@
                                                                                           stroke-linecap="round"
                                                                                           stroke-linejoin="round" />
                                                                               </svg>
-                                                                              <span> New Message</span>
+                                                                              <span>{{'NewMessage' | translate}}</span>
                                                                         </a>
                                                                   </div>
                                                             </div>
@@ -256,10 +263,12 @@
                                                                   class="position-absolute top-0 start-0 w-100 h-100 rounded-circle border border-3 border-danger opacity-25"></span>
                                                       </div>
 
-                                                      <h2 class="fw-bold text-dark mb-3" style="z-index:1;">No Chat
-                                                            Selected</h2>
+                                                      <h2 class="fw-bold text-dark mb-3" style="z-index:1;">
+                                                            {{'NoChatSelected' | translate}}
+                                                      </h2>
                                                       <p class="text-muted" style="max-width: 400px; z-index:1;">
-                                                            Tap a chat from your chat list to start a conversation.
+                                                            {{'TapAChatFromYourChatListToStartAConversation' |
+                                                            translate}}
                                                       </p>
                                                 </div>
                                                 }

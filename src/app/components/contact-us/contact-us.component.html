@@ -1,58 +1,32 @@
-<!-- <section class="">
-      <div class="container">
-            <div class="row">
-                  <div class="col-md-12">
-                        <h2 class="ct_fs_44 text-white ct_fw_700 ct_ff_Epilogue text-center">Contact Us</h2>
-                        <ul class="ct_breadcrumb">
-                              <li>
-                                    <a routerLink="/" class="ct_text_red ct_fw_600">Home</a>
-                              </li>
-                              <li class="">
-                                    <i class="fa-solid fa-angles-right "></i>
-                              </li>
-                              <li class="">
-                                    Contact Us
-                              </li>
-
-                        </ul>
-                  </div>
-            </div>
-
-      </div>
-</section> -->
-
-
 <section class="ct_py_70">
       <div class="container">
             <div class="row">
                   <div class="col-md-8 mx-auto">
                         <div class="ct_edit_profile_bg">
                               <form action="">
-
-
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Full Name</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'FullName' | translate}}</label>
                                           <input type="text" class="form-control ct_input"
-                                                placeholder="Enter Full Name">
+                                                placeholder="{{'Enter' | translate}} {{'FullName' | translate | lowercase}}">
                                     </div>
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Email Address</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'EmailAddress' | translate}}</label>
                                           <input type="email" class="form-control ct_input"
-                                                placeholder="Enter Email Address">
+                                                placeholder="{{'Enter' | translate}} {{'EmailAddress' | translate | lowercase}}">
                                     </div>
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Phone Number</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'PhoneNumber' | translate}}</label>
                                           <input type="text" class="form-control ct_input"
-                                                placeholder="Enter Phone Number">
+                                                placeholder="{{'Enter' | translate}} {{'PhoneNumber' | translate | lowercase}}">
                                     </div>
                                     <div class="form-group mb-4">
-                                          <label for="" class="mb-2 ct_fw_600 ">Address</label>
+                                          <label for="" class="mb-2 ct_fw_600 ">{{'Address' | translate}}</label>
                                           <textarea class="form-control ct_input h-auto" rows="4"
-                                                placeholder="Enter Address"></textarea>
+                                                placeholder="{{'Enter' | translate}} {{'Address' | translate | lowercase}}"></textarea>
                                     </div>
 
                                     <div class="text-center mt-4">
-                                          <button class="ct_red_btn">Submit</button>
+                                          <app-submit-button [text]="'Submit' | translate" [class]="'ct_red_btn'" [isLoading]="loading"></app-submit-button>
                                     </div>
                               </form>
                         </div>

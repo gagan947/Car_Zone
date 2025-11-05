@@ -5,10 +5,11 @@ import { CommonService } from '../../services/common.service';
 import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../services/loader.service';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-chats',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, TranslateModule],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })
@@ -27,7 +28,8 @@ export class ChatsComponent {
   unsubscribe!: () => void;
   userData: any;
 
-  constructor(private chatService: ChatService, private commonService: CommonService, public location: Location, private loader: LoaderService) {
+  constructor(private chatService: ChatService, private commonService: CommonService, public location: Location, private loader: LoaderService, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     effect(() => {
       this.userData = this.commonService.userData()
       const sellerData = JSON.parse(sessionStorage.getItem('sellerData') || '{}') || this.commonService.sellerData();
@@ -60,10 +62,6 @@ export class ChatsComponent {
         this.roomId = sellerData.id < this.userData.id ? this.userData.id + '' + sellerData.id : sellerData.id + '' + this.userData.id;
       }
     })
-  }
-
-  ngOnInit() {
-
   }
 
   openChat(item: any) {

@@ -5,17 +5,20 @@ import { CommonService } from '../../services/common.service';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../services/loader.service';
 import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-wishlist',
-  imports: [RouterLink, CommonModule, ChfFormatPipe],
+  imports: [RouterLink, CommonModule, ChfFormatPipe, TranslateModule],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
 export class WishlistComponent {
   private destroy$ = new Subject<void>();
   wishList: any
-  constructor(private service: CommonService, private loader: LoaderService) { }
+  constructor(private service: CommonService, private loader: LoaderService, private translate: TranslateService) { 
+    this.translate.use(localStorage.getItem('lang') || 'en')
+  }
 
   ngOnInit(): void {
     this.getWishList()

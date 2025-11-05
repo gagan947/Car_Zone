@@ -4,10 +4,11 @@ import { RoleDirective } from '../../directives/role.directive';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 declare var Swiper: any;
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, RoleDirective, CommonModule],
+  imports: [RouterLink, RoleDirective, CommonModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [],
@@ -16,7 +17,8 @@ export class HomeComponent {
   userData: any
   private destroy$ = new Subject<void>();
   carReels: any = [];
-  constructor(private commonService: CommonService, private router: Router) {
+  constructor(private commonService: CommonService, private router: Router, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     effect(() => {
       this.userData = this.commonService.userData
     })

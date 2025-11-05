@@ -10,18 +10,18 @@
                                     <div>
                                           <button class="mb-0 ct_fw_600 ct_filter_btn" data-bs-toggle="modal"
                                                 data-bs-target="#ct_filter_modal"><i class="fa-solid fa-filter"></i>
-                                                Filter</button>
+                                                {{'Filters' | translate}}</button>
                                     </div>
                               </div>
                         </div>
                         <div class="row">
                               <div class="col-lg-3 mb-4 position-sticky top-0">
                                     <div class="ct_filter_bg d-lg-block d-none">
-                                          <h4 class="ct_fs_20 ct_fw_700 mb-4">Filter</h4>
+                                          <h4 class="ct_fs_20 ct_fw_700 mb-4">{{'Filters' | translate}}</h4>
                                           <form action="">
                                                 <div class="form-group mb-3 text-start ct_package_select_custom">
-                                                      <label for="" class="mb-2 ct_fw_600">Brand
-                                                            Name</label>
+                                                      <label for="" class="mb-2 ct_fw_600">{{'BrandName' |
+                                                            translate}}</label>
                                                       <nz-select class="form-control ct_input " nzPlaceHolder="All"
                                                             [nzShowSearch]="true" [(ngModel)]="selectedBrand"
                                                             [ngModelOptions]="{standalone: true}"
@@ -48,7 +48,8 @@
                                                 </div>
                                                 @if(modalList.length > 0){
                                                 <div class="form-group mb-3 text-start ct_package_select_custom">
-                                                      <label for="" class="mb-2 ct_fw_600">Car Model</label>
+                                                      <label for="" class="mb-2 ct_fw_600">{{'CarModelVariant' |
+                                                            translate}}</label>
                                                       <nz-select class="form-control ct_input" nzPlaceHolder="All"
                                                             [nzShowSearch]="true" [(ngModel)]="selectedModal"
                                                             [ngModelOptions]="{standalone: true}" nzMode="tags">
@@ -72,7 +73,8 @@
                                                 }
 
                                                 <div class="form-group mb-3">
-                                                      <label for="" class="mb-1 ct_fw_600">Year Range</label>
+                                                      <label for="" class="mb-1 ct_fw_600">{{'YearRange' |
+                                                            translate}}</label>
                                                       <div
                                                             class="d-flex justify-content-between align-items-center gap-2">
                                                             <nz-select class="form-control ct_input"
@@ -116,7 +118,8 @@
                                                 </div>
 
                                                 <div class="form-group mb-3">
-                                                      <label for="" class="mb-1 ct_fw_600">Price Range (CHF)</label>
+                                                      <label for="" class="mb-1 ct_fw_600">{{'PriceRange' |
+                                                            translate}} (CHF)</label>
                                                       <nz-slider [nzTooltipVisible]="'never'" nzRange [nzStep]="1000"
                                                             [nzMin]="0" [nzMax]="100000" [(ngModel)]="priceRange"
                                                             (ngModelChange)="getFilteredData($event)"
@@ -135,7 +138,8 @@
                                                 </div>
 
                                                 <div class="form-group mb-3">
-                                                      <label for="" class="mb-1 ct_fw_600">Milage Range</label>
+                                                      <label for="" class="mb-1 ct_fw_600">{{'MilageRange' |
+                                                            translate}}</label>
                                                       <div
                                                             class="d-flex justify-content-between align-items-center gap-2">
                                                             <input type="number" class="form-control ct_input"
@@ -150,7 +154,8 @@
 
 
                                                 <div class="form-group mb-3">
-                                                      <label for="" class="mb-2 ct_fw_600">Fuel Type</label>
+                                                      <label for="" class="mb-2 ct_fw_600">{{'FuelType' |
+                                                            translate}}</label>
                                                       <ul>
                                                             @for (item of fuelTypes; track $index) {
                                                             <li>
@@ -172,7 +177,8 @@
                                                 </div>
 
                                                 <div class="form-group mb-3">
-                                                      <label for="" class="mb-2 ct_fw_600">Transmission</label>
+                                                      <label for="" class="mb-2 ct_fw_600">{{'Transmission' |
+                                                            translate}}</label>
                                                       <ul>
                                                             @for (item of transmissions; track $index) {
                                                             <li>
@@ -231,10 +237,11 @@
 
                                                 <div class="">
                                                       <button class="ct_red_btn w-100 ct_flex_1 mb-3"
-                                                            (click)="onFilterApply()">Apply</button>
+                                                            (click)="onFilterApply()">{{'ApplyFilters' |
+                                                            translate}}</button>
                                                       <button class="ct_red_btn ct_outline_btn w-100 ct_flex_1"
-                                                            (click)="onFilterClear()">Clear
-                                                            All</button>
+                                                            (click)="onFilterClear()">{{'ClearAll' | translate}}
+                                                      </button>
                                                 </div>
                                           </form>
                                     </div>
@@ -243,7 +250,8 @@
                                     <div class="row">
                                           <div class="ct_search mb-4 position-relative">
                                                 <input type="search" (input)="search($event)"
-                                                      class="form-control ct_input" placeholder="Search cars...">
+                                                      class="form-control ct_input"
+                                                      placeholder="{{'SearchAnyCar' | translate}}...">
                                                 <i class="fa-solid fa-search ct_show_eye"></i>
                                           </div>
                                           @if(carsList.length > 0){
@@ -276,25 +284,25 @@
                                                                         {{item.carModel}}</a>
                                                                   <ul>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Transmission'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.transmission}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                                    Type</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'FuelType'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.fuelType}}
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">Passenger</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Passenger'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.sittingCapacity}}
-                                                                                    Person
+                                                                                    {{'Person' | translate}}
                                                                               </p>
                                                                         </li>
                                                                   </ul>
@@ -302,8 +310,9 @@
                                                                   <div class="mt-4">
                                                                         <a routerLink="/car-detail"
                                                                               [queryParams]="{id: item.id}"
-                                                                              class="ct_red_btn w-100 text-center">View
-                                                                              More</a>
+                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore'
+                                                                              | translate}}
+                                                                        </a>
                                                                   </div>
                                                             </figcaption>
 
@@ -330,10 +339,11 @@
                                                 </div>
 
                                                 <!-- Message -->
-                                                <h2 class="fw-bold text-dark" style="z-index:1;">No Cars Found</h2>
+                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' |
+                                                      translate}}</h2>
                                                 <p class="text-muted mt-2 mb-4" style="max-width: 400px; z-index:1;">
-                                                      We couldn’t find any cars matching your filters. <br>
-                                                      Try adjusting your search criteria.
+                                                      {{'NoCarsFoundDescription' | translate}} <br>
+                                                      {{'NoCarsFoundDescription2' | translate}}
                                                 </p>
 
                                                 <!-- Decorative line -->

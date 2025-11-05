@@ -14,17 +14,17 @@
                                                             class="d-flex align-items-center justify-content-between gap-2 mb-2">
                                                             <h4 class="ct_fs_20 ct_fw_600 mb-0">{{item.name}}</h4>
                                                             @if (item.name == 'Basic Plan') {
-                                                            <span
-                                                                  class="ct_custom_badge">{{isUsed ? 'Used' : 'Starter'}}</span>
+                                                            <span class="ct_custom_badge">{{isUsed ? 'Used' :
+                                                                  'Starter'}}</span>
                                                             }
                                                       </div>
                                                       <h3 class="ct_fs_24 ct_fw_700 mb-0 ct_text_red mb-1">
                                                             {{item.price }}
                                                       </h3>
                                                       @if (item.name == 'Basic Plan') {
-                                                      <p class="mb-0">First car</p>
+                                                      <p class="mb-0">{{'FirstCar' | translate}}</p>
                                                       }@else {
-                                                      <p class="mb-0">Price per additional car</p>
+                                                      <p class="mb-0">{{'PricePerAdditionalCar' | translate}}</p>
                                                       }
                                                 </div>
                                           </div>
@@ -34,7 +34,7 @@
                               </div>
 
                               <div class="mt-4">
-                                    <h4 class="ct_fs_20 ct_fw_600 mb-4">Bulk Slot Options</h4>
+                                    <h4 class="ct_fs_20 ct_fw_600 mb-4">{{'BulkSlotOptions' | translate}}</h4>
                                     <div class="row">
                                           @for (item of planList.slice(2); track $index) {
                                           <div class="col-md-6 mb-4">
@@ -47,11 +47,13 @@
                                                                         (change)="selectPlan(item)" />
                                                                   <label class="form-check-label ct_fw_500 ms-1"
                                                                         [for]="item.slot_count + '_' + item.name">
-                                                                        {{item.slot_count}} Slots
+                                                                        {{item.slot_count}} {{'Slots' | translate}}
                                                                   </label>
                                                             </div>
                                                             <h6 class="mb-0">
-                                                                  <span class="ct_fw_700">{{item.price}}</span>/month
+                                                                  <span
+                                                                        class="ct_fw_700">{{item.price}}</span>/{{'Month'
+                                                                  | translate}}
                                                             </h6>
                                                       </li>
                                                 </ul>
@@ -59,19 +61,20 @@
                                           }
                                     </div>
 
-                                    <a routerLink="/request-additional-slots" class="ct_text_red ct_fw_600">Request Slot
+                                    <a routerLink="/request-additional-slots"
+                                          class="ct_text_red ct_fw_600">{{'RequestSlot' | translate}}
                                           <i class="fa-solid fa-arrow-right ms-1"></i></a>
 
                                     <div class="ct_info_box mt-3">
-                                          <p class="mb-0"><i class="fa-solid fa-circle-info"></i> You can freely swap
-                                                cars anytime this month
-                                                without paying extra.</p>
+                                          <p class="mb-0"><i
+                                                      class="fa-solid fa-circle-info"></i>{{'YouCanFreelySwapCarsAnytime'
+                                                | translate}}</p>
                                     </div>
 
                                     <div class="mt-5 text-center">
                                           <button [disabled]="!selectedPlan" class="ct_red_btn"
-                                                (click)="purchasePlan()">Continue to Add
-                                                car</button>
+                                                (click)="purchasePlan()">
+                                                {{'ContinueToAdd' | translate}}</button>
                                     </div>
                               </div>
                         </div>

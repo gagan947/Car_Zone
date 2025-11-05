@@ -5,15 +5,16 @@ import { Router, RouterLink } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { QuillModule } from 'ngx-quill';
-import { NoWhitespaceDirective, integerValidator, strongPasswordValidator, passwordMatchValidator, passwordMismatchValidator } from '../../helper/validators';
+import { NoWhitespaceDirective, strongPasswordValidator, passwordMatchValidator, passwordMismatchValidator } from '../../helper/validators';
 import { ValidationErrorService } from '../../services/validation-error.service';
 import { CountryISO, NgxIntlTelInputModule, SearchCountryField } from 'ngx-intl-tel-input-gg';
 import { SubmitButtonComponent } from '../shared/submit-button/submit-button.component';
 import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
-  imports: [ReactiveFormsModule, CommonModule, NzSelectModule, QuillModule, FormsModule, RouterLink, NgxIntlTelInputModule, SubmitButtonComponent],
+  imports: [ReactiveFormsModule, CommonModule, NzSelectModule, QuillModule, FormsModule, RouterLink, NgxIntlTelInputModule, SubmitButtonComponent, TranslateModule],
   templateUrl: './seller-sign-up.component.html',
   styleUrl: './seller-sign-up.component.css'
 })
@@ -31,7 +32,8 @@ export class SellerSignUpComponent {
   loading: boolean = false
   isShowPassword: boolean = false
   isShowConfirmPassword: boolean = false
-  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router) {
+  constructor(private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private router: Router, private translate: TranslateService) {
+    this.translate.use(localStorage.getItem('lang') || 'en');
     this.Form = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(20), NoWhitespaceDirective.validate]],
       email: ['', [Validators.required, Validators.email]],
