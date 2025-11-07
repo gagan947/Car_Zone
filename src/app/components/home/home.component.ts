@@ -104,7 +104,7 @@ export class HomeComponent {
 
   getReels() {
     this.isLoading = true;
-    this.commonService.get('user/fetchAllCarReels?page=' + 1 + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    this.commonService.get('user/asGuestUsersfetchAllCarReels?page=' + 1 + '').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carReels = res.data.data;
       this.isLoading = false;
     })

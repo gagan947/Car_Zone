@@ -12,14 +12,18 @@ import { HttpClient } from '@angular/common/http';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { carData } from '../../../helper/carData';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-list-your-car',
-  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule],
+  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule, ImageCropperComponent],
   templateUrl: './list-your-car.component.html',
   styleUrl: './list-your-car.component.css'
 })
 export class ListYourCarComponent {
   @ViewChild('featureInput') featureInput!: ElementRef<HTMLButtonElement>
+  @ViewChild('closeBtn') closeBtn!: ElementRef<HTMLButtonElement>;
   private destroy$ = new Subject<void>();
   brandList: any[] = []
   modalList: any[] = []
@@ -27,7 +31,7 @@ export class ListYourCarComponent {
   selectedPlan: any = null;
   carFormOne!: FormGroup;
   carFormTwo!: FormGroup;
-  formStep: number = 1;
+  formStep: number = 3;
   entryType: number = 1;
   selectedFeatures: string[] = [];
   carImages: File[] = [];
@@ -162,16 +166,35 @@ export class ListYourCarComponent {
     this.selectedFeatures.splice(index, 1);
   }
 
-  onCarImage(event: any) {
-    const files = event.target.files;
-    Array.from(files).forEach((file: any) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewCarImages.push(e.target.result);
-      };
-      reader.readAsDataURL(file);
-      this.carImages.push(file);
-    });
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  croppedImageBlob: any = '';
+  onCoverImage(event: any): void {
+    this.imageChangedEvent = event
+    if (event.target.files && event.target.files[0]) {
+      this.openModal()
+    }
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImageBlob = event.blob
+    this.croppedImage = event.objectUrl
+  }
+
+  onDone() {
+    this.previewCarImages.push(this.croppedImage)
+    this.carImages.push(new File([this.croppedImageBlob], 'cover.png', {
+      type: 'image/png'
+    }))
+    this.closeBtn.nativeElement.click()
+  }
+
+  openModal() {
+    const modalElement = document.getElementById('ct_feedback_detail_modal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
 
   onFileSelected(event: any) {

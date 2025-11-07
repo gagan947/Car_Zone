@@ -511,5 +511,14 @@
       "NoActivePlanDescription": "Non hai attualmente alcun piano attivo. Per favore acquista un piano per iniziare a elencare le tue auto e accedere a tutte le funzionalità.",
       "PurchaseAndStartListing": "Acquista e inizia a elencare",
       "PaymentFailedDescription": "Il tuo pagamento è fallito. Per favore riprova.",
-      "PaymentSuccessfulDescription": "Hai acquistato con successo il piano slot. Grazie!"
+      "PaymentSuccessfulDescription": "Hai acquistato con successo il piano slot. Grazie!",
+      "FrontView": "Vista frontale",
+      "RearView": "Vista posteriore",
+      "LeftSideView": "Vista laterale sinistra",
+      "RightSideView": "Vista laterale destra",
+      "FrontInterior": "Interno frontale",
+      "RearInterior": "Interno posteriore",
+      "Dashboard": "Dashboard",
+      "EngineBay": "Compartimento motore",
+      "Done": "Fatto"
 }

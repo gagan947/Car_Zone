@@ -198,6 +198,19 @@
                                                             }
                                                       </ul>
                                                 </div>
+                                                <div class="form-group mb-3">
+                                                      <label for="" class="mb-1 ct_fw_600">{{'PowerOutput' |
+                                                            translate}}</label>
+                                                      <div
+                                                            class="d-flex justify-content-between align-items-center gap-2">
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Min" [(ngModel)]="powerRange[0]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                            <input type="number" class="form-control ct_input"
+                                                                  placeholder="Max" [(ngModel)]="powerRange[1]"
+                                                                  [ngModelOptions]="{standalone: true}" />
+                                                      </div>
+                                                </div>
 
                                                 <!-- <div class="form-group mb-3">
                                                       <label for="" class="mb-2 ct_fw_600">Sitting Capacity</label>
@@ -248,11 +261,73 @@
                               </div>
                               <div class="col-lg-9 mb-4">
                                     <div class="row">
-                                          <div class="ct_search mb-4 position-relative">
+                                          <div class="ct_search mb-3 position-relative">
                                                 <input type="search" (input)="search($event)"
                                                       class="form-control ct_input"
                                                       placeholder="{{'SearchAnyCar' | translate}}...">
                                                 <i class="fa-solid fa-search ct_show_eye"></i>
+                                          </div>
+                                          <div class="d-flex align-items-center gap-3 flex-wrap mb-4">
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('BMW')}"
+                                                      (click)="selectBrand(['BMW'])">
+                                                      <img src="img/BrandIcons/ic_Bmw.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Mercedes-Benz')}"
+                                                      (click)="selectBrand(['Mercedes-Benz'])">
+                                                      <img src="img/BrandIcons/ic_Mercedes.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Audi')}"
+                                                      (click)="selectBrand(['Audi'])">
+                                                      <img src="img/BrandIcons/ic_Audi.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Volkswagen')}"
+                                                      (click)="selectBrand(['Volkswagen'])">
+                                                      <img src="img/BrandIcons/ic_volkswagen.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Porsche')}"
+                                                      (click)="selectBrand(['Porsche'])">
+                                                      <img src="img/BrandIcons/ic_Porsche.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Toyota')}"
+                                                      (click)="selectBrand(['Toyota'])">
+                                                      <img src="img/BrandIcons/ic_toyota.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Ford')}"
+                                                      (click)="selectBrand(['Ford'])">
+                                                      <img src="img/BrandIcons/ic_ford.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Skoda')}"
+                                                      (click)="selectBrand(['Skoda'])">
+                                                      <img src="img/BrandIcons/ic_skoda.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Volvo')}"
+                                                      (click)="selectBrand(['Volvo'])">
+                                                      <img src="img/BrandIcons/ic_volvo.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Tesla')}"
+                                                      (click)="selectBrand(['Tesla'])">
+                                                      <img src="img/BrandIcons/ic_tesla.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Fiat')}"
+                                                      (click)="selectBrand(['Fiat'])">
+                                                      <img src="img/BrandIcons/ic_fiat.svg" alt="">
+                                                </div>
+                                                <div class="ct_brand_icon"
+                                                      [ngClass]="{'ct_brand_icon_active': selectedBrand.includes('Seat')}"
+                                                      (click)="selectBrand(['Seat'])">
+                                                      <img src="img/BrandIcons/ic_Seat.svg" alt="">
+                                                </div>
                                           </div>
                                           @if(carsList.length > 0){
                                           @for (item of carsList; track $index) {

@@ -524,5 +524,14 @@
       "NoActivePlanDescription": "You currently don’t have any active plan. Please purchase a plan to start listing your cars and access all features.",
       "PurchaseAndStartListing": "Purchase and start listing",
       "PaymentFailedDescription": "Your payment failed. Please try again.",
-      "PaymentSuccessfulDescription": "You have successfully purchased the slot plan. Thank you!"
+      "PaymentSuccessfulDescription": "You have successfully purchased the slot plan. Thank you!",
+      "FrontView": "Front View",
+      "RearView": "Rear View",
+      "LeftSideView": "Left Side View",
+      "RightSideView": "Right Side View",
+      "FrontInterior": "Front Interior",
+      "RearInterior": "Rear Interior",
+      "Dashboard": "Dashboard",
+      "EngineBay": "Engine Bay",
+      "Done": "Done"
 }

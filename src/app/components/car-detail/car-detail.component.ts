@@ -24,6 +24,7 @@ export class CarDetailComponent {
   carId: any
   token: any
   conditions = carData.conditions
+  ShoMore: boolean = false
   constructor(private service: CommonService, private route: ActivatedRoute, private loader: LoaderService, private router: Router, private message: NzMessageService, private modalService: ModalService, private authService: AuthService, private translate: TranslateService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     this.route.queryParamMap.subscribe(params => {

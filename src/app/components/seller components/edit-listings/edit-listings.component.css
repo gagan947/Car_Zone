@@ -73,3 +73,7 @@ quill-editor {
     height: 100%;
     object-fit: cover;
 }
+
+.ct_upload_product_main_180 {
+    height: 145px !important;
+}

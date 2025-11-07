@@ -1,4 +1,4 @@
-import { Component, effect } from '@angular/core';
+import { Component, effect, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { RoleDirective } from '../../directives/role.directive';
 import { CommonService } from '../../services/common.service';
@@ -11,14 +11,16 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { CommonModule } from '@angular/common';
 import { RoleService } from '../../services/role.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
+import { ImageCroppedEvent, ImageCropperComponent } from 'ngx-image-cropper';
+declare var bootstrap: any;
 @Component({
   selector: 'app-edit-profile',
-  imports: [FormsModule, ReactiveFormsModule, NgxIntlTelInputModule, CommonModule, RoleDirective, TranslateModule],
+  imports: [FormsModule, ReactiveFormsModule, NgxIntlTelInputModule, CommonModule, RoleDirective, TranslateModule, ImageCropperComponent],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
 })
 export class EditProfileComponent {
+  @ViewChild('closeBtn') closeBtn!: ElementRef<HTMLButtonElement>;
   private destroy$ = new Subject<void>();
   userData: any
   Form: FormGroup;
@@ -88,16 +90,36 @@ export class EditProfileComponent {
     })
   }
 
-  onProfileImage(event: any) {
-    const file = event.target.files[0];
-    this.profileImage = file;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  croppedImageBlob: any = '';
+  onProfileImage(event: any): void {
+    this.imageChangedEvent = event
+    if (event.target.files && event.target.files[0]) {
+      this.openModal()
+    }
+  }
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result as string;
-    };
-    reader.readAsDataURL(file);
-  };
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImageBlob = event.blob
+    this.croppedImage = event.objectUrl
+  }
+
+  onDone() {
+    this.imagePreview = this.croppedImage
+    this.profileImage = new File([this.croppedImageBlob], 'profile.jpg', {
+      type: 'image/jpg'
+    })
+    this.closeBtn.nativeElement.click()
+  }
+
+  openModal() {
+    const modalElement = document.getElementById('ct_feedback_detail_modal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
+  }
 
   onSubmit() {
     if (this.Form.invalid) {

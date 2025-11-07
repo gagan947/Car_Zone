@@ -342,45 +342,72 @@
                               <div class="ct_edit_profile_bg mb-4">
                                     <h2 class="ct_fs_20 ct_fw_700 mb-4">{{'UploadPhotosVideo' | translate}}</h2>
                                     <div class="text-start mb-4">
-                                          <label for="" class="ct_fw_600 mb-2">{{'UploadPhotos' | translate}}
-                                          </label>
-                                          <div class="ct_upload_product_main ct_upload_product_main_180">
-                                                <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
-                                                      xmlns="http://www.w3.org/2000/svg">
-                                                      <path d="M5.87174 22.0167C4.26376 20.9403 3.20508 19.1073 3.20508 17.027C3.20508 13.9023 5.59376 11.3354 8.64473 11.0528C9.26883 7.25653 12.5654 4.36035 16.5384 4.36035C20.5114 4.36035 23.808 7.25653 24.4321 11.0528C27.4831 11.3354 29.8717 13.9023 29.8717 17.027C29.8717 19.1073 28.8131 20.9403 27.2051 22.0167M11.2051 21.6937L16.5384 16.3604M16.5384 16.3604L21.8717 21.6937M16.5384 16.3604V28.3604"
-                                                            stroke="#9CA3AF" stroke-width="2.66667"
-                                                            stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </svg>
-
-                                                <p class="text-center ct_fs_18 ct_text_op_07 mb-0">
-                                                      {{'UploadYourImageHere' | translate}}
-                                                </p>
-                                                <small class="text-center d-block ct_text_op_6">{{'Maximum10Images' |
-                                                      translate}}
-                                                </small>
-                                                <label for="ct_upload_product">
-                                                      <input type="file" name="" id="ct_upload_product" class="d-none"
-                                                            accept="image/*" (change)="onCarImage($event)" multiple />
-                                                      <div class="ct_browse_btn mt-3">
-                                                            <span>{{'BrowseFiles' | translate}}</span>
+                                          <label for="" class="ct_fw_600 mb-2">{{'UploadPhotos' |
+                                                translate}}</label>
+                                          <div class="row g-3">
+                                                <ng-container *ngFor="let side of [
+                                                                                                {label: ('FrontView' | translate),        key: 0},
+                                                                                                {label: ('RearView' | translate),         key: 1},
+                                                                                                {label: ('LeftSideView' | translate),     key: 2},
+                                                                                                {label: ('RightSideView' | translate),    key: 3},
+                                                                                                {label: ('FrontInterior' | translate),    key: 4},
+                                                                                                {label: ('RearInterior' | translate),     key: 5},
+                                                                                                {label: ('Dashboard' | translate),        key: 6},
+                                                                                                {label: ('EngineBay' | translate),        key: 7}
+                                                                                          ]; let i = index">
+                                                      <div class="col-6 col-md-3">
+                                                            <div
+                                                                  class="ct_upload_product_main ct_upload_product_main_180 text-center">
+                                                                  <label [for]="'ct_upload_product_' + i"
+                                                                        class="w-100 mb-0">
+                                                                        <input type="file" class="d-none"
+                                                                              accept="image/*"
+                                                                              [id]="'ct_upload_product_' + i"
+                                                                              (change)="onCoverImage($event)" />
+                                                                        <!-- Box with correct 38:27 aspect ratio -->
+                                                                        <div class="ct_browse_box position-relative d-flex flex-column align-items-center justify-content-center"
+                                                                              style="cursor:pointer; width:100%; aspect-ratio:38/27; background:#f8f9fa; border-radius: 10px;">
+                                                                              <ng-container
+                                                                                    *ngIf="!!previewCarImages && previewCarImages[i]; else uploadPlaceholder">
+                                                                                    <img [src]="previewCarImages[i]"
+                                                                                          alt=""
+                                                                                          style="width:100%;height:100%;object-fit:cover; border-radius: 8px;" />
+                                                                                    <i class="fa-solid fa-xmark position-absolute top-0 end-0 m-2 close-btn"
+                                                                                          style="cursor:pointer;"
+                                                                                          (click)="removeCarImage(i,previewCarImages[i]); $event.stopPropagation(); $event.preventDefault();"></i>
+                                                                              </ng-container>
+                                                                              <ng-template #uploadPlaceholder>
+                                                                                    <svg width="33" height="33"
+                                                                                          viewBox="0 0 33 33"
+                                                                                          fill="none"
+                                                                                          xmlns="http://www.w3.org/2000/svg">
+                                                                                          <path d="M5.87174 22.0167C4.26376 20.9403 3.20508 19.1073 3.20508 17.027C3.20508 13.9023 5.59376 11.3354 8.64473 11.0528C9.26883 7.25653 12.5654 4.36035 16.5384 4.36035C20.5114 4.36035 23.808 7.25653 24.4321 11.0528C27.4831 11.3354 29.8717 13.9023 29.8717 17.027C29.8717 19.1073 28.8131 20.9403 27.2051 22.0167M11.2051 21.6937L16.5384 16.3604M16.5384 16.3604L21.8717 21.6937M16.5384 16.3604V28.3604"
+                                                                                                stroke="#9CA3AF"
+                                                                                                stroke-width="2.66667"
+                                                                                                stroke-linecap="round"
+                                                                                                stroke-linejoin="round">
+                                                                                          </path>
+                                                                                    </svg>
+                                                                                    <span
+                                                                                          class="d-block ct_fs_16 ct_text_op_07 mt-2">
+                                                                                          {{ side.label }}
+                                                                                    </span>
+                                                                                    <small class="d-block ct_text_op_6">{{'UploadImage'
+                                                                                          | translate}}</small>
+                                                                                    <div class="ct_browse_btn mt-2">
+                                                                                          <span>{{'BrowseFiles' |
+                                                                                                translate}}</span>
+                                                                                    </div>
+                                                                              </ng-template>
+                                                                        </div>
+                                                                  </label>
+                                                            </div>
                                                       </div>
-                                                </label>
+                                                </ng-container>
                                           </div>
-
-                                          <div class="ct_multiple_img_div ct_custom_scroll mb-4">
-                                                @for (item of previewCarImages; track $index) {
-                                                <div class="ct_uploaded_img123 position-relative">
-                                                      <div class="ct_uploaded_img_w">
-                                                            <img [src]="item" alt="" />
-                                                            <i class="fa-solid fa-xmark"
-                                                                  (click)="removeCarImage($index, item)"></i>
-                                                      </div>
-                                                </div>
-                                                }
-                                          </div>
-                                          <small *ngIf="previewCarImages.length == 0 && submitted" class="text-danger">
-                                                {{'PleaseUploadCarImages' | translate}}
-                                          </small>
+                                          <!-- <small *ngIf="previewCarImages && previewCarImages.filter((x: any) => !!x).length < 8 && submitted" class="text-danger">
+                                                                                          {{'PleaseUploadCarImagesForAllSides' | translate}}
+                                                                                    </small> -->
                                     </div>
                                     <div class="text-start mb-4">
                                           <label for="" class="ct_fw_600 mb-2">{{'UploadCarReel' | translate}}
@@ -452,3 +479,23 @@
 
       </div>
 </section>
+
+<div class="modal fade modal-lg" id="ct_feedback_detail_modal" tabindex="-1"
+      aria-labelledby="ct_feedback_detail_modalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                  <div class="modal-body">
+                        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                              [aspectRatio]="38 / 27" [resizeToWidth]="190" [resizeToHeight]="135" format="png"
+                              (imageCropped)="imageCropped($event)">
+                        </image-cropper>
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="ct_outline_btn ct_red_btn" data-bs-dismiss="modal"
+                              #closeBtn>{{'Cancel' |
+                              translate}}</button>
+                        <button type="button" class="ct_red_btn" (click)="onDone()">{{'Done' | translate}}</button>
+                  </div>
+            </div>
+      </div>
+</div>

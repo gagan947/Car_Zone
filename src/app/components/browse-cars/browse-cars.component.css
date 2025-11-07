@@ -33,3 +33,25 @@
    top: 0px;
    overflow-y: auto;
  }
+
+ .ct_brand_icon {
+   width: 60px;
+   height: 60px;
+   border-radius: 10px;
+   background-color: #f2f2f2;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 8px;
+   cursor: pointer;
+ }
+
+ .ct_brand_icon img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+ }
+
+ .ct_brand_icon_active {
+   background-color: #ffccd1;
+ }

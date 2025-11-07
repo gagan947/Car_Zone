@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonService } from '../../services/common.service';
-import { Subject, takeUntil } from 'rxjs';
+import { forkJoin, Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { carData } from '../../helper/carData';
 import { FormsModule } from '@angular/forms';
@@ -41,7 +41,8 @@ export class BrowseCarsComponent {
   selectedTransmissions: string[] = [];
   priceRange: any = [1000, 2000000];
   yearRange: any = [2000, 2025];
-  milageRange: any = [20, 60];
+  milageRange: any = [];
+  powerRange: any = [];
   token: any;
 
   years: number[] = [];
@@ -120,31 +121,53 @@ export class BrowseCarsComponent {
   //   })
   // }
 
-  getModalList(selectedBrands: string[]) {
-    if (!selectedBrands || selectedBrands.length === 0) {
+  selectBrand(brand: string[]) {
+    if (this.selectedBrand.includes(brand[0])) {
+      this.selectedBrand = this.selectedBrand.filter(b => b !== brand[0]);
+    } else {
+      this.selectedBrand = [...this.selectedBrand, brand[0]];
+    }
+    this.getModalList(this.selectedBrand)
+  }
+
+  getModalList(selectedBrands: string[] | string) {
+    let brandsToQuery: string[] = Array.isArray(selectedBrands) ? selectedBrands : [selectedBrands];
+
+    if (!brandsToQuery || brandsToQuery.length === 0 || !brandsToQuery[0]) {
       this.modalList = [];
+      this.selectedModal = [];
       return;
     }
+    const prevSelectedModels = Array.isArray(this.selectedModal) ? [...this.selectedModal] : [];
 
-    // Clear old model list or combine results if needed
-    this.modalList = [];
-
-    selectedBrands.forEach((brand: string) => {
+    let allBrandModelFetches = brandsToQuery.map((brand) => {
       const brandData = this.brandList.find(
         (item: any) => item.make_display.toLowerCase() === brand.toLowerCase()
       );
 
       if (brandData) {
         const brandId = brandData.make_id;
-        this.service
+        return this.service
           .get('user/getModel/' + brandId)
-          .pipe(takeUntil(this.destroy$))
-          .subscribe((res: any) => {
-            // ✅ either replace or merge results
-            this.modalList = [...this.modalList, ...res.data];
-          });
+          .pipe(takeUntil(this.destroy$));
       }
-    });
+      return null;
+    }).filter(fetchObs => fetchObs !== null);
+
+    if (allBrandModelFetches.length > 0) {
+      forkJoin(allBrandModelFetches).subscribe((results: any[]) => {
+        const allModels = results.reduce((acc, res: any) => {
+          return [...acc, ...(res.data || [])];
+        }, []);
+        this.modalList = allModels;
+
+        const validModelNames = new Set(this.modalList.map((m: any) => m.modelName));
+        this.selectedModal = prevSelectedModels.filter((model: string) => validModelNames.has(model));
+      });
+    } else {
+      this.modalList = [];
+      this.selectedModal = [];
+    }
   }
 
 
@@ -168,22 +191,20 @@ export class BrowseCarsComponent {
   }
 
   onFilterApply() {
-    const params = Object.fromEntries(
-      Object.entries({
-        brandName: this.selectedBrand?.length > 0 ? this.selectedBrand.join(',') : null,
-        carModel: this.selectedModal?.length > 0 ? this.selectedModal.join(',') : null,
-        fuelType: this.selectedFuels.length > 0 ? this.selectedFuels.join(',') : null,
-        transmission: this.selectedTransmissions.length > 0 ? this.selectedTransmissions.join(',') : null,
-        //sittingCapacity: this.selectedSittingCapacity,
-        //sellerType: this.selectedSellerType,
-        priceRange: this?.priceRange ? this.priceRange?.join(',') : null,
-        min_year: this?.yearRange[0],
-        max_year: this?.yearRange[1],
-        min_mileage: this?.milageRange[0],
-        max_mileage: this?.milageRange[1]
-      })
-        .filter(([key, value]) => value !== null)
-    );
+    const paramsObj: any = {
+      ...(this.selectedBrand && this.selectedBrand.length > 0 && { brandName: this.selectedBrand.join(',') }),
+      ...(this.selectedModal && this.selectedModal.length > 0 && { carModel: this.selectedModal.join(',') }),
+      ...(this.selectedFuels && this.selectedFuels.length > 0 && { fuelType: this.selectedFuels.join(',') }),
+      ...(this.selectedTransmissions && this.selectedTransmissions.length > 0 && { transmission: this.selectedTransmissions.join(',') }),
+      ...(this.priceRange && Array.isArray(this.priceRange) && this.priceRange.length === 2 && this.priceRange.every((v: any) => v !== undefined && v !== null) && { priceRange: this.priceRange.join(',') }),
+      ...(this.yearRange && Array.isArray(this.yearRange) && typeof this.yearRange[0] === 'number' && { min_year: this.yearRange[0] }),
+      ...(this.yearRange && Array.isArray(this.yearRange) && typeof this.yearRange[1] === 'number' && { max_year: this.yearRange[1] }),
+      ...(this.milageRange && Array.isArray(this.milageRange) && typeof this.milageRange[0] === 'number' && { min_mileage: this.milageRange[0] }),
+      ...(this.milageRange && Array.isArray(this.milageRange) && typeof this.milageRange[1] === 'number' && { max_mileage: this.milageRange[1] }),
+      ...(this.powerRange && Array.isArray(this.powerRange) && typeof this.powerRange[0] === 'number' && { min_hp: this.powerRange[0] }),
+      ...(this.powerRange && Array.isArray(this.powerRange) && typeof this.powerRange[1] === 'number' && { max_hp: this.powerRange[1] }),
+    };
+    const params = paramsObj;
 
     this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList', params).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.carsList = res.data

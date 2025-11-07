@@ -28,6 +28,6 @@ export class AuthService {
             localStorage.removeItem('CarZoneToken');
             localStorage.removeItem('userInfo');
             localStorage.removeItem('app_role');
-            this.roleService.setRole(undefined);
+            this.roleService.setRole('buyer');
       };
 }

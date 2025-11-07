@@ -12,14 +12,18 @@ import { CommonService } from '../../../services/common.service';
 import { ValidationErrorService } from '../../../services/validation-error.service';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ImageCropperComponent, ImageCroppedEvent } from 'ngx-image-cropper';
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-edit-listings',
-  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule],
+  imports: [FormsModule, NzSelectModule, ReactiveFormsModule, CommonModule, SubmitButtonComponent, TranslateModule, ImageCropperComponent],
   templateUrl: './edit-listings.component.html',
   styleUrl: './edit-listings.component.css'
 })
 export class EditListingsComponent {
   @ViewChild('featureInput') featureInput!: ElementRef<HTMLButtonElement>
+  @ViewChild('closeBtn') closeBtn!: ElementRef<HTMLButtonElement>;
   private destroy$ = new Subject<void>();
   brandList: any[] = []
   modalList: any[] = []
@@ -37,7 +41,7 @@ export class EditListingsComponent {
   sittingCapacity = carData.sittingCapacity
   loading: boolean = false;
   carId: any
-  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private route: ActivatedRoute, private translate: TranslateService ) {
+  constructor(private service: CommonService, private message: NzMessageService, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private http: HttpClient, private router: Router, private route: ActivatedRoute, private translate: TranslateService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     this.route.queryParamMap.subscribe(params => {
       this.carId = params.get('id')
@@ -154,16 +158,35 @@ export class EditListingsComponent {
     this.selectedFeatures.splice(index, 1);
   }
 
-  onCarImage(event: any) {
-    const files = event.target.files;
-    Array.from(files).forEach((file: any) => {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewCarImages.push(e.target.result);
-      };
-      reader.readAsDataURL(file);
-      this.carImages.push(file);
-    });
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+  croppedImageBlob: any = '';
+  onCoverImage(event: any): void {
+    this.imageChangedEvent = event
+    if (event.target.files && event.target.files[0]) {
+      this.openModal()
+    }
+  }
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImageBlob = event.blob
+    this.croppedImage = event.objectUrl
+  }
+
+  onDone() {
+    this.previewCarImages.push(this.croppedImage)
+    this.carImages.push(new File([this.croppedImageBlob], 'cover.png', {
+      type: 'image/png'
+    }))
+    this.closeBtn.nativeElement.click()
+  }
+
+  openModal() {
+    const modalElement = document.getElementById('ct_feedback_detail_modal');
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    }
   }
 
   onFileSelected(event: any) {

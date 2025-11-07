@@ -27,11 +27,19 @@
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'Reels' |
                                                             translate}}</a>
                                                 </li>
+                                                @if(authService.isLogedIn()) {
                                                 <li>
                                                       <a routerLink="/chats" routerLinkActive="active"
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
                                                             translate}}</a>
                                                 </li>
+                                                }@else {
+                                                <li>
+                                                      <a (click)="openLogin()" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
+                                                            translate}}</a>
+                                                </li>
+                                                }
                                           </ng-container>
 
                                           <!-- <ng-container *ngIf="!userRole">
@@ -58,12 +66,19 @@
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'MyListings' |
                                                             translate}}</a>
                                                 </li>
-
+                                                @if(authService.isLogedIn()) {
                                                 <li>
                                                       <a routerLink="/chats" routerLinkActive="active"
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
                                                             translate}}</a>
                                                 </li>
+                                                }@else {
+                                                <li>
+                                                      <a (click)="openLogin()" routerLinkActive="active"
+                                                            [routerLinkActiveOptions]="{ exact: true }">{{'Chat' |
+                                                            translate}}</a>
+                                                </li>
+                                                }
                                                 <li>
                                                       <a routerLink="/our-visitors" routerLinkActive="active"
                                                             [routerLinkActiveOptions]="{ exact: true }">{{'OurVisitors'
