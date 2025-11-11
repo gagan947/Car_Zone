@@ -58,7 +58,7 @@
       "Rejected": "Rejeté",
       "All": "Tout",
       "ViewDetails": "Voir les détails",
-      "Chat": "Chats",
+      "Chat": "Discussions",
       "EditProfile": "Modifier le profil",
       "Language": "Langue",
       "Notifications": "Notifications",
@@ -519,5 +519,7 @@
       "RearInterior": "Intérieur arrière",
       "Dashboard": "Tableau de bord",
       "EngineBay": "Compartiment moteur",
-      "Done": "Fait"
+      "Done": "Fait",
+      "SuggestedCars": "Voitures suggérées",
+      "UploadImage": "Télécharger une image"
 }

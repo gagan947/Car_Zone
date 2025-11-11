@@ -33,13 +33,12 @@ export class CarDetailComponent {
   }
 
   ngOnInit(): void {
-    this.getCarDetail()
     this.token = this.authService.getToken();
+    this.getCarDetail()
   }
 
   getCarDetail() {
     this.loader.show();
-
     const endpoint = this.token
       ? `user/getCar/${this.carId}`
       : `user/asGuestUserGetCar/${this.carId}`;
@@ -167,7 +166,7 @@ export class CarDetailComponent {
         name: item.sellerDetails.fullName,
         email: item.sellerDetails.email,
         profileImage: item.sellerDetails.profileImage,
-        // carId: item.id,
+        carId: item.id,
         // carImage: item.carImages[0],
         // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
       }
@@ -178,5 +177,17 @@ export class CarDetailComponent {
     } else {
       this.modalService.openLoginModal();
     }
+  }
+
+  shareOnWhatsapp(item: any) {
+    let whatsappUrl = `https://wa.me/?text=${encodeURIComponent(item.title)} ${encodeURIComponent(item.description)} ${encodeURIComponent(item.price)}`;
+    window.open(whatsappUrl, '_blank');
+    this.message.success('Whatsapp message sent successfully')
+  }
+
+  viewCarDetail(id: any) {
+    this.carId = id;
+    this.getCarDetail();
+    this.router.navigate(['/car-detail'], { queryParams: { id: id } });
   }
 }

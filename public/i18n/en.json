@@ -533,5 +533,7 @@
       "RearInterior": "Rear Interior",
       "Dashboard": "Dashboard",
       "EngineBay": "Engine Bay",
-      "Done": "Done"
+      "Done": "Done",
+      "SuggestedCars": "Suggested Cars",
+      "UploadImage": "Upload Image"
 }

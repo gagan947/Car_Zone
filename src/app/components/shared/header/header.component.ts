@@ -70,15 +70,14 @@ export class HeaderComponent {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 
   onCustomLangChange(lang: string) {
     this.selectedLang = lang;
     this.translate.use(lang);
     localStorage.setItem('lang', lang);
+
+    this.commonService.post('user/changeLanguage', { language: lang }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+    })
   }
 
   getLanguage(langCode: string) {
@@ -123,4 +122,8 @@ export class HeaderComponent {
     this.modalService.openLoginModal();
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }

@@ -6,10 +6,12 @@ import { CommonModule, Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoaderService } from '../../services/loader.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-chats',
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [CommonModule, FormsModule, TranslateModule, ChfFormatPipe, RouterLink],
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.css'
 })
@@ -27,7 +29,8 @@ export class ChatsComponent {
   sub1!: Subscription;
   unsubscribe!: () => void;
   userData: any;
-
+  sellerCarList: any[] = [];
+  currentCar: any = {};
   constructor(private chatService: ChatService, private commonService: CommonService, public location: Location, private loader: LoaderService, private translate: TranslateService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     effect(() => {
@@ -45,8 +48,9 @@ export class ChatsComponent {
           if (sellerData.name) {
             const existingChat = this.chatList.find(chat => chat.id == sellerData.id);
             if (existingChat) {
-              this.openChat(existingChat)
+              this.openChat(existingChat, sellerData.carId);
             } else {
+              this.getSellerCars(sellerData.id, sellerData.carId);
               this.currentChat = {
                 id: sellerData.id,
                 name: sellerData.name,
@@ -54,6 +58,7 @@ export class ChatsComponent {
                 // carImage: sellerData.carImage,
                 // carName: sellerData.carName
               };
+
               console.log('Created new chat:', this.currentChat);
             }
           }
@@ -64,7 +69,22 @@ export class ChatsComponent {
     })
   }
 
-  openChat(item: any) {
+  getSellerCars(sellerId: any, carId: any) {
+    this.commonService.get('user/fetchOtherCarListByOtherSellerId?id=' + sellerId).subscribe((res: any) => {
+      if (carId) {
+        this.sellerCarList = res.data.filter((car: any) => car.id != carId);
+        this.currentCar = res.data.find((car: { id: any; }) => car.id == carId);
+      }
+      else {
+        this.currentCar = null;
+        this.sellerCarList = res.data;
+        this.currentCar = res.data[0] || null;
+      }
+    })
+  }
+
+  openChat(item: any, carId: any) {
+    this.getSellerCars(item.id, carId);
     this.currentChat = item;
     this.roomId = item.id < this.userData.id ? this.userData.id + '' + item.id : item.id + '' + this.userData.id;
 

@@ -520,5 +520,7 @@
       "RearInterior": "Interno posteriore",
       "Dashboard": "Dashboard",
       "EngineBay": "Compartimento motore",
-      "Done": "Fatto"
+      "Done": "Fatto",
+      "SuggestedCars": "Auto suggerite",
+      "UploadImage": "Carica immagine"
 }

@@ -31,7 +31,7 @@ export class ListYourCarComponent {
   selectedPlan: any = null;
   carFormOne!: FormGroup;
   carFormTwo!: FormGroup;
-  formStep: number = 3;
+  formStep: number = 1;
   entryType: number = 1;
   selectedFeatures: string[] = [];
   carImages: File[] = [];
@@ -108,8 +108,21 @@ export class ListYourCarComponent {
         form.get(key)?.markAsTouched();
       });
     } else {
-      this.formStep = this.formStep + 1
-      this.entryType = 2
+      if (this.formStep === 1) {
+        this.service.post('user/descriptionAwsRecognition', { description: form.get('description')?.value }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+          if (res.success) {
+            this.formStep = this.formStep + 1
+            this.entryType = 2
+          } else {
+            this.message.error(res.message);
+          }
+        }, (error: any) => {
+          this.message.error(error);
+        })
+      } else {
+        this.formStep = this.formStep + 1
+        this.entryType = 2
+      }
     }
   }
 
@@ -121,7 +134,6 @@ export class ListYourCarComponent {
   }
 
   fetchCarDetailByVIN() {
-
     if (this.carFormOne.get('vrn')?.invalid) {
       this.carFormOne.get('vrn')?.markAllAsTouched();
       return;
@@ -170,23 +182,23 @@ export class ListYourCarComponent {
   croppedImage: any = '';
   croppedImageBlob: any = '';
   onCoverImage(event: any): void {
-    this.imageChangedEvent = event
+    this.imageChangedEvent = event;
     if (event.target.files && event.target.files[0]) {
-      this.openModal()
+      this.openModal();
     }
   }
 
   imageCropped(event: ImageCroppedEvent) {
-    this.croppedImageBlob = event.blob
-    this.croppedImage = event.objectUrl
+    this.croppedImageBlob = event.blob;
+    this.croppedImage = event.objectUrl;
   }
 
   onDone() {
-    this.previewCarImages.push(this.croppedImage)
+    this.previewCarImages.push(this.croppedImage);
     this.carImages.push(new File([this.croppedImageBlob], 'cover.png', {
       type: 'image/png'
-    }))
-    this.closeBtn.nativeElement.click()
+    }));
+    this.closeBtn.nativeElement.click();
   }
 
   openModal() {

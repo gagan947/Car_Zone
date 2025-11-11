@@ -517,5 +517,7 @@
       "RearInterior": "Rückraum",
       "Dashboard": "Dashboard",
       "EngineBay": "Motorraum",
-      "Done": "Fertig"
+      "Done": "Fertig",
+      "SuggestedCars": "Vorgeschlagene Autos",
+      "UploadImage": "Bild hochladen"
 }

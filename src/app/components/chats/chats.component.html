@@ -1,7 +1,7 @@
-<section class="py-4">
+<section class="pt-4">
       <div class="container-fluid">
             <div class="row">
-                  <div class="col-lg-9 mb-4">
+                  <div class="col-lg-9 mb-4" [ngClass]="sellerCarList.length > 1 ? 'col-lg-9' : 'col-lg-12'">
                         <div class="chat-area">
                               <!-- chatlist -->
                               <div class="chatlist ct_chatroom_chatlist">
@@ -22,13 +22,14 @@
                                                             (input)="filterChatList($event)">
                                                       <i class="fa-solid fa-search ct_input_icon_left"></i>
                                                 </div>
-                                                <div class="modal-body mt-4 ct_custom_scrollbar">
+                                                <div class="modal-body mt-4 ct_custom_scroll">
                                                       <!-- chat-list -->
                                                       <div class="chat-lists ">
                                                             <div class="chat-list">
                                                                   @if(filteredChatList.length > 0){
                                                                   @for (item of filteredChatList; track $index) {
-                                                                  <a (click)="openChat(item)" class="d-flex active2">
+                                                                  <a (click)="openChat(item, null)"
+                                                                        class="d-flex active2">
                                                                         <div class="ct_chat_list_grid">
                                                                               <div class="position-relative">
                                                                                     <img class="img-fluid ct_img_40"
@@ -117,15 +118,20 @@
                                                                               </div>
                                                                         </div>
                                                                   </div>
-                                                                  <div class="d-flex align-items-center gap-2">
-                                                                        <img src="img/car_2.jpg" alt=""
+                                                                  @if(currentCar){
+                                                                  <a class="d-flex align-items-center gap-2"
+                                                                        routerLink="/car-detail"
+                                                                        [queryParams]="{id: currentCar.id}">
+                                                                        <img [src]="currentCar.carImages[0]" alt=""
                                                                               class="ct_ads_card_w_100">
-                                                                        <p class="mb-0 ct_fw_600">BMW</p>
-                                                                  </div>
-
+                                                                        <p class="mb-0 ct_fw_600">
+                                                                              {{currentCar.brandName}}
+                                                                              {{currentCar.carModel}}</p>
+                                                                  </a>
+                                                                  }
                                                             </div>
                                                             <div class="modal-body">
-                                                                  <div class="msg-body ct_custom_scrollbar"
+                                                                  <div class="msg-body ct_custom_scroll"
                                                                         #scrollContainer>
                                                                         <ul>
                                                                               @for (item of messages; track $index) {
@@ -277,196 +283,30 @@
                               </div>
                         </div>
                   </div>
+                  @if(sellerCarList.length > 1){
                   <div class="col-lg-3 mb-4">
                         <div class="ct_right_side_card_listed">
                               <h4 class="ct_fs_18 ct_text_red mb-1">More Cars by the seller</h4>
-                              <p class="ct_fs_14 ct_text_op_6">Showing 5 more cars you might like</p>
+                              <p class="ct_fs_14 ct_text_op_6">Showing {{sellerCarList.length - 1}} more cars you might
+                                    like</p>
                               <ul class="mt-4 ct_custom_scroll">
+                                    @for(car of sellerCarList; track $index){
                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
+                                          <a class="d-flex align-items-start gap-3" routerLink="/car-detail"
+                                                [queryParams]="{id: car.id}">
+                                                <img [src]="car.carImages[0]" alt="" class="ct_img_w_76">
                                                 <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
+                                                      <h4 class="ct_fs_14 mb-1">{{car.brandName}} {{car.carModel}}</h4>
+                                                      <p class=" mb-0 ct_text_red ">{{car.totalPrice |
+                                                            chfFormat}}</p>
                                                 </div>
-                                                 
-                                          </div>
+                                          </a>
                                     </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
-                                     <li>
-                                          <div class="d-flex align-items-start gap-3">
-                                                <img src="img/car_1.jpg" alt="" class="ct_img_w_76">
-                                                <div>
-                                                      <h4 class="ct_fs_14 mb-1">Nissan Kicks 2022</h4>
-                                                      <p class="ct_text_op_6 mb-0">CHF 17,990</p>
-                                                </div>
-                                                 
-                                          </div>
-                                    </li>
+                                    }
                               </ul>
                         </div>
-
                   </div>
-                  
+                  }
             </div>
       </div>
 </section>

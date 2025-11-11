@@ -252,14 +252,15 @@
                                                                               @for (item of transmissions; track $index)
                                                                               {
                                                                               <nz-option nzCustomContent
-                                                                                    [nzLabel]="item.title"
+                                                                                    [nzLabel]="item.title | translate"
                                                                                     [nzValue]="item.key"
                                                                                     class="ct_custom_select">
                                                                                     <div
                                                                                           class="d-flex align-items-center justify-content-between">
                                                                                           <div>
                                                                                                 <p class="m-0">
-                                                                                                      {{item.title}}
+                                                                                                      {{item.title |
+                                                                                                      translate}}
                                                                                                 </p>
                                                                                           </div>
                                                                                           <input type="radio"
@@ -328,7 +329,7 @@
                                                                               formControlName="carCondition">
                                                                               @for (item of conditions; track $index) {
                                                                               <nz-option nzCustomContent
-                                                                                    [nzLabel]="item.title"
+                                                                                    [nzLabel]="item.title | translate"
                                                                                     [nzValue]="item.key"
                                                                                     class="ct_custom_select">
                                                                                     <div
@@ -336,10 +337,12 @@
                                                                                           <div>
                                                                                                 <p
                                                                                                       class="m-0 ct_fw_600">
-                                                                                                      {{item.title}}
+                                                                                                      {{item.title |
+                                                                                                      translate}}
                                                                                                 </p>
                                                                                                 <p class="m-0 ">
-                                                                                                      {{item.subTitle}}
+                                                                                                      {{item.subTitle |
+                                                                                                      translate}}
                                                                                                 </p>
                                                                                           </div>
                                                                                           <input type="radio"
@@ -633,9 +636,15 @@
       <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                   <div class="modal-body">
+                        <!-- 
+                          Yes, this compresses the image quality.
+
+                          The attributes [resizeToWidth]="190" and [resizeToHeight]="135" instruct the image-cropper to resize the output to 190x135 pixels, which is a significant reduction from typical camera/photo resolutions. Combined with format="png", this reduces file size and may alter (compress) quality.
+                          
+                          You can remove [resizeToWidth] and [resizeToHeight] or set them to higher values if you want less compression.
+                        -->
                         <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                              [aspectRatio]="38 / 27" [resizeToWidth]="190" [resizeToHeight]="135" format="png"
-                              (imageCropped)="imageCropped($event)">
+                              [aspectRatio]="38 / 27" (imageCropped)="imageCropped($event)" [imageQuality]="93">
                         </image-cropper>
                   </div>
                   <div class="modal-footer">

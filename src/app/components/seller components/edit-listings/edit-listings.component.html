@@ -127,7 +127,8 @@
                                                 <div class="form-group mb-4 text-start">
                                                       <label for="" class="mb-2 ct_fw_600">{{'FuelType' | translate}}
                                                       </label>
-                                                      <nz-select class="form-control ct_input" nzPlaceHolder="Select"
+                                                      <nz-select class="form-control ct_input"
+                                                            nzPlaceHolder="{{'Select' | translate}}"
                                                             formControlName="fuelType">
                                                             @for (type of fuelTypes; track $index) {
                                                             <nz-option nzCustomContent [nzLabel]="type.title"
@@ -136,7 +137,7 @@
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                               <p class="m-0">
-                                                                                    {{type.title}}
+                                                                                    {{type.title | translate}}
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
@@ -154,16 +155,18 @@
                                                       <label for="" class="mb-2 ct_fw_600">{{'Transmission' |
                                                             translate}}</label>
                                                       <nz-select class="form-control ct_input ct_custom_select"
-                                                            nzPlaceHolder="Select" formControlName="transmission">
+                                                            nzPlaceHolder="{{'Select' | translate}}"
+                                                            formControlName="transmission">
                                                             @for (item of transmissions; track $index)
                                                             {
-                                                            <nz-option nzCustomContent [nzLabel]="item.title"
+                                                            <nz-option nzCustomContent
+                                                                  [nzLabel]="item.title | translate"
                                                                   [nzValue]="item.key" class="ct_custom_select">
                                                                   <div
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                               <p class="m-0">
-                                                                                    {{item.title}}
+                                                                                    {{item.title | translate}}
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
@@ -214,18 +217,20 @@
                                                       <label for="" class="mb-2 ct_fw_600">{{'Condition' |
                                                             translate}}</label>
                                                       <nz-select class="form-control ct_input ct_custom_select"
-                                                            nzPlaceHolder="Select" formControlName="carCondition">
+                                                            nzPlaceHolder="{{'Select' | translate}}"
+                                                            formControlName="carCondition">
                                                             @for (item of conditions; track $index) {
-                                                            <nz-option nzCustomContent [nzLabel]="item.title"
+                                                            <nz-option nzCustomContent
+                                                                  [nzLabel]="item.title | translate"
                                                                   [nzValue]="item.key" class="ct_custom_select">
                                                                   <div
                                                                         class="d-flex align-items-center justify-content-between">
                                                                         <div>
                                                                               <p class="m-0 ct_fw_600">
-                                                                                    {{item.title}}
+                                                                                    {{item.title | translate}}
                                                                               </p>
                                                                               <p class="m-0 ">
-                                                                                    {{item.subTitle}}
+                                                                                    {{item.subTitle | translate}}
                                                                               </p>
                                                                         </div>
                                                                         <input type="radio" class="cutom_radio_input"
@@ -281,7 +286,7 @@
                                                       <div class="position-relative">
                                                             <input type="text" class="form-control ct_input"
                                                                   #featureInput rows="4"
-                                                                  placeholder="Enter Features & Specifications"
+                                                                  placeholder="{{'Enter' | translate}} {{'FeaturesSpecifications' | translate}}"
                                                                   formControlName="carFeatures"
                                                                   (keydown.enter)="addFeature(featureInput.value); $event.preventDefault()" />
                                                             <button type="button"
@@ -486,8 +491,7 @@
             <div class="modal-content">
                   <div class="modal-body">
                         <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                              [aspectRatio]="38 / 27" [resizeToWidth]="190" [resizeToHeight]="135" format="png"
-                              (imageCropped)="imageCropped($event)">
+                              [aspectRatio]="38 / 27" (imageCropped)="imageCropped($event)" [imageQuality]="93">
                         </image-cropper>
                   </div>
                   <div class="modal-footer">

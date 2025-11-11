@@ -30,22 +30,22 @@ $(document).on("click", function (e) {
 //     delay: 1000
 //   });
 
-$('.ct_ads_slider').owlCarousel({
-  loop: true,
-  margin: 10,
-  nav: true,
-  responsive: {
-    0: {
-      items: 1
-    },
-    600: {
-      items: 2
-    },
-    1000: {
-      items: 3
-    }
-  }
-})
+// $('.ct_ads_slider').owlCarousel({
+//   loop: true,
+//   margin: 10,
+//   nav: true,
+//   responsive: {
+//     0: {
+//       items: 1
+//     },
+//     600: {
+//       items: 2
+//     },
+//     1000: {
+//       items: 3
+//     }
+//   }
+// })
 
 new WOW().init();
 
@@ -101,28 +101,28 @@ $(window).scroll(function () {
 // })
 
 
-$('.ct_login_slider').owlCarousel({
-  loop: true,
-  animateIn: 'fadeIn',
-  margin: 10,
-  autoplayTimeout: 3000,
+// $('.ct_login_slider').owlCarousel({
+//   loop: true,
+//   animateIn: 'fadeIn',
+//   margin: 10,
+//   autoplayTimeout: 3000,
 
-  nav: true,
-  autoplay: 3000,
-  //    smartSpeed:1000,
-  slideSpeed: 2000,
-  responsive: {
-    0: {
-      items: 1
-    },
-    600: {
-      items: 1
-    },
-    1000: {
-      items: 1
-    }
-  }
-})
+//   nav: true,
+//   autoplay: 3000,
+//   //    smartSpeed:1000,
+//   slideSpeed: 2000,
+//   responsive: {
+//     0: {
+//       items: 1
+//     },
+//     600: {
+//       items: 1
+//     },
+//     1000: {
+//       items: 1
+//     }
+//   }
+// })
 
 
 $(".chat-list a").click(function () {

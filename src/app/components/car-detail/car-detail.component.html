@@ -44,7 +44,7 @@
                               </div>
 
                               <div class="ct_address_info mt-4">
-                                    <ul>
+                                    <ul class="mb-0">
                                           <!-- @if(carData?.location){
                                           <li>
                                                 <i class="fa-solid fa-location-dot"></i>
@@ -66,7 +66,10 @@
                                     <p class="mb-0"><i class="fa-solid fa-check me-1 text-success"></i> Ab MFK</p>
                                     <p class="mb-0"><i class="fa-solid fa-check me-1 text-success"></i> Mit Garantie</p>
                               </div>
-                              <div class="mt-5">
+                              <p class="ct_fs_16 ct_green_text mt-2 mb-0">Share On: <a
+                                          (click)="shareOnWhatsapp(carData)" class="ct_green_text"><i
+                                                class="fa-brands fa-whatsapp"></i></a></p>
+                              <div class="mt-4">
                                     <ng-container *appRole="'buyer'">
                                           <a (click)="contactSeller(carData)"
                                                 class="ct_red_btn w-100 text-center">{{'ContactSeller' | translate}}</a>
@@ -130,7 +133,6 @@
             </div>
       </div>
 </section>
-
 
 <section class=" pb-5 pt-0">
       <div class="container">
@@ -461,256 +463,74 @@
       </div>
 </section>
 }
+@if(carData?.suggestedCar.length > 0){
 <section class="pb-5">
       <div class="container">
             <div class="row">
                   <div class="col-md-12">
-                        <h4 class="ct_fs_24 ct_fw_600 mb-4">Other vehicles from this provider</h4>
-                        <div class="otherSwiper swiper ct_ads_slider">
+                        <h4 class="ct_fs_24 ct_fw_600 mb-4">{{'SuggestedCars' | translate}}</h4>
+                        <div class="otherSwiper swiper">
                               <div class="swiper-wrapper">
+                                    @for(car of carData?.suggestedCar; track $index){
                                     <div class="swiper-slide">
                                           <div class="ct_browse_car_card">
                                                 <figure class="mb-0">
                                                       <div class="ct_browse_card_img">
-                                                            <img src="img/car-1.png" alt="">
+                                                            <img [src]="car.car_images[0] || 'img/placeHolder.webp'"
+                                                                  alt="" (click)="viewCarDetail(car.id)"
+                                                                  style="cursor: pointer;">
                                                       </div>
                                                       <figcaption class="mt-3">
                                                             <div
                                                                   class="d-flex align-items-center justify-content-between mb-2">
                                                                   <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
-                                                                        45,900</span>
-                                                                  <small class="ct_fs_16 ct_green_text">Share On: <a
-                                                                              href="#" class="ct_green_text"><i
-                                                                                    class="fa-brands fa-whatsapp"></i></a></small>
+                                                                        {{car.totalPrice | chfFormat}}</span>
                                                             </div>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
-                                                                  C-Class</a>
+                                                            <a (click)="viewCarDetail(car.id)"
+                                                                  class="ct_fs_20 ct_fw_700 d-block">{{car.brandName}}
+                                                                  {{car.carModel}}</a>
                                                             <ul>
                                                                   <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
+                                                                        <small class="ct_text_op_6 ct_fw_600">{{'Transmission'
+                                                                              | translate}}</small>
                                                                         <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Automatic</p>
+                                                                              {{car.transmission}}</p>
                                                                   </li>
                                                                   <li>
-                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                              Type</small>
+                                                                        <small class="ct_text_op_6 ct_fw_600">{{'FuelType'
+                                                                              | translate}}</small>
                                                                         <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Electric</p>
+                                                                              {{car.fuelType}}</p>
                                                                   </li>
                                                                   <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
-                                                                              Person</p>
+                                                                        <small class="ct_text_op_6 ct_fw_600">{{'Passenger'
+                                                                              | translate}} </small>
+                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
+                                                                              {{car.sittingCapacity}}
+                                                                              {{'Person' | translate}}
+                                                                        </p>
                                                                   </li>
                                                             </ul>
                                                             <div class="mt-4">
-                                                                  <a routerLink="/car-detail"
-                                                                        class="ct_red_btn w-100 text-center">View
-                                                                        More</a>
+                                                                  <a (click)="viewCarDetail(car.id)"
+                                                                        class="ct_red_btn w-100 text-center">{{'ViewMore'
+                                                                        | translate}}
+                                                                  </a>
                                                             </div>
                                                       </figcaption>
                                                 </figure>
                                           </div>
                                     </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_browse_car_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_browse_card_img">
-                                                            <img src="img/car-1.png" alt="">
-                                                      </div>
-                                                      <figcaption class="mt-3">
-                                                            <div
-                                                                  class="d-flex align-items-center justify-content-between mb-2">
-                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
-                                                                        45,900</span>
-                                                                  <small class="ct_fs_16 ct_green_text">Share On: <a
-                                                                              href="#" class="ct_green_text"><i
-                                                                                    class="fa-brands fa-whatsapp"></i></a></small>
-                                                            </div>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
-                                                                  C-Class</a>
-                                                            <ul>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Automatic</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                              Type</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Electric</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
-                                                                              Person</p>
-                                                                  </li>
-                                                            </ul>
-                                                            <div class="mt-4">
-                                                                  <a routerLink="/car-detail"
-                                                                        class="ct_red_btn w-100 text-center">View
-                                                                        More</a>
-                                                            </div>
-                                                      </figcaption>
-                                                </figure>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_browse_car_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_browse_card_img">
-                                                            <img src="img/car-1.png" alt="">
-                                                      </div>
-                                                      <figcaption class="mt-3">
-                                                            <div
-                                                                  class="d-flex align-items-center justify-content-between mb-2">
-                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
-                                                                        45,900</span>
-                                                                  <small class="ct_fs_16 ct_green_text">Share On: <a
-                                                                              href="#" class="ct_green_text"><i
-                                                                                    class="fa-brands fa-whatsapp"></i></a></small>
-                                                            </div>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
-                                                                  C-Class</a>
-                                                            <ul>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Automatic</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                              Type</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Electric</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
-                                                                              Person</p>
-                                                                  </li>
-                                                            </ul>
-                                                            <div class="mt-4">
-                                                                  <a routerLink="/car-detail"
-                                                                        class="ct_red_btn w-100 text-center">View
-                                                                        More</a>
-                                                            </div>
-                                                      </figcaption>
-                                                </figure>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_browse_car_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_browse_card_img">
-                                                            <img src="img/car-1.png" alt="">
-
-                                                      </div>
-                                                      <figcaption class="mt-3">
-                                                            <div
-                                                                  class="d-flex align-items-center justify-content-between mb-2">
-                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
-                                                                        45,900</span>
-                                                                  <small class="ct_fs_16 ct_green_text">Share On: <a
-                                                                              href="#" class="ct_green_text"><i
-                                                                                    class="fa-brands fa-whatsapp"></i></a></small>
-                                                            </div>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
-                                                                  C-Class</a>
-                                                            <ul>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Automatic</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                              Type</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Electric</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
-                                                                              Person</p>
-                                                                  </li>
-                                                            </ul>
-                                                            <div class="mt-4">
-                                                                  <a routerLink="/car-detail"
-                                                                        class="ct_red_btn w-100 text-center">View
-                                                                        More</a>
-                                                            </div>
-                                                      </figcaption>
-                                                </figure>
-                                          </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                          <div class="ct_browse_car_card">
-                                                <figure class="mb-0">
-                                                      <div class="ct_browse_card_img">
-                                                            <img src="img/car-1.png" alt="">
-
-                                                      </div>
-                                                      <figcaption class="mt-3">
-                                                            <div
-                                                                  class="d-flex align-items-center justify-content-between mb-2">
-                                                                  <span class="ct_fs_16 ct_fw_700 mb-0 ct_text_red">CHF
-                                                                        45,900</span>
-                                                                  <small class="ct_fs_16 ct_green_text">Share On: <a
-                                                                              href="#" class="ct_green_text"><i
-                                                                                    class="fa-brands fa-whatsapp"></i></a></small>
-                                                            </div>
-                                                            <a routerLink="/car-detail"
-                                                                  class="ct_fs_20 ct_fw_700 d-block">Mercedes-Benz
-                                                                  C-Class</a>
-                                                            <ul>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Translation</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Automatic</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small class="ct_text_op_6 ct_fw_600">Fuel
-                                                                              Type</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">
-                                                                              Electric</p>
-                                                                  </li>
-                                                                  <li>
-                                                                        <small
-                                                                              class="ct_text_op_6 ct_fw_600">Passenger</small>
-                                                                        <p class="mb-0 ct_fs_16 ct_fw_600">03
-                                                                              Person</p>
-                                                                  </li>
-                                                            </ul>
-                                                            <div class="mt-4">
-                                                                  <a routerLink="/car-detail"
-                                                                        class="ct_red_btn w-100 text-center">View
-                                                                        More</a>
-                                                            </div>
-                                                      </figcaption>
-                                                </figure>
-                                          </div>
-                                    </div>
+                                    }
                               </div>
+                              <div class="swiper-button-prev"></div>
+                              <div class="swiper-button-next"></div>
                         </div>
                   </div>
             </div>
       </div>
 </section>
+}
 
 <section class="">
       <iframe

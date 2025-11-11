@@ -13,28 +13,30 @@
 .cursor-pointer {
       cursor: pointer;
 }
-.ct_right_side_card_listed{
+
+.ct_right_side_card_listed {
       padding: 22px;
       background-color: #FDFDFD;
       border: 1px solid #6C6C6C4D;
       box-shadow: 0px 0px 45px 0px #00000021;
-height: calc(100% - 33px);
-/* overflow-y: auto; */
+      height: calc(100% - 33px);
+      /* overflow-y: auto; */
       border-radius: 10px;
 }
-.ct_img_w_76{
+
+.ct_img_w_76 {
       width: 76px;
       height: 58px;
       object-fit: cover;
       border-radius: 10px;
 }
 
-.ct_right_side_card_listed li + li{
+.ct_right_side_card_listed li+li {
       margin-top: 30px;
 }
 
-.ct_right_side_card_listed ul{
-          max-height: calc(100vh - 380px);
-    overflow-y: auto;
-    padding-bottom: 20px;
+.ct_right_side_card_listed ul {
+      max-height: calc(100vh - 380px);
+      overflow-y: auto;
+      padding-bottom: 20px;
 }
