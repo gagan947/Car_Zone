@@ -1422,7 +1422,7 @@ message-area
 }
 
 .ct_fs_12 {
-  font-size: 12px;
+  font-size: 12px !important;
 }
 
 .chatbox .modal-dialog,
@@ -2469,9 +2469,9 @@ button:focus {
 }
 
 .ct_single_uploaded_img img {
+  object-fit: cover;
+  height: 100%;
   width: 100%;
-  object-fit: contain;
-  height: 200px;
 }
 
 .ct_single_uploaded_img i {

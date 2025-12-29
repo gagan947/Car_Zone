@@ -1,9 +1,8 @@
 <section class="w-100 mx-auto" style="max-width: 800px;">
-      <div class="ct_back_btn" style="cursor: pointer;" (click)="location.back()">
+      <div class="ct_back_btn text-white" style="cursor: pointer;" (click)="location.back()">
             <i class="fa-solid fa-arrow-left"></i>Back
       </div>
       <div class="mySwiper swiper">
-
             <div class="swiper-wrapper">
                   @for (item of carReels; track $index) {
                   @if(item.carReel){

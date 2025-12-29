@@ -5,10 +5,14 @@ import { CommonService } from '../../services/common.service';
 import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { LoaderService } from '../../services/loader.service';
+import { AuthService } from '../../services/auth.service';
+import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
+import { RoleService } from '../../services/role.service';
 declare var Swiper: any;
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, RoleDirective, CommonModule, TranslateModule],
+  imports: [RouterLink, RoleDirective, CommonModule, TranslateModule, ChfFormatPipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
   providers: [],
@@ -17,7 +21,10 @@ export class HomeComponent {
   userData: any
   private destroy$ = new Subject<void>();
   carReels: any = [];
-  constructor(private commonService: CommonService, private router: Router, private translate: TranslateService) {
+  carsList: any[] = []
+  myCarsList: any[] = []
+  token: any;
+  constructor(private commonService: CommonService, private router: Router, private translate: TranslateService, private loader: LoaderService, private authService: AuthService, private roleService: RoleService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     effect(() => {
       this.userData = this.commonService.userData
@@ -25,7 +32,13 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    this.getReels()
+    this.token = this.authService.getToken();
+    this.getReels();
+    if (this.roleService.currentRole() === 'seller') {
+      this.getMyCars();
+    } else {
+      this.getCars();
+    }
   }
 
   listCar() {
@@ -36,7 +49,7 @@ export class HomeComponent {
     }
   }
 
-  ngAfterViewInit(): void {
+  loadSwipers(): void {
     new Swiper('.carSwiper', {
       direction: 'horizontal',
       slidesPerView: 1,
@@ -54,7 +67,7 @@ export class HomeComponent {
       speed: 400
     });
 
-    const swiper = new Swiper('.mySwiper', {
+    new Swiper('.mySwiper', {
       direction: 'horizontal',
       slidesPerView: 1,
       spaceBetween: 10,
@@ -126,6 +139,38 @@ export class HomeComponent {
     item.isSavedReel = !item.isSavedReel
     this.commonService.delete('user/removeSavedCarsReel', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
     })
+  }
+
+  getCars() {
+    this.loader.show()
+    this.commonService.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.carsList = res.data
+      this.loadSwipers()
+      this.loader.hide()
+    }, err => {
+      this.loader.hide()
+    })
+  }
+
+  getMyCars() {
+    this.loader.show()
+    this.commonService.get('user/getMyCar').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.myCarsList = res.data
+      setTimeout(() => {
+        this.loadSwipers()
+      }, 100);
+      this.loader.hide()
+    }, err => {
+      this.loader.hide()
+    })
+  }
+
+  get activeCars() {
+    return this.myCarsList.filter((c: { is_active: any; }) => c.is_active);
+  }
+
+  get expiredCars() {
+    return this.myCarsList.filter((c: { is_active: any; }) => !c.is_active);
   }
 
   ngOnDestroy(): void {

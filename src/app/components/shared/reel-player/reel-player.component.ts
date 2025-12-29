@@ -58,7 +58,7 @@ export class ReelPlayerComponent {
     setTimeout(() => {
       this.swiper = new Swiper('.mySwiper', {
         direction: 'vertical',
-        loop: false,
+        loop: true,
         currrentIndex: 4,
         mousewheel: {
           forceToAxis: true,
@@ -117,7 +117,7 @@ export class ReelPlayerComponent {
 
   private playActiveVideo(video: HTMLVideoElement) {
     video.muted = false;
-    video.volume = 0;
+    video.volume = 1;
 
     // Add these attributes to prevent power-saving pause
     video.setAttribute('playsinline', '');
@@ -228,7 +228,7 @@ export class ReelPlayerComponent {
   //   this.service.post('user/saveCarReels', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
   //   })
   // }
-    saveReel(item: any) {
+  saveReel(item: any) {
     // Optimistically toggle saved state
     item.isSavedReel = !item.isSavedReel;
 

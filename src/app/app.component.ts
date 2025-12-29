@@ -31,7 +31,6 @@ export class AppComponent {
     });
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
-        this.notificationService.listenForMessages();
         const existingScript = document.querySelector('script[src="js/main.js"]');
         if (existingScript) {
           existingScript.remove();

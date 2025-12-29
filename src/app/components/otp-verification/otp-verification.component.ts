@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-otp-verification',
@@ -24,10 +25,11 @@ export class OtpVerificationComponent {
   otp: string = '';
   loading: boolean = false
   isForgotPassword: string | undefined
-
-  constructor(private router: Router, private toster: NzMessageService, private commonService: CommonService, private translate: TranslateService) {
+  userName: string
+  constructor(private router: Router, private toster: NzMessageService, private commonService: CommonService, private translate: TranslateService, private userService: UserService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     this.email = sessionStorage.getItem('email') || ''
+    this.userName = sessionStorage.getItem('userName') || ''
     this.isForgotPassword = sessionStorage.getItem('isForgotPassword') || ''
   }
 
@@ -81,6 +83,7 @@ export class OtpVerificationComponent {
         if (this.isForgotPassword === '1') {
           this.router.navigate(['/reset-password'])
         } else {
+          this.userService.handleAddOrUpdateUser(res.data.userId, this.userName, '')
           this.router.navigate(['/login'])
         }
       },

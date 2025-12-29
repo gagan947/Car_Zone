@@ -20,7 +20,9 @@ const scrollConfig: InMemoryScrollingOptions = {
 
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withInMemoryScrolling(scrollConfig)),
-  provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+  provideFirebaseApp(() =>
+     initializeApp(environment.firebaseConfig)
+),
   provideAuth(() => getAuth()),
   provideMessaging(() => getMessaging()),
   provideFirestore(() => getFirestore()),

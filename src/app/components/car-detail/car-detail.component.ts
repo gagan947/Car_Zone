@@ -167,8 +167,8 @@ export class CarDetailComponent {
         email: item.sellerDetails.email,
         profileImage: item.sellerDetails.profileImage,
         carId: item.id,
-        // carImage: item.carImages[0],
-        // carName: item.brandName + ' ' + item.carModel + ' ' + item.selectYear
+        carImage: item.carImages[0],
+        carName: item.brandName + ' ' + item.carModel
       }
 
       this.service.sellerData.set(sellerData)

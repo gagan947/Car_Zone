@@ -159,6 +159,61 @@
                                                                               carFormOne.get("sittingCapacity"))}}</small>
                                                                   </div>
                                                             </div>
+
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">{{'BodyType'
+                                                                              | translate}}
+                                                                        </label>
+
+                                                                        <nz-select class="form-control ct_input"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
+                                                                              formControlName="bodyTypes">
+                                                                              @for (item of bodyTypes; track
+                                                                              $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.title | translate"
+                                                                                    [nzValue]="item.key"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p class="m-0">
+                                                                                                      {{item.title |
+                                                                                                      translate}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.key === carFormOne.get('bodyTypes')?.value">
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        <small class="text-danger">{{validationErrorService.getErrorMessage(('BodyType'
+                                                                              | translate),
+                                                                              carFormOne.get("bodyTypes"))}}</small>
+                                                                  </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">{{'Consuption'
+                                                                              | translate}}
+                                                                        </label>
+                                                                        <input type="text" class="form-control ct_input"
+                                                                              placeholder="{{'Select' | translate}} {{'Consumption' | translate}}"
+                                                                              formControlName="consuption"
+                                                                              data-bs-toggle="modal"
+                                                                              data-bs-target="#ct_filter_modal" />
+                                                                        <small class="text-danger">{{validationErrorService.getErrorMessage(('Consuption'
+                                                                              | translate),
+                                                                              carFormOne.get("consuption"))}}</small>
+                                                                  </div>
+                                                            </div>
+
                                                             <div class="col-md-6">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
@@ -309,9 +364,40 @@
                                                                               class="mb-2 ct_fw_600">{{'ExteriorColor' |
                                                                               translate}}
                                                                         </label>
+                                                                        @if(carFormOne.get('carColor')?.value
+                                                                        !=='Other' && !isCarColorOther) {
+                                                                        <nz-select
+                                                                              class="form-control ct_input ct_custom_select"
+                                                                              nzPlaceHolder="{{'Select' | translate}}"
+                                                                              formControlName="carColor">
+                                                                              @for (item of carColors; track $index) {
+                                                                              <nz-option nzCustomContent
+                                                                                    [nzLabel]="item.title | translate"
+                                                                                    [nzValue]="item.key"
+                                                                                    class="ct_custom_select">
+                                                                                    <div
+                                                                                          class="d-flex align-items-center justify-content-between">
+                                                                                          <div>
+                                                                                                <p
+                                                                                                      class="m-0 ct_fw_600">
+                                                                                                      {{item.title |
+                                                                                                      translate}}
+                                                                                                </p>
+                                                                                          </div>
+                                                                                          <input type="radio"
+                                                                                                class="cutom_radio_input"
+                                                                                                [checked]="item.key === carFormOne.get('carColor')?.value" />
+                                                                                    </div>
+                                                                              </nz-option>
+                                                                              }
+                                                                        </nz-select>
+                                                                        }
+                                                                        @if(carFormOne.get('carColor')?.value
+                                                                        ==='Other' || isCarColorOther) {
                                                                         <input type="text" class="form-control ct_input"
                                                                               placeholder="{{'Enter' | translate}} {{'ExteriorColor' | translate}}"
                                                                               formControlName="carColor" />
+                                                                        }
                                                                         <small class="text-danger">{{validationErrorService.getErrorMessage(('ExteriorColor'
                                                                               | translate),
                                                                               carFormOne.get("carColor"))}}</small>
@@ -456,6 +542,48 @@
                                                       <div class="row">
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
+                                                                        <div
+                                                                              class="form-check ct_custom_check2 d-flex align-items-start gap-2">
+                                                                              <input class=" form-check-input"
+                                                                                    type="checkbox" id="isLeasing"
+                                                                                    formControlName="isLeasing">
+                                                                              <label class="form-check-label mb-0 ms-1 d-grid"
+                                                                                    for="isLeasing">
+                                                                                    <span class="ct_fw_600">
+                                                                                          {{'EnableLeasing' |
+                                                                                          translate}}
+                                                                                    </span>
+                                                                                    <span class="">
+                                                                                          {{'TurnThisOnIfYouWantToOfferLeasingForThisVehicle'
+                                                                                          |
+                                                                                          translate}}
+                                                                                    </span>
+                                                                              </label>
+                                                                        </div>
+                                                                  </div>
+                                                            </div>
+                                                            @if(carFormTwo.get('isLeasing')?.value) {
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
+                                                                        <label for=""
+                                                                              class="mb-2 ct_fw_600">{{'LeasingPrice' |
+                                                                              translate}}
+                                                                        </label>
+                                                                        <div class="position-relative">
+                                                                              <input type="number"
+                                                                                    class="form-control ct_input pe-5"
+                                                                                    placeholder="{{'Enter' | translate}} {{'LeasingPrice' | translate}}"
+                                                                                    formControlName="leasingPrice" />
+                                                                              <span class="ct_show_eye">CHF</span>
+                                                                        </div>
+                                                                        <small class="text-danger">{{validationErrorService.getErrorMessage(('LeasingPrice'
+                                                                              | translate),
+                                                                              carFormTwo.get("leasingPrice"))}}</small>
+                                                                  </div>
+                                                            </div>
+                                                            }
+                                                            <div class="col-md-12">
+                                                                  <div class="form-group mb-4 text-start">
                                                                         <label for=""
                                                                               class="mb-2 ct_fw_600">{{'TotalPrice' |
                                                                               translate}}
@@ -475,7 +603,8 @@
                                                             <div class="col-md-12">
                                                                   <div class="form-group mb-4 text-start">
                                                                         <label for=""
-                                                                              class="mb-2 ct_fw_600">{{'Location' |
+                                                                              class="mb-2 ct_fw_600">{{'Location'
+                                                                              |
                                                                               translate}}
                                                                         </label>
                                                                         <textarea type="text"
@@ -575,6 +704,7 @@
                                           <div class="text-start mb-4">
                                                 <label for="" class="ct_fw_600 mb-2">{{'UploadCarReel' | translate}}
                                                 </label>
+                                                @if(!videoPreview){
                                                 <div class="ct_upload_product_main ct_upload_product_main">
                                                       <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -599,8 +729,9 @@
                                                             </div>
                                                       </label>
                                                 </div>
-
-                                                <div class="ct_single_uploaded_img mt-3 py-2" *ngIf="videoPreview">
+                                                }
+                                                @else{
+                                                <div class="ct_single_uploaded_img mt-2 py-2">
                                                       <div class="mobile-frame">
                                                             <video [src]="videoPreview" autoplay controls playsinline
                                                                   class="videoPreview"></video>
@@ -608,6 +739,48 @@
                                                                   (click)="removeFile()"></i>
                                                       </div>
                                                 </div>
+                                                }
+                                          </div>
+
+                                          <div class="text-start mb-4">
+                                                <label for="" class="ct_fw_600 mb-2">{{'UploadCarReelThumbnail' |
+                                                      translate}}
+                                                </label>
+                                                @if(!thumbnailImagePreview){
+                                                <div class="ct_upload_product_main ct_upload_product_main">
+                                                      <svg width="33" height="33" viewBox="0 0 33 33" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M5.87174 22.0167C4.26376 20.9403 3.20508 19.1073 3.20508 17.027C3.20508 13.9023 5.59376 11.3354 8.64473 11.0528C9.26883 7.25653 12.5654 4.36035 16.5384 4.36035C20.5114 4.36035 23.808 7.25653 24.4321 11.0528C27.4831 11.3354 29.8717 13.9023 29.8717 17.027C29.8717 19.1073 28.8131 20.9403 27.2051 22.0167M11.2051 21.6937L16.5384 16.3604M16.5384 16.3604L21.8717 21.6937M16.5384 16.3604V28.3604"
+                                                                  stroke="#9CA3AF" stroke-width="2.66667"
+                                                                  stroke-linecap="round" stroke-linejoin="round"></path>
+                                                      </svg>
+
+                                                      <p class="text-center ct_fs_18 ct_text_op_07 mb-0">
+                                                            {{'UploadYourThumbnailHere' | translate}}
+                                                      </p>
+                                                      <small class="text-center d-block ct_text_op_6">{{'MP4VideoUpTo60Seconds'
+                                                            | translate}}
+
+                                                      </small>
+                                                      <label for="ct_upload_thumbnail_image">
+                                                            <input type="file" name="" id="ct_upload_thumbnail_image"
+                                                                  class="d-none" accept="image/*"
+                                                                  (change)="onThumbnailImageSelected($event)" />
+                                                            <div class="ct_browse_btn mt-3">
+                                                                  <span>{{'BrowseFiles' | translate}}</span>
+                                                            </div>
+                                                      </label>
+                                                </div>
+                                                }
+                                                @else{
+                                                <div class="ct_single_uploaded_img mt-2 py-2">
+                                                      <div class="mobile-frame">
+                                                            <img [src]="thumbnailImagePreview" alt="" />
+                                                            <i class="fa-solid fa-xmark close-btn"
+                                                                  (click)="removeThumbnailImage()"></i>
+                                                      </div>
+                                                </div>
+                                                }
                                           </div>
                                           <!-- <button routerLink="/my-listings" type="button"
                                                 class="ct_red_btn ct_form_next float-end">
@@ -644,7 +817,7 @@
                           You can remove [resizeToWidth] and [resizeToHeight] or set them to higher values if you want less compression.
                         -->
                         <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
-                              [aspectRatio]="38 / 27" (imageCropped)="imageCropped($event)" [imageQuality]="93">
+                              [aspectRatio]="38 / 27" (imageCropped)="imageCropped($event)">
                         </image-cropper>
                   </div>
                   <div class="modal-footer">
@@ -661,3 +834,81 @@
 </ngx-scanner-qrcode>
 <button (click)="action.start()">Start</button>
 <button (click)="action.stop()">Stop</button> -->
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="ct_filter_modal" tabindex="-1" aria-labelledby="ct_filter_modalLabel" aria-hidden="true"
+      data-bs-backdrop="static" data-bs-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ct_consumption_modal">
+
+                  <div class="modal-header border-0">
+                        <h1 class="modal-title ct_fs_20 ct_fW_600">Consumption</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <div class="modal-body">
+
+                        <div class="">
+
+                              <div class="d-flex align-items-center gap-4">
+
+                                    <div class="ct_timer_main">
+
+                                          <!-- Center highlight window -->
+                                          <div class="ct-center-line"></div>
+
+                                          <!-- WHOLE -->
+                                          <div #wholeWheel class="wheel" (scroll)="onScroll($event, 'whole')">
+                                                <ul>
+                                                      <li *ngFor="let n of wholeNumbers; let i = index"
+                                                            [class.active]="i === activeWholeIndex">
+                                                            {{ n }}
+                                                      </li>
+                                                </ul>
+                                          </div>
+
+                                          <span class="ct-dot">.</span>
+
+                                          <!-- DECIMAL -->
+                                          <div #decimalWheel class="wheel" (scroll)="onScroll($event, 'decimal')">
+                                                <ul>
+                                                      <li *ngFor="let d of decimalNumbers; let i = index"
+                                                            [class.active]="i === activeDecimalIndex">
+                                                            {{ d }}
+                                                      </li>
+                                                </ul>
+                                          </div>
+
+                                    </div>
+
+                                    <!-- RIGHT RESULT -->
+                                    <div class="text-end">
+                                          <div class="ct_result_value">{{ resultValue }}</div>
+                                          <div class="ct_result_unit">L/100 km</div>
+                                    </div>
+
+                              </div>
+
+                              <!-- INFO TEXT -->
+                              <div class="text-center mt-3 ct_scroll_note">
+                                    {{'ScrollToAdjustValues' | translate}}
+                              </div>
+
+                              <!-- BUTTON -->
+                              <button class="btn w-100 ct_done_btn mt-4 ct_red_btn" data-bs-dismiss="modal"
+                                    (click)="onDoneModalCloseBtnClick()">
+                                    {{'Done' | translate}}
+                              </button>
+
+                        </div>
+
+                  </div>
+            </div>
+      </div>
+</div>
+<!-- Filter section Res Modal E -->

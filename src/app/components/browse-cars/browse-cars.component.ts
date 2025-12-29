@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonService } from '../../services/common.service';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
@@ -12,10 +12,10 @@ import { ChfFormatPipe } from '../../pipes/chf-format.pipe';
 import { AuthService } from '../../services/auth.service';
 import { ModalService } from '../../services/modal.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 @Component({
   selector: 'app-browse-cars',
-  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule, ChfFormatPipe, TranslateModule],
+  imports: [RouterLink, CommonModule, NzSelectModule, FormsModule, NzSliderModule, ChfFormatPipe, TranslateModule, NzPopoverModule],
   templateUrl: './browse-cars.component.html',
   styleUrl: './browse-cars.component.css'
 })
@@ -27,26 +27,41 @@ export class BrowseCarsComponent {
   conditions = carData.conditions
   loading: boolean = false
   brandList: any[] = []
+  orgBrandList: any[] = []
   modalList: any[] = []
+  orgModalList: any[] = []
   sittingCapacity = [1, 2, 3, 4, 5, 6, 7]
   sellerTypes = carData.sellerTypes
-
-  // selectedBrand: any = null
-  selectedBrand: string[] = [];
-  // selectedModal: any = null
+  visible: boolean = false
+  YearVisible: boolean = false
+  PriceVisible: boolean = false
+  MilageVisible: boolean = false
+  FuelVisible: boolean = false
+  TransmissionVisible: boolean = false
+  PowerVisible: boolean = false
+  TypeOfCarVisible: boolean = false
+  selectedBrand: string[] = []
   selectedModal: string[] = [];
   selectedSittingCapacity: any = null
   selectedSellerType: any = null
   selectedFuels: string[] = [];
   selectedTransmissions: string[] = [];
-  priceRange: any = [1000, 2000000];
-  yearRange: any = [2000, 2025];
-  milageRange: any = [];
-  powerRange: any = [];
+  priceRange: any = [0, 1000000];
+  yearRange: any = [1900, 2025];
+  milageRange: any = [0, 10000];
+  powerRange: any = [0, 1000];
   token: any;
-
   years: number[] = [];
-
+  selectedBrandsModal: any[] = [];
+  searchModalValue: string = '';
+  searchBrandValue: string = '';
+  @ViewChild('modalScrollDiv') modalScrollDiv!: ElementRef<HTMLDivElement>;
+  YearFilterApplied: boolean = false
+  PriceFilterApplied: boolean = false
+  MilageFilterApplied: boolean = false
+  FuelFilterApplied: boolean = false
+  TransmissionFilterApplied: boolean = false
+  PowerFilterApplied: boolean = false
   constructor(private service: CommonService, private loader: LoaderService, private authService: AuthService, private modalService: ModalService, private translate: TranslateService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
   }
@@ -82,6 +97,7 @@ export class BrowseCarsComponent {
   //   this.service.post('user/addToWishlist', { carId: item.id }).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
   //   })
   // }
+
   addToWishlist(item: any) {
     item.isWishlist = !item.isWishlist;
 
@@ -111,6 +127,7 @@ export class BrowseCarsComponent {
   getBrands() {
     this.service.get('user/brand').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
       this.brandList = res.data
+      this.orgBrandList = [...this.brandList]
     })
   }
 
@@ -121,59 +138,23 @@ export class BrowseCarsComponent {
   //   })
   // }
 
-  selectBrand(brand: string[]) {
-    if (this.selectedBrand.includes(brand[0])) {
-      this.selectedBrand = this.selectedBrand.filter(b => b !== brand[0]);
+  selectBrand(brand: string) {
+    const selectedBrand = this.brandList.find((item: any) => item.make_display.toLowerCase() == brand.toLowerCase()).make_display
+    if (this.selectedBrand.includes(selectedBrand)) {
+      this.selectedBrand = this.selectedBrand.filter(b => b !== selectedBrand);
     } else {
-      this.selectedBrand = [...this.selectedBrand, brand[0]];
+      this.selectedBrand.push(selectedBrand);
     }
-    this.getModalList(this.selectedBrand)
+    this.getModalList(selectedBrand)
   }
 
-  getModalList(selectedBrands: string[] | string) {
-    let brandsToQuery: string[] = Array.isArray(selectedBrands) ? selectedBrands : [selectedBrands];
-
-    if (!brandsToQuery || brandsToQuery.length === 0 || !brandsToQuery[0]) {
-      this.modalList = [];
-      this.selectedModal = [];
-      return;
-    }
-    const prevSelectedModels = Array.isArray(this.selectedModal) ? [...this.selectedModal] : [];
-
-    let allBrandModelFetches = brandsToQuery.map((brand) => {
-      const brandData = this.brandList.find(
-        (item: any) => item.make_display.toLowerCase() === brand.toLowerCase()
-      );
-
-      if (brandData) {
-        const brandId = brandData.make_id;
-        return this.service
-          .get('user/getModel/' + brandId)
-          .pipe(takeUntil(this.destroy$));
-      }
-      return null;
-    }).filter(fetchObs => fetchObs !== null);
-
-    if (allBrandModelFetches.length > 0) {
-      forkJoin(allBrandModelFetches).subscribe((results: any[]) => {
-        const allModels = results.reduce((acc, res: any) => {
-          return [...acc, ...(res.data || [])];
-        }, []);
-        this.modalList = allModels;
-
-        const validModelNames = new Set(this.modalList.map((m: any) => m.modelName));
-        this.selectedModal = prevSelectedModels.filter((model: string) => validModelNames.has(model));
-      });
-    } else {
-      this.modalList = [];
-      this.selectedModal = [];
-    }
+  getModalList(selectedBrand: string) {
+    this.service.get('user/getModel/' + selectedBrand).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+      this.modalList = res.data
+      this.orgModalList = [...this.modalList]
+    })
   }
 
-
-  getFilteredData(event: any) {
-    this.priceRange = event
-  }
 
   onFuelChange(event: any) {
     if (event.target.checked) {
@@ -182,12 +163,91 @@ export class BrowseCarsComponent {
       this.selectedFuels = this.selectedFuels.filter(f => f !== event.target.value);
     }
   }
+
   onTransmissionChange(event: any) {
     if (event.target.checked) {
       this.selectedTransmissions.push(event.target.value);
     } else {
       this.selectedTransmissions = this.selectedTransmissions.filter(f => f !== event.target.value);
     }
+  }
+
+  FilterYearRange() {
+    this.yearRange = [this.yearRange[0], this.yearRange[1]]
+    this.YearFilterApplied = true
+    this.YearVisible = false
+    this.onFilterApply()
+  }
+
+  removeYearFilter() {
+    this.yearRange = [1900, 2025]
+    this.YearFilterApplied = false
+    this.onFilterApply()
+  }
+
+  FilterPriceRange() {
+    this.PriceFilterApplied = true
+    this.PriceVisible = false
+    this.onFilterApply()
+  }
+
+  removePriceFilter() {
+    this.priceRange = [0, 1000000]
+    this.PriceFilterApplied = false
+    this.onFilterApply()
+  }
+
+  FilterMilageRange() {
+    this.MilageFilterApplied = true
+    this.MilageVisible = false
+    this.onFilterApply()
+  }
+
+  removeMilageFilter() {
+    this.milageRange = [0, 10000]
+    this.MilageFilterApplied = false
+    this.onFilterApply()
+  }
+
+  FilterFuelRange() {
+    this.FuelFilterApplied = true
+    this.FuelVisible = false
+    this.onFilterApply()
+  }
+
+  removeFuelFilter() {
+    this.selectedFuels = []
+    this.FuelFilterApplied = false
+    this.onFilterApply()
+  }
+
+  FilterTransmissionRange() {
+    this.TransmissionFilterApplied = true
+    this.TransmissionVisible = false
+    this.onFilterApply()
+  }
+
+  removeTransmissionFilter() {
+    this.selectedTransmissions = []
+    this.TransmissionFilterApplied = false
+    this.onFilterApply()
+  }
+
+  FilterPowerRange() {
+    this.PowerFilterApplied = true
+    this.PowerVisible = false
+    this.onFilterApply()
+  }
+
+  removePowerFilter() {
+    this.powerRange = [0, 1000]
+    this.PowerFilterApplied = false
+    this.onFilterApply()
+  }
+
+  filterBrandModel() {
+    this.visible = false
+    this.onFilterApply()
   }
 
   onFilterApply() {
@@ -212,17 +272,38 @@ export class BrowseCarsComponent {
   }
 
   onFilterClear() {
-    this.selectedBrand = [];
-    this.selectedModal = [];
-    this.selectedFuels = [];
-    this.selectedTransmissions = [];
-    this.selectedSittingCapacity = null;
-    this.selectedSellerType = null;
-    this.priceRange = [1000, 2000000];
+    this.selectedBrand = []
+    this.selectedModal = []
+    this.selectedFuels = []
+    this.selectedTransmissions = []
+    this.selectedBrandsModal = []
+    this.priceRange = [0, 1000000]
+    this.yearRange = [1900, 2025]
+    this.milageRange = [0, 10000]
+    this.powerRange = [0, 1000]
+    this.MilageFilterApplied = false
+    this.PriceFilterApplied = false
+    this.YearFilterApplied = false
+    this.FuelFilterApplied = false
+    this.TransmissionFilterApplied = false
+    this.PowerFilterApplied = false
+    this.MilageVisible = false
+    this.PriceVisible = false
+    this.YearVisible = false
+    this.FuelVisible = false
+    this.TransmissionVisible = false
+    this.PowerVisible = false
+    this.visible = false
+    this.onFilterApply()
+  }
 
-    this.service.get(this.token ? 'user/fetchOtherSellerCarsList' : 'user/asGuestUserFetchSellerCarsList').pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
-      this.carsList = res.data
-    })
+  filterByBrand(brand: string) {
+    if (this.selectedBrand.includes(brand)) {
+      this.selectedBrand = this.selectedBrand.filter(b => b !== brand);
+    } else {
+      this.selectedBrand.push(brand);
+    }
+    this.onFilterApply()
   }
 
   private searchTimeout: any;
@@ -236,6 +317,61 @@ export class BrowseCarsComponent {
           this.carsList = res.data;
         });
     }, 400);
+  }
+
+  searchModal(event: any) {
+    this.searchModalValue = event.target.value.trim()
+    if (this.searchModalValue.length > 0) {
+      this.modalList = this.orgModalList.filter((item: any) => item.modelName.toLowerCase().includes(this.searchModalValue.toLowerCase()))
+    } else {
+      this.modalList = [...this.orgModalList]
+    }
+  }
+
+  searchBrand(event: any) {
+    const searchValue = event.target.value.trim()
+    if (searchValue.length > 0) {
+      this.brandList = this.orgBrandList.filter((item: any) => item.make_display.toLowerCase().includes(searchValue.toLowerCase()))
+    } else {
+      this.brandList = [...this.orgBrandList]
+    }
+  }
+
+  selectModal(event: any, brand: string) {
+    const selectedModal = this.modalList.find((item: any) => item.modelName.toLowerCase() == event.target.value.toLowerCase()).modelName
+    const brandIndex = this.selectedBrandsModal.findIndex((item: any) => item.brand === brand);
+
+    if (this.selectedModal.includes(selectedModal)) {
+      this.selectedModal = this.selectedModal.filter(m => m !== selectedModal);
+
+      if (brandIndex !== -1) {
+        this.selectedBrandsModal[brandIndex].modals = this.selectedBrandsModal[brandIndex].modals.filter((m: any) => m !== selectedModal);
+        if (this.selectedBrandsModal[brandIndex].modals.length === 0) {
+          this.selectedBrandsModal.splice(brandIndex, 1);
+        }
+      }
+    } else {
+      this.selectedModal.push(selectedModal);
+
+      if (brandIndex !== -1) {
+        this.selectedBrandsModal[brandIndex].modals = [...this.selectedBrandsModal[brandIndex].modals, selectedModal];
+      } else {
+        this.selectedBrandsModal.push({ brand: brand, modals: [selectedModal] });
+      }
+    }
+  }
+
+  removeBrandModal(item: any) {
+    this.selectedBrandsModal = this.selectedBrandsModal.filter(b => b.brand !== item.brand);
+    this.selectedModal = this.selectedModal.filter(m => !item.modals.includes(m));
+    this.selectedBrand = this.selectedBrand.filter(b => b !== item.brand);
+    this.onFilterApply()
+  }
+
+  backToBrand() {
+    this.modalList = [];
+    this.orgModalList = [];
+    this.brandList = [...this.orgBrandList]
   }
 
   ngOnDestroy(): void {

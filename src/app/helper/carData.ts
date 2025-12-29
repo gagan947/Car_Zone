@@ -79,4 +79,31 @@ export const carData = {
             { title: 'Private', key: 'personal' },
             { title: 'Official', key: 'business' },
       ],
+
+      bodyTypes: [
+            { title: 'Sedan', select: false, key: 'Sedan' },
+            { title: 'SUV', select: false, key: 'SUV' },
+            { title: 'Hatchback', select: false, key: 'Hatchback' },
+            { title: 'Coupe', select: false, key: 'Coupe' },
+            { title: 'Convertible', select: false, key: 'Convertible' },
+            { title: 'Wagon', select: false, key: 'Wagon' },
+            { title: 'Pickup', select: false, key: 'Pickup' },
+            { title: 'Van', select: false, key: 'Van' },
+            { title: 'Minivan', select: false, key: 'Minivan' },
+            { title: 'OffRoad', select: false, key: 'OffRoad' },
+      ],
+
+      carColors: [
+            { title: 'Grey', select: false, key: 'Grey' },
+            { title: 'White', select: false, key: 'White' },
+            { title: 'Black', select: false, key: 'Black' },
+            { title: 'Blue', select: false, key: 'Blue' },
+            { title: 'Red', select: false, key: 'Red' },
+            { title: 'Green', select: false, key: 'Green' },
+            { title: 'Silver', select: false, key: 'Silver' },
+            { title: 'Yellow', select: false, key: 'Yellow' },
+            { title: 'Orange', select: false, key: 'Orange' },
+            { title: 'Brown', select: false, key: 'Brown' },
+            { title: 'Other', select: false, key: 'Other' },
+      ],
 }

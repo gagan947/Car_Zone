@@ -21,7 +21,7 @@
 
  .mobile-frame {
        width: 100%;
-       height: calc(100vh - 120px);
+       height: calc(100vh - 35px);
        border-radius: 10px;
        position: relative;
        overflow: hidden;
@@ -29,15 +29,14 @@
        display: flex;
        align-items: center;
        flex-direction: column;
-       max-width: 500px;
-
+       max-width: 450px;
  }
 
  .videoPreview {
        width: 100%;
        height: 100%;
        object-fit: cover;
-       background-color: #000;
+       background-color: #ffffff78;
  }
 
  .ct_reel_title_top {
@@ -84,4 +83,8 @@
  .visible {
        opacity: 1;
        transition: opacity 1s ease-in-out;
+ }
+
+ ::ng-deep body {
+       background-color: #000 !important;
  }

@@ -93,6 +93,7 @@ export class SignUpComponent {
         this.loading = false
         this.toastr.success(res.message)
         sessionStorage.setItem('email', this.Form.value.email)
+        sessionStorage.setItem('userName', this.Form.value.fullName)
         sessionStorage.setItem('isForgotPassword', '0')
         this.router.navigate(['/otp-verification'])
       },

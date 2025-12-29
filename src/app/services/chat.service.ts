@@ -62,8 +62,8 @@ export class ChatService {
                   avatar: otherUser.avatar,
                   lastMsg: inputValue.trim(),
                   createdAt: serverTimestamp(),
-                  // carImage: otherUser.carImage,
-                  // carName: otherUser.carName,
+                  carImage: otherUser.carImage,
+                  carName: otherUser.carName,
             };
 
             const otherUserList = {

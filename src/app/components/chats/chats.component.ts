@@ -55,11 +55,9 @@ export class ChatsComponent {
                 id: sellerData.id,
                 name: sellerData.name,
                 avatar: sellerData.profileImage,
-                // carImage: sellerData.carImage,
-                // carName: sellerData.carName
+                carImage: sellerData.carImage,
+                carName: sellerData.carName
               };
-
-              console.log('Created new chat:', this.currentChat);
             }
           }
           this.loader.hide()

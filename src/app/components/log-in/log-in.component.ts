@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 import { Auth } from '@angular/fire/auth';
 import { browserPopupRedirectResolver, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-log-in',
@@ -26,7 +27,7 @@ export class LogInComponent {
   private destroy$ = new Subject<void>();
   private roleService = inject(RoleService);
   role = this.roleService.currentRole;
-  constructor(private auth: Auth, private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router, private translate: TranslateService) {
+  constructor( private fb: FormBuilder, public validationErrorService: ValidationErrorService, private toastr: NzMessageService, private commonService: CommonService, private authService: AuthService, private router: Router, private translate: TranslateService, private userService: UserService) {
     this.translate.use(localStorage.getItem('lang') || 'en');
     this.Form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -101,16 +102,16 @@ export class LogInComponent {
     this.destroy$.complete();
   }
 
-  async signInWithGoogle() {
-    try {
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(this.auth, provider, browserPopupRedirectResolver);
-      console.log('User signed in:', result.user);
-      this.googleLogin(result.user);
-    } catch (error) {
-      console.error('Error during sign-in:', error);
-    }
-  }
+  // async signInWithGoogle() {
+  //   try {
+  //     const provider = new GoogleAuthProvider();
+  //     const result = await signInWithPopup(this.auth, provider, browserPopupRedirectResolver);
+  //     console.log('User signed in:', result.user);
+  //     this.googleLogin(result.user);
+  //   } catch (error) {
+  //     console.error('Error during sign-in:', error);
+  //   }
+  // }
 
   googleLogin(userDet: any) {
     this.loading = true;
@@ -118,7 +119,7 @@ export class LogInComponent {
     const fullName = userDet.displayName;
 
     let formData = {
-      email: this.Form.value.email,
+      email: userDet.email,
       fullName: fullName,
       isSeller: this.role() == 'seller' ? 1 : 0
     }
@@ -127,6 +128,7 @@ export class LogInComponent {
         this.loading = false;
         this.toastr.success(res.message);
         this.authService.setValues(res.token, res.user.id);
+        this.userService.handleAddOrUpdateUser(res.user.id, fullName, '')
         if (this.role() == 'buyer') {
           this.router.navigate(['/']);
         } else {

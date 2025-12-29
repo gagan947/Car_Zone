@@ -66,3 +66,170 @@ quill-editor {
 .ct_upload_product_main_180 {
       height: 150px !important;
 }
+
+
+.ct-wheel-container {
+      width: 60px;
+      height: 145px;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      background: #f4f4f4;
+      border-radius: 16px;
+      text-align: center;
+      padding-top: 0;
+      scroll-behavior: smooth;
+      scroll-snap-align: center;
+      overscroll-behavior: contain;
+
+}
+
+.ct-wheel-container::-webkit-scrollbar {
+      width: 0px;
+}
+
+/* Track */
+.ct-wheel-container::-webkit-scrollbar-track {
+      background: #f1f1f1;
+}
+
+/* Handle */
+.ct-wheel-container::-webkit-scrollbar-thumb {
+      background: #888;
+}
+
+/* Handle on hover */
+.ct-wheel-container::-webkit-scrollbar-thumb:hover {
+      background: #555;
+}
+
+.ct-wheel li {
+      list-style: none;
+      padding: 10px 0;
+      font-size: 22px;
+      color: #777;
+      scroll-snap-align: center;
+      height: 47px;
+}
+
+.ct-wheel li.active {
+      font-weight: 700;
+      color: #000;
+}
+
+.ct-dot {
+      font-size: 32px;
+      margin: 0 4px;
+      font-weight: bold;
+}
+
+.ct_result_value {
+      font-size: 36px;
+      color: #a10014;
+      font-weight: 700;
+}
+
+.ct_result_unit {
+      font-size: 14px;
+      color: #555;
+}
+
+.ct_timer_main {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex: 1;
+}
+
+#ct_filter_modal {
+      padding: 0px !important;
+}
+
+
+.picker-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+}
+
+.wheel {
+      width: 70px;
+      height: 132px;
+      /* shows 3 rows */
+      overflow-y: scroll;
+      scrollbar-width: none;
+      scroll-snap-type: y mandatory;
+      position: relative;
+      padding-top: 44px;
+      padding-bottom: 44px;
+      background: #0000000f;
+      border-radius: 12px;
+}
+
+.wheel::-webkit-scrollbar {
+      display: none;
+}
+
+.wheel ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+}
+
+.wheel li {
+      height: 44px;
+      line-height: 44px;
+      text-align: center;
+      scroll-snap-align: center;
+
+      font-size: 22px;
+      font-weight: 500;
+      opacity: 0.25;
+      transition: 0.15s ease;
+}
+
+/* ACTIVE ITEM — EXACT FIX */
+.wheel li.active {
+      font-size: 28px;
+      font-weight: 700;
+      opacity: 1;
+      color: #000;
+
+      /* background: rgba(0, 0, 0, 0.06); */
+
+}
+
+/* THE CENTER HIGHLIGHT BOX */
+.highlight {
+      position: absolute;
+      top: calc(50% - 22px);
+      height: 44px;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.06);
+      border-radius: 12px;
+      pointer-events: none;
+      z-index: -1;
+      /* goes behind text */
+}
+
+.dot {
+      font-size: 32px;
+}
+
+.preview {
+      margin-left: 30px;
+      text-align: right;
+}
+
+.preview .val {
+      font-size: 36px;
+      font-weight: 700;
+      color: #d60000;
+}
+
+.preview .unit {
+      display: block;
+      font-size: 14px;
+      opacity: 0.7;
+}

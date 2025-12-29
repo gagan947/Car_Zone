@@ -215,3 +215,43 @@ small {
 .ant-select-multiple .ant-select-selector {
       align-items: start !important;
 }
+
+.ant-popover-inner {
+      width: 20rem !important;
+}
+
+.cursor-pointer {
+      cursor: pointer;
+}
+
+.ant-popover-inner-content {
+      padding: 0 !important;
+}
+
+.ant-popover-inner-content {
+      width: 100% !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+      background: var(--red);
+      padding: 6px;
+      width: 30px;
+      height: 30px;
+      border-radius: 100px;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+      background-color: #fff;
+}
+
+.swiper-button-prev:hover svg path,
+.swiper-button-next:hover svg path {
+      fill: #f0151e;
+}
+
+.swiper-button-prev svg path,
+.swiper-button-next svg path {
+      fill: #fff;
+}

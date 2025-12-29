@@ -15,14 +15,14 @@
                               <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-Active-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-Active" type="button" role="tab"
-                                          aria-controls="pills-Active" aria-selected="false"
-                                          tabindex="-1">{{'Active' | translate}}</button>
+                                          aria-controls="pills-Active" aria-selected="false" tabindex="-1">{{'Active' |
+                                          translate}}</button>
                               </li>
                               <li class="nav-item" role="presentation">
                                     <button class="nav-link" id="pills-Expired-tab" data-bs-toggle="pill"
                                           data-bs-target="#pills-Expired" type="button" role="tab"
-                                          aria-controls="pills-Expired" aria-selected="false"
-                                          tabindex="-1">{{'Expired' | translate}}</button>
+                                          aria-controls="pills-Expired" aria-selected="false" tabindex="-1">{{'Expired'
+                                          | translate}}</button>
                               </li>
 
                         </ul>
@@ -41,21 +41,23 @@
                                                                   <div class="ct_status_badge" style="color: #fff;"
                                                                         [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                         <p class="mb-0">
-                                                                              {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
+                                                                              {{item.is_active ? ('Active' | translate)
+                                                                              : ('Expired' | translate)}}
                                                                         </p>
 
                                                                   </div>
                                                             </div>
                                                             <figcaption class="mt-3">
-                                                                  <span
-                                                                        class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice | chfFormat}}</span>
+                                                                  <span class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice
+                                                                        | chfFormat}}</span>
                                                                   <a routerLink="/car-detail"
+                                                                        [queryParams]="{id: item.id}"
                                                                         class="ct_fs_24 ct_fw_700 d-block">{{item.brandName}}
                                                                         {{item.carModel}}</a>
                                                                   <ul>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Transmission'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.transmission}}
                                                                               </p>
@@ -68,8 +70,8 @@
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Passenger'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.sittingCapacity}}
                                                                                     {{'Person' | translate}}
@@ -79,7 +81,8 @@
                                                                   <div class="mt-4">
                                                                         <a routerLink="/car-detail"
                                                                               [queryParams]="{id: item.id}"
-                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}</a>
+                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore'
+                                                                              | translate}}</a>
                                                                   </div>
                                                             </figcaption>
                                                       </figure>
@@ -104,7 +107,8 @@
                                                 </div>
 
                                                 <!-- Message -->
-                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
+                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' |
+                                                      translate}}
                                                 </h2>
                                                 <p class="text-muted mt-2 mb-4" style="max-width: 400px; z-index:1;">
                                                       {{'NoCarsFoundDescription' | translate}} <br>
@@ -131,21 +135,23 @@
                                                                   <div class="ct_status_badge" style="color: #fff;"
                                                                         [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                         <p class="mb-0">
-                                                                              {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
+                                                                              {{item.is_active ? ('Active' | translate)
+                                                                              : ('Expired' | translate)}}
                                                                         </p>
 
                                                                   </div>
                                                             </div>
                                                             <figcaption class="mt-3">
-                                                                  <span
-                                                                        class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice | chfFormat}}</span>
+                                                                  <span class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice
+                                                                        | chfFormat}}</span>
                                                                   <a routerLink="/car-detail"
+                                                                        [queryParams]="{id: item.id}"
                                                                         class="ct_fs_24 ct_fw_700 d-block">{{item.brandName}}
                                                                         {{item.carModel}}</a>
                                                                   <ul>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Transmission'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.transmission}}
                                                                               </p>
@@ -158,8 +164,8 @@
                                                                               </p>
                                                                         </li>
                                                                         <li>
-                                                                              <small
-                                                                                    class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
+                                                                              <small class="ct_text_op_6 ct_fw_600">{{'Passenger'
+                                                                                    | translate}}</small>
                                                                               <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                     {{item.sittingCapacity}}
                                                                                     {{'Person' | translate}}
@@ -169,8 +175,9 @@
                                                                   <div class="mt-4">
                                                                         <a routerLink="/car-detail"
                                                                               [queryParams]="{id: item.id}"
-                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}
-                                                                              </a>
+                                                                              class="ct_red_btn w-100 text-center">{{'ViewMore'
+                                                                              | translate}}
+                                                                        </a>
                                                                   </div>
                                                             </figcaption>
                                                       </figure>
@@ -195,7 +202,8 @@
                                                 </div>
 
                                                 <!-- Message -->
-                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
+                                                <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' |
+                                                      translate}}
                                                 </h2>
                                                 <p class="text-muted mt-2 mb-4" style="max-width: 400px; z-index:1;">
                                                       {{'NoCarsFoundDescription' | translate}} <br>
@@ -224,21 +232,26 @@
                                                                               style="color: #fff;"
                                                                               [style.background-color]="item.is_active ? '#54b705' : '#E9021E'">
                                                                               <p class="mb-0">
-                                                                                    {{item.is_active ? ('Active' | translate) : ('Expired' | translate)}}
+                                                                                    {{item.is_active ? ('Active' |
+                                                                                    translate) : ('Expired' |
+                                                                                    translate)}}
                                                                               </p>
 
                                                                         </div>
                                                                   </div>
                                                                   <figcaption class="mt-3">
                                                                         <span
-                                                                              class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice | chfFormat}}</span>
+                                                                              class="ct_fs_16 ct_fw_700 mb-2 ct_text_red">{{item.totalPrice
+                                                                              | chfFormat}}</span>
                                                                         <a routerLink="/car-detail"
+                                                                              [queryParams]="{id: item.id}"
                                                                               class="ct_fs_24 ct_fw_700 d-block">{{item.brandName}}
                                                                               {{item.carModel}}</a>
                                                                         <ul>
                                                                               <li>
                                                                                     <small
-                                                                                          class="ct_text_op_6 ct_fw_600">{{'Transmission' | translate}}</small>
+                                                                                          class="ct_text_op_6 ct_fw_600">{{'Transmission'
+                                                                                          | translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.transmission}}
                                                                                     </p>
@@ -246,14 +259,16 @@
                                                                               <li>
                                                                                     <small
                                                                                           class="ct_text_op_6 ct_fw_600">
-                                                                                          {{'FuelType' | translate}}</small>
+                                                                                          {{'FuelType' |
+                                                                                          translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.fuelType}}
                                                                                     </p>
                                                                               </li>
                                                                               <li>
                                                                                     <small
-                                                                                          class="ct_text_op_6 ct_fw_600">{{'Passenger' | translate}}</small>
+                                                                                          class="ct_text_op_6 ct_fw_600">{{'Passenger'
+                                                                                          | translate}}</small>
                                                                                     <p class="mb-0 ct_fs_16 ct_fw_600">
                                                                                           {{item.sittingCapacity}}
                                                                                           {{'Person' | translate}}
@@ -263,8 +278,9 @@
                                                                         <div class="mt-4">
                                                                               <a routerLink="/car-detail"
                                                                                     [queryParams]="{id: item.id}"
-                                                                                    class="ct_red_btn w-100 text-center">{{'ViewMore' | translate}}
-                                                                                    </a>
+                                                                                    class="ct_red_btn w-100 text-center">{{'ViewMore'
+                                                                                    | translate}}
+                                                                              </a>
                                                                         </div>
                                                                   </figcaption>
                                                             </figure>
@@ -289,11 +305,12 @@
                                                       </div>
 
                                                       <!-- Message -->
-                                                                        <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' | translate}}
+                                                      <h2 class="fw-bold text-dark" style="z-index:1;">{{'NoCarsFound' |
+                                                            translate}}
                                                       </h2>
                                                       <p class="text-muted mt-2 mb-4"
                                                             style="max-width: 400px; z-index:1;">
-                                                                  {{'NoCarsFoundDescription' | translate}} <br>
+                                                            {{'NoCarsFoundDescription' | translate}} <br>
                                                       </p>
 
                                                       <!-- Decorative line -->
